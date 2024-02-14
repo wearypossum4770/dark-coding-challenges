@@ -1,0 +1,5 @@
+# .prettierrc.toml
+trailingComma = "all"
+tabWidth = 4
+semi = true
+plugins = ["prettier-plugin-toml", "prettier-plugin-sql-cst", "prettier-plugin-sh", "prettier-plugin-rust", "prettier-plugin-java"]

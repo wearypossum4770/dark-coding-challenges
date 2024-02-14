@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "allowJs": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "target": "ES2020",
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": {
+            "~/*": ["./src/*"]
+        }
+    }
+}
