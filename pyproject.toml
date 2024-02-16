@@ -10,10 +10,47 @@ packages = [{ include = "dark_coding_challenges" }]
 python = "^3.10"
 pytest = "^8.0.0"
 isort = "^5.13.2"
+django = "^5.0.2"
 
 [tool.poetry.group.dev.dependencies]
 numpy = "^1.26.4"
+black = "^24.2.0"
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -v"
+python_functions = [
+    'test_*',
+    '*_test',
+    'check_*',
+    '*_check',
+    'example_*',
+    'suite_*',
+    '*_example',
+    '*_suite',
+]
+python_classes = [
+    'Suite*',
+    '*Suite',
+    'Test*',
+    '*Test',
+    'Check*',
+    '*Check',
+    'Example*',
+    '*Example',
 
+]
+python_files = [
+    'test_*.py',
+    '*_test.py',
+    'check_*.py',
+    '*_check.py',
+    'example_*.py',
+    'suite_*.py',
+    '*_example.py',
+    '*_suite.py',
+]
+
+testpaths = ['easy']
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
