@@ -1,20 +1,24 @@
 {
-  "name": "dark-coding-challenges",
-  "module": "src/index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest",
-    "prettier": "^3.2.5",
-    "prettier-plugin-java": "^2.5.0",
-    "prettier-plugin-rust": "^0.1.9",
-    "prettier-plugin-sh": "^0.14.0",
-    "prettier-plugin-sql-cst": "^0.11.4",
-    "prettier-plugin-toml": "^2.0.1"
-  },
-  "scripts": {
-    "lint": "bun run prettier --write ./"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  }
+    "name": "dark-coding-challenges",
+    "module": "src/index.ts",
+    "type": "module",
+    "devDependencies": {
+        "@types/bun": "latest",
+        "change-case": "^5.4.3",
+        "prettier": "^3.2.5",
+        "prettier-plugin-java": "^2.5.0",
+        "prettier-plugin-rust": "^0.1.9",
+        "prettier-plugin-sh": "^0.14.0",
+        "prettier-plugin-sql-cst": "^0.11.4",
+        "prettier-plugin-toml": "^2.0.1"
+    },
+    "scripts": {
+        "lint": "bun run prettier --write ./"
+    },
+    "peerDependencies": {
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "prompts": "^2.4.2"
+    }
 }
