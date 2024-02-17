@@ -17,7 +17,7 @@ numpy = "^1.26.4"
 black = "^24.2.0"
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-ra -v"
+addopts = "-ra -vv"
 python_functions = [
     'test_*',
     '*_test',
