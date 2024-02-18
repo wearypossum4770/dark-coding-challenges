@@ -44,8 +44,11 @@ describe("Grading students", () => {
                 91, 14, 25, 61, 41, 0,
             ],
         ],
-    ])("Given a list of grades perform curve calculations.", (grades: number[], output: number[]) => {
-        const result = gradingStudents(grades);
-        expect(result).toStrictEqual(output);
-    });
+    ])(
+        "Given a list of grades perform curve calculations.",
+        (grades: number[], output: number[]) => {
+            const result = gradingStudents(grades);
+            expect(result).toStrictEqual(output);
+        },
+    );
 });
