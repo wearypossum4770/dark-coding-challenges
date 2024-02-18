@@ -1,7 +1,3 @@
-import {plusOne} from './plus-one'
+import { plusOne } from "./plus-one";
 
-
-
-export {
-    plusOne
-}
+export { plusOne };
