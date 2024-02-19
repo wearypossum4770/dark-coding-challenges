@@ -1,5 +1,18 @@
-def palindromic_number():
+def palindromic_number(num):
     """
-    DOCUMENTATION
+    Determine if number is a palindrome
+    Leet Code
+    website: https://leetcode.com/problems/palindrome-number/
+    +--------------+------------------------+---------------------------+
+    | Name         | Resource               | percentile                |
+    +==============+========================+===========================+
+    | Memory       | 16.50 MB               | 92.89%                    |
+    +--------------+------------------------+---------------------------+
+    | Runtime      | 48 ms                  | 83.45%                    |
+    +--------------+------------------------+---------------------------+
+
     """
-    return None
+    if num < 0:
+        return False
+    x = str(num)
+    return x == x[::-1]
