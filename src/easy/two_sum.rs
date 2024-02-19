@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-use std::str;
 // https://leetcode.com/problems/two-sum/
 //1. Two Sum
 pub fn two_sum(numbers: Vec<i32>, target: i32) -> [usize; 2] {
@@ -7,7 +5,7 @@ pub fn two_sum(numbers: Vec<i32>, target: i32) -> [usize; 2] {
         return [0, 1];
     }
     'outside: for (outdex, outer) in numbers.iter().enumerate() {
-        'inside: for (index, inner) in numbers.iter().enumerate() {
+        for (index, inner) in numbers.iter().enumerate() {
             if outdex == index {
                 continue 'outside;
             }
