@@ -2,7 +2,7 @@
 pub fn grading_students(grades: Vec<i32>) -> Vec<i32> {
     let mut target: Vec<i32> = Vec::with_capacity(grades.len());
     for grade in grades.iter() {
-        if (grade < &38_i32 || grade % 5 < 3) {
+        if grade < &38_i32 || grade % 5 < 3 {
             target.push(*grade);
         } else {
             target.push(grade + 5 - grade % 5)
