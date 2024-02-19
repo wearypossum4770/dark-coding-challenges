@@ -24,8 +24,11 @@ describe("Utopian Tree Problem", () => {
         [12, 127],
         [11, 126],
         [15, 510],
-    ])("Given a tree with growth cycles %o determine the correct amount of growth of %o", async (cycle, output) => {
-        const result = utopianTree(cycle);
-        expect(result).toStrictEqual(output);
-    });
+    ])(
+        "Given a tree with growth cycles %o determine the correct amount of growth of %o",
+        async (cycle, output) => {
+            const result = utopianTree(cycle);
+            expect(result).toStrictEqual(output);
+        },
+    );
 });
