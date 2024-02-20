@@ -12,21 +12,21 @@ pub fn space_age(planet: &str, seconds: i32) -> f64 {
         _ => 1.0,
     };
 
-    age / earth_years / orbital_periods
+    let oribital_age = age / earth_years / orbital_periods;
+    (oribital_age * 100.0).round() / 100.0
 }
 #[cfg(test)]
 mod tests {
     use super::space_age;
-    use float_eq::assert_float_eq;
     #[test]
     fn test_space_age() {
-        assert_float_eq!(space_age("earth", 1000000000), 31.69);
-        assert_float_eq!(space_age("mercury", 2134835688), 280.88);
-        assert_float_eq!(space_age("venus", 189839836), 9.78);
-        assert_float_eq!(space_age("mars", 2129871239), 35.88);
-        assert_float_eq!(space_age("jupiter", 901876382), 2.41);
-        assert_float_eq!(space_age("saturn", 2000000000), 2.15);
-        assert_float_eq!(space_age("uranus", 1210123456), 0.46);
-        assert_float_eq!(space_age("neptune", 1821023456), 0.35);
+        assert_eq!(space_age("earth", 1000000000), 31.69);
+        assert_eq!(space_age("mercury", 2134835688), 280.88);
+        assert_eq!(space_age("venus", 189839836), 9.78);
+        assert_eq!(space_age("mars", 2129871239), 35.88);
+        assert_eq!(space_age("jupiter", 901876382), 2.41);
+        assert_eq!(space_age("saturn", 2000000000), 2.15);
+        assert_eq!(space_age("uranus", 1210123456), 0.46);
+        assert_eq!(space_age("neptune", 1821023456), 0.35);
     }
 }
