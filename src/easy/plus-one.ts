@@ -1,5 +1,6 @@
 /**
  * @copyright https://leetcode.com/problems/plus-one/
+ * Leet Code # 66
  * @param digits
  */
 export const plusOne = (digits: number[]): number[] => {
