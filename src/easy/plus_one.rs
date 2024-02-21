@@ -1,5 +1,7 @@
 /// Runtime 0ms Beats 100.00% of users with Rust
 /// Memory 2.13MB Beats 52.00% of users with Rust
+/// https://leetcode.com/problems/plus-one/
+/// Leet Code #66
 pub fn plus_one(digits: Vec<i32>) -> Vec<i32> {
     let mut carry = 1;
     let mut target = Vec::with_capacity(digits.len());
