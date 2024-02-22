@@ -1,4 +1,6 @@
 from functools import reduce
+
+
 def find_digits(n):
     """
     DOCUMENTATION
@@ -6,10 +8,8 @@ def find_digits(n):
     target = 0
     for digit in str(n):
         try:
-            if n % int(digit) == 0 :
-                target +=1
+            if n % int(digit) == 0:
+                target += 1
         except ZeroDivisionError:
             pass
     return target
-
-
