@@ -1,5 +1,5 @@
-def summation():
+def summation(a, b):
     """
     DOCUMENTATION
     """
-    return None
+    return a + b
