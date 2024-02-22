@@ -5,7 +5,7 @@
 pub fn plus_one(digits: Vec<i32>) -> Vec<i32> {
     let mut carry = 1;
     let mut target = Vec::with_capacity(digits.len());
-    for (index, num) in digits.iter().enumerate().rev() {
+    for num in digits.iter().rev() {
         let sum = num + carry;
         target.push(sum % 10);
         carry = sum / 10;
