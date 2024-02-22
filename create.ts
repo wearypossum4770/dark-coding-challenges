@@ -2,6 +2,7 @@ import { writeFile } from "fs";
 import prompts from "prompts";
 import { camelCase, snakeCase, kebabCase } from "change-case";
 
+const logger = (err: unknown) => console.log(err);
 const createJavascript = ({
     directory,
     functionanme,
@@ -12,13 +13,9 @@ const createJavascript = ({
     const name = camelCase(functionanme);
     const filename = kebabCase(functionanme);
     const module = `export const ${name} = () => {}`;
-    const contents = `\nimport { describe, test, expect } from "bun:test";\nimport { ${name} } from '~/${directory}/${filename}'\ndescribe('', () => {\ntest.each([])('', (strs, output) => {\nconst result = longestCommonPrefix(strs)\nexpect(result).toStrictEqual(output)\n})\n})`;
-    writeFile(`./src/${directory}/${filename}.ts`, module, (err) =>
-        console.log(err),
-    );
-    writeFile(`./test/${directory}/${filename}.test.ts`, contents, (err) =>
-        console.log(err),
-    );
+    const contents = `\nimport { describe, test, expect } from "bun:test";\nimport { ${name} } from '~/${directory}/${filename}'\ndescribe('', () => {\ntest.each([])('', (strs, output) => {\nconst result = ${name}(strs)\nexpect(result).toStrictEqual(output)\n})\n})`;
+    writeFile(`./src/${directory}/${filename}.ts`, module, logger);
+    writeFile(`./test/${directory}/${filename}.test.ts`, contents, logger);
 };
 
 const createPython = ({
@@ -32,13 +29,9 @@ const createPython = ({
 }) => {
     const name = snakeCase(functionanme);
     const module = `\ndef ${name}():\n\t"""\n\tDOCUMENTATION\n\t"""\n\treturn None`;
-    const contents = `\nimport pytest\nfrom easy.${moduleName} import ${name}\n@pytest.mark.parametrize("num,expected",[])\ndef test_${name}(num, expected):\n\tassert ${name}(num) == expected`;
-    writeFile(`./${directory}/${moduleName}.py`, module, (err) =>
-        console.log(err),
-    );
-    writeFile(`./${directory}/test_${moduleName}.py`, contents, (err) =>
-        console.log(err),
-    );
+    const contents = `\nimport pytest\nfrom easy.${name} import ${name}\n@pytest.mark.parametrize("num,expected",[])\ndef test_${name}(num, expected):\n\tassert ${name}(num) == expected`;
+    writeFile(`./${directory}/${name}.py`, module, logger);
+    writeFile(`./${directory}/test_${name}.py`, contents, logger);
 };
 const createRust = ({
     directory,
@@ -51,9 +44,7 @@ const createRust = ({
 }) => {
     const name = snakeCase(functionanme);
     const contents = `pub fn ${name}() -> bool {\n//\n\n}\n#[cfg(test)]\nmod tests {\nuse super::${name};\n#[test]\nfn test_${name}() {\nassert_eq!(${name}(parameters), returnvalue);\n}\n}`;
-    writeFile(`./src/${directory}/${name}.rs`, contents, (err) =>
-        console.log(err),
-    );
+    writeFile(`./src/${directory}/${name}.rs`, contents, logger);
 };
 
 const onSubmit = (): void => {};
