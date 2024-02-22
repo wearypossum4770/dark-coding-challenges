@@ -1,7 +1,10 @@
 import pytest
 from easy.find_digits import find_digits
 
-@pytest.mark.parametrize("num,expected", [
+
+@pytest.mark.parametrize(
+    "num,expected",
+    [
         (124, 3),
         (111, 3),
         (12, 2),
@@ -17,6 +20,7 @@ from easy.find_digits import find_digits
         (77, 2),
         (88, 2),
         (106108048, 5),
-])
+    ],
+)
 def test_find_digits(num, expected):
     assert find_digits(num) == expected
