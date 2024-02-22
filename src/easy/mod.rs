@@ -6,5 +6,6 @@ pub mod is_leap_year;
 pub mod palindromic_number;
 pub mod plus_one;
 pub mod space_age;
+pub mod summation;
 pub mod two_sum;
 pub mod utopian_tree;
