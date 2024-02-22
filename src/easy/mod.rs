@@ -1,6 +1,10 @@
 // pub mod roman_to_int;
 pub mod grading_students;
 // pub mod longest_common_prefix;
+pub mod find_digits;
+pub mod is_leap_year;
 pub mod palindromic_number;
+pub mod plus_one;
+pub mod space_age;
 pub mod two_sum;
 pub mod utopian_tree;
