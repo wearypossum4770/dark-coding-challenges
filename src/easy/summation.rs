@@ -7,7 +7,7 @@ mod tests {
     #[test]
     fn test_summation() {
         assert_eq!(summation(2, 3), 5);
-        assert_eq!(summation(1, 3) 4);
-        assert_eq!(summation(3, 4) 7);
+        assert_eq!(summation(1, 3), 4);
+        assert_eq!(summation(3, 4), 7);
     }
 }
