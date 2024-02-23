@@ -17,7 +17,20 @@ const createJavascript = ({
     writeFile(`./src/${directory}/${filename}.ts`, module, logger);
     writeFile(`./test/${directory}/${filename}.test.ts`, contents, logger);
 };
+const createZig = ({
+    directory,
+    functionanme,
+    moduleName,
+}: {
+    moduleName: string;
+    functionanme: string;
+    directory: string;
+}) => {
+    const name = snakeCase(functionanme);
+    const contents = `const expect = @import("std").testing.expect;\n\npub fn ${name}(minuend: i32, subtrahend: i32) i32 {\n\treturn minuend - subtrahend;\n}\ntest "integer subtraction" {\n\tconst a: i32 = 3;\n\tconst b: i32 = 2;\n\tconst c: i32 = 945;\n\tconst d: i32 = 422;\n\tconst difference = ${name}(a, b);\n\tconst e = ${name}(c, d);\n\ttry expect(difference == 1);\n\ttry expect(e == 523);\n}`;
+    writeFile(`./src/${directory}/${name}.zig`, contents, logger);
 
+}
 const createPython = ({
     directory,
     functionanme,
@@ -79,6 +92,7 @@ async function main() {
     createJavascript(response);
     createRust(response);
     createPython(response);
+    createZig(response);
 }
 
 main();
