@@ -19,6 +19,6 @@ test "Division by Zero" {
 test "Division by non-zero number" {
     const a: f64 = 12;
     const b: f64 = 3;
-    const quotient = division(a,b);
+    const quotient = division(a, b);
     try expect(quotient == 4.0);
 }

@@ -7,7 +7,6 @@ fn addFive(x: u32) u32 {
     return x + 5;
 }
 
-
 test "summation function" {
     const y = summation(2, 9);
     const a = summation(1, 3);
