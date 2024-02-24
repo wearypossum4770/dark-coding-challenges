@@ -1,6 +1,6 @@
 import { describe, test, expect } from "bun:test";
 import { reverseString } from "~/easy/reverse-string";
-describe("s", () => {
+describe("Reverse String", () => {
     test.each([
         ["an empty string", "", ""],
         ["a word", "robot", "tobor"],
