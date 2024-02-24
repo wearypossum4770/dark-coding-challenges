@@ -1,5 +1,5 @@
 const expect = @import("std").testing.expect;
-const helpers = @import("../helpers.zig");
+const helpers = @import("./helpers.zig");
 
 pub fn dart_score(x: f32, y: f32) i32 {
     const point: f32 = helpers.distance_from_origin(x, y);
