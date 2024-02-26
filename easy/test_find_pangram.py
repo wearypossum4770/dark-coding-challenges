@@ -1,0 +1,37 @@
+import pytest
+from easy.find_pangram import find_pangram
+
+
+@pytest.mark.parametrize(
+    "rule, sentence,expected",
+    [
+        ["empty sentence", "", False],
+        ["perfect lower case", "abcdefghijklmnopqrstuvwxyz", True],
+        ["only lower case", "the quick brown fox jumps over the lazy dog", True],
+        [
+            "missing the letter 'x'",
+            "a quick movement of the enemy will jeopardize five gunboats",
+            False,
+        ],
+        ["missing the letter 'h'", "five boxing wizards jump quickly at it", False],
+        ["with underscores", "the_quick_brown_fox_jumps_over_the_lazy_dog", True],
+        ["with numbers", "the 1 quick brown fox jumps over the 2 lazy dogs", True],
+        [
+            "missing letters replaced by numbers",
+            "7h3 qu1ck brown fox jumps ov3r 7h3 lazy dog",
+            False,
+        ],
+        [
+            "mixed case and punctuation",
+            '"Five quacking Zephyrs jolt my wax bed."',
+            True,
+        ],
+        [
+            "a-m and A-M are 26 different characters but not a pangram",
+            "abcdefghijklm ABCDEFGHIJKLM",
+            False,
+        ],
+    ],
+)
+def test_find_pangram(rule, sentence, expected):
+    assert find_pangram(sentence) == expected
