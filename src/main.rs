@@ -1,8 +1,13 @@
 mod easy;
 mod shapes;
-use crate::easy::{grading_students, plus_one, space_age, two_sum};
+use crate::easy::{grading_students, plus_one, raindrops, space_age, two_sum};
 
 fn main() {
+    println!(
+        "raindrops {:?} {:?}",
+        raindrops::raindrops(1),
+        raindrops::raindrops(3)
+    );
     println!("plus one {:?}", plus_one::plus_one(vec!(1, 2, 3)));
     println!(
         "\n\n a value here{:?}",

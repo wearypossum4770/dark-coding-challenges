@@ -8,6 +8,7 @@ pub mod find_pangram;
 pub mod is_leap_year;
 pub mod palindromic_number;
 pub mod plus_one;
+pub mod raindrops;
 pub mod reverse_string;
 pub mod space_age;
 pub mod subtraction;
