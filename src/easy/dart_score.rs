@@ -1,7 +1,7 @@
 use crate::easy::distance_from_origin;
 
 pub fn dart_score(x: f32, y: f32) -> i8 {
-    let point: f32 = distance_from_origin(x, y) as f32;
+    let point: f32 = distance_from_origin(x, y);
     if point <= 10.0 && point > 5.0 {
         return 1;
     }

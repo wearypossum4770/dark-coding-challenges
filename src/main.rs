@@ -1,4 +1,5 @@
 mod easy;
+mod helpers;
 mod shapes;
 use crate::easy::{grading_students, plus_one, raindrops, space_age, two_sum};
 

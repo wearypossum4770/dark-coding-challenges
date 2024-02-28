@@ -6,6 +6,7 @@ pub mod division;
 pub mod find_digits;
 pub mod find_pangram;
 pub mod is_leap_year;
+mod next_gigasecond;
 pub mod palindromic_number;
 pub mod plus_one;
 pub mod raindrops;

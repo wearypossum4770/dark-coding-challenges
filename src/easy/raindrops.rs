@@ -7,7 +7,7 @@ pub fn raindrops(drop: i32) -> String {
             target.push_str(words[index]);
         }
     }
-    if target.len() > 0 {
+    if !target.is_empty() {
         target
     } else {
         drop.to_string()
