@@ -1,6 +1,6 @@
 import pytest
-from pytest import approx
 from easy.space_age import space_age
+from pytest import approx
 
 
 @pytest.mark.parametrize(

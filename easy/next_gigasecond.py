@@ -1,5 +1,8 @@
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
+
 gigasecond = 1_000_000_000
+
+
 def next_gigasecond(moment):
     """
     Exercism: https://exercism.org/tracks/python/exercises/gigasecond/edit

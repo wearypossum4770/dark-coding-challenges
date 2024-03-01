@@ -11,6 +11,7 @@ python = "^3.10"
 pytest = "^8.0.0"
 isort = "^5.13.2"
 django = "^5.0.2"
+pre-commit = "^3.6.2"
 
 [tool.poetry.group.dev.dependencies]
 numpy = "^1.26.4"
@@ -50,7 +51,17 @@ python_files = [
     '*_suite.py',
 ]
 
-testpaths = ['easy']
+testpaths = ['easy', 'medium']
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+# verbose=true
+virtual_env = "poetry"
+honor_noqa = true
+multi_line_output = 5
+
+[tool.black]
+line-length = 88
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
