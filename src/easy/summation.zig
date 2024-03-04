@@ -1,5 +1,6 @@
 const expect = @import("std").testing.expect;
 
+// @copyright https://edabit.com/challenge/3LpBLgNRyaHMvNb4j
 pub fn summation(x: i32, y: i32) i32 {
     return x + y;
 }
@@ -23,3 +24,12 @@ test "function" {
     try expect(@TypeOf(y) == u32);
     try expect(y == 5);
 }
+
+test "edabit test cases" {
+    try expect(summation(2, 3) == 5);
+    try expect(summation(-3, -6) == -9);
+    try expect(summation(7, 3) == 10);
+    try expect(summation(88, 2) == 90);
+}
+
+
