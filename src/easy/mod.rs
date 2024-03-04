@@ -6,6 +6,7 @@ pub mod division;
 pub mod find_digits;
 pub mod find_pangram;
 pub mod is_leap_year;
+pub mod minutes_to_seconds;
 mod next_gigasecond;
 pub mod palindromic_number;
 pub mod plus_one;
@@ -16,6 +17,7 @@ pub mod subtraction;
 pub mod summation;
 pub mod two_sum;
 pub mod utopian_tree;
+
 pub fn distance(x: f32, y: f32, a: f32, b: f32) -> f32 {
     let x_diff: f32 = a - x;
     let y_diff: f32 = b - y;
