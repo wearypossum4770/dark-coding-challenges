@@ -6,6 +6,6 @@ pub fn hello() []const u8 {
 
 test "Ziglang, Hello World" {
     const expected = "Hello, World!";
-    const actual = hello_world.hello();
+    const actual = hello();
     try testing.expectEqualStrings(expected, actual);
 }

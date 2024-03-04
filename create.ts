@@ -91,7 +91,7 @@ async function main() {
     createJavascript(response);
     createRust(response);
     createPython(response);
-    createZig(response);
+    // createZig(response);
 }
 
 main();
