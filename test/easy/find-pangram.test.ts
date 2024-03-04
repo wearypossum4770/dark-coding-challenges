@@ -1,6 +1,14 @@
 import { describe, test, expect } from "bun:test";
-import { findPangram } from "~/easy/find-pangram";
+import { findPangram, hackerRankPangram } from "~/easy/find-pangram";
 describe("Test for Pangram.", () => {
+    test.each([
+        ["We promptly judged antique ivory buckles for the next prize", true],
+        ["We promptly judged antique ivory buckles for the prize", false],
+    ])("Hacker rank pangram", (sentence, output) => {
+        const target = output ? "pangram" : "not pangram";
+        const result = hackerRankPangram(sentence);
+        expect(result).toStrictEqual(target);
+    });
     test.each([
         ["empty sentence", "", false],
         ["perfect lower case", "abcdefghijklmnopqrstuvwxyz", true],
