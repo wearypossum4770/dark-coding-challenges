@@ -38,5 +38,3 @@ export const findPangram = (sentence: string): boolean => {
 
 export const hackerRankPangram = (sentence: string): string =>
     findPangram(sentence) ? "pangram" : "not pangram";
-
-console.log(alphabetic());
