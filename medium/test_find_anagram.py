@@ -1,16 +1,40 @@
 import pytest
-from easy.find_anagram import find_anagram
+from medium.find_anagram import find_anagram
 
 
 @pytest.mark.parametrize(
     "candidates,expected, word",
     [
-        ( ["hello", "world", "zombies", "pants"],[], "diaper", ),
-        ( ["lemons", "cherry", "melons"],["lemons", "melons"], "solemn", ),
-        ( ["dog", "goody"],[], "good", ),
-        ( ["enlists", "google", "inlets", "banana"],["inlets"], "listen", ),
-        ( ["gallery", "ballerina", "regally", "clergy", "largely", "leading"],["gallery", "regally", "largely"], "allergy", ),
-        ( ["Eons", "ONES"],["Eons", "ONES"], "nose", ),
+        (
+            ["hello", "world", "zombies", "pants"],
+            [],
+            "diaper",
+        ),
+        (
+            ["lemons", "cherry", "melons"],
+            ["lemons", "melons"],
+            "solemn",
+        ),
+        (
+            ["dog", "goody"],
+            [],
+            "good",
+        ),
+        (
+            ["enlists", "google", "inlets", "banana"],
+            ["inlets"],
+            "listen",
+        ),
+        (
+            ["gallery", "ballerina", "regally", "clergy", "largely", "leading"],
+            ["gallery", "regally", "largely"],
+            "allergy",
+        ),
+        (
+            ["Eons", "ONES"],
+            ["Eons", "ONES"],
+            "nose",
+        ),
         (
             ["last"],
             [],
@@ -56,9 +80,21 @@ from easy.find_anagram import find_anagram
             [],
             "BANANA",
         ),
-        ( ["LISTEN", "Silent"], ["Silent"], "LISTEN",),
-        ( ["ΒΓΑ", "ΒΓΔ", "γβα", "αβγ"],["ΒΓΑ", "γβα"], "ΑΒΓ", ),
-        ( ["€a"],[], "a⬂", ),
+        (
+            ["LISTEN", "Silent"],
+            ["Silent"],
+            "LISTEN",
+        ),
+        (
+            ["ΒΓΑ", "ΒΓΔ", "γβα", "αβγ"],
+            ["ΒΓΑ", "γβα"],
+            "ΑΒΓ",
+        ),
+        (
+            ["€a"],
+            [],
+            "a⬂",
+        ),
     ],
 )
 def test_find_anagram(candidates, expected, word):

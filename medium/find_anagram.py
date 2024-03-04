@@ -1,13 +1,20 @@
 def prepare_word(word):
-    return list(word)
+    return "".join(sorted(word))
+
+
 def find_anagram(word, candidates):
     """
     DOCUMENTATION
     """
+    lower = word.lower()
+    target = []
     for candidate in candidates:
-        if word.lower() == candidate.lower():
+        temp = candidate.lower()
+        if lower == temp:
             continue
+        if prepare_word(lower) == prepare_word(temp):
+            target.append(candidate)
+    return target
 
-    return None
 
 print(find_anagram("LISTEN", ["LISTEN", "Silent"]))
