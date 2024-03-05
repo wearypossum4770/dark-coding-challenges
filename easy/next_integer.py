@@ -1,6 +1,5 @@
-
 def next_integer(num):
-	"""
-	DOCUMENTATION
-	"""
-	return num + 1
+    """
+    DOCUMENTATION
+    """
+    return num + 1
