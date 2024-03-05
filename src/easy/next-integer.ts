@@ -1,1 +1,1 @@
-export const nextInteger = (num: number): number => num +1 ;
+export const nextInteger = (num: number): number => num + 1;
