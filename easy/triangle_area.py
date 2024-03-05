@@ -3,4 +3,4 @@ def triangle_area(base, height):
 	"""
 	DOCUMENTATION
 	"""
-	return None
+	return (base * height)/ 2

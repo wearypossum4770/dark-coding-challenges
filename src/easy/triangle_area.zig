@@ -1,7 +1,8 @@
 const expect = @import("std").testing.expect;
 
 pub fn triangleArea(base: i32, height: i32) i32 {
-	return minuend - subtrahend;
+	const squareArea: i32 = base * height;
+	return @divExact(squareArea, 2);
 }
 test "integer subtraction" {
 try expect(triangleArea(3, 2) == 3);
