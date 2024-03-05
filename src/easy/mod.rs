@@ -16,6 +16,7 @@ pub mod reverse_string;
 pub mod space_age;
 pub mod subtraction;
 pub mod summation;
+pub mod triangle_area;
 pub mod two_sum;
 pub mod utopian_tree;
 
