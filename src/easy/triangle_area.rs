@@ -1,4 +1,3 @@
-
 pub fn triangle_area(base: i32, height: i32) -> i32 {
     (base * height) / 2
 }
