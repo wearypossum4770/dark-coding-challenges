@@ -8,6 +8,7 @@ pub mod find_pangram;
 pub mod is_leap_year;
 pub mod minutes_to_seconds;
 mod next_gigasecond;
+pub mod next_integer;
 pub mod palindromic_number;
 pub mod plus_one;
 pub mod raindrops;
