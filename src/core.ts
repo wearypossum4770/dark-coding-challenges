@@ -1,4 +1,5 @@
-export const decimalToBinary = (decimalNumber: number):string => decimalNumber.toString(2);
+export const decimalToBinary = (decimalNumber: number): string =>
+    decimalNumber.toString(2);
 
 export const counter = (input: string): Record<string, number> =>
     [...input].reduce(
