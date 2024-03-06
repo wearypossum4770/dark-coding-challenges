@@ -31,5 +31,3 @@ test "edabit test cases" {
     try expect(summation(7, 3) == 10);
     try expect(summation(88, 2) == 90);
 }
-
-
