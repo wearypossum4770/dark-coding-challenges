@@ -3,6 +3,7 @@ mod age_to_days;
 mod array_pop;
 mod circuit_power;
 mod grading_students;
+mod hours_to_seconds;
 // mod longest_common_prefix;
 mod dart_score;
 mod division;
