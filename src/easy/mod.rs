@@ -4,6 +4,7 @@ mod array_pop;
 mod circuit_power;
 mod grading_students;
 mod hours_to_seconds;
+mod triangle_next_edge;
 // mod longest_common_prefix;
 mod dart_score;
 mod division;
