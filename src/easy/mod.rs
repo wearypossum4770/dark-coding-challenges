@@ -2,8 +2,10 @@
 mod age_to_days;
 mod array_pop;
 mod circuit_power;
+mod find_perimeter;
 mod grading_students;
 mod hours_to_seconds;
+mod remainder;
 mod triangle_next_edge;
 // mod longest_common_prefix;
 mod dart_score;

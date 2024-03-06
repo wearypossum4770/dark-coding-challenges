@@ -1,6 +1,5 @@
-
 def remainder(a, b):
-	"""
-	DOCUMENTATION
-	"""
-	return a % b
+    """
+    DOCUMENTATION
+    """
+    return a % b

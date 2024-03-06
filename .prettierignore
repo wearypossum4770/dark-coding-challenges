@@ -1,1 +1,4 @@
 /ziglings.org
+/book
+**.lock
+*-lock.json

@@ -1,6 +1,15 @@
-
 import pytest
 from easy.remainder import remainder
-@pytest.mark.parametrize("num,expected",[])
-def test_remainder(num, expected):
-	assert remainder(num) == expected
+
+
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (7, 2, 1),
+        (3, 4, 3),
+        (-9, 45, -9),
+        (5, 5, 0),
+    ],
+)
+def test_remainder(a, b, expected):
+    assert remainder(a, b) == expected
