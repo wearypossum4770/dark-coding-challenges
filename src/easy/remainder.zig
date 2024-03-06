@@ -1,13 +1,13 @@
 const expect = @import("std").testing.expect;
 
 pub fn divisibleByThree(a: i32) bool {
-    return @rem(a, 3) == 0;
+    return remainder(a, 3) == 0;
 }
 pub fn divisibleByFive(a: i32) bool {
-    return @rem(a, 5) == 0;
+    return remainder(a, 5) == 0;
 }
 pub fn divisibleBySeven(a: i32) bool {
-    return @rem(a, 7) == 0;
+    return remainder(a, 7) == 0;
 }
 pub fn remainder(a: i32, b: i32) i32 {
     return @rem(a, b);
