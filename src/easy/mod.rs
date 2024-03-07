@@ -17,6 +17,8 @@ mod is_leap_year;
 mod minutes_to_seconds;
 mod next_gigasecond;
 mod next_integer;
+mod number_squared;
+mod number_squared;
 mod palindromic_number;
 mod plus_one;
 mod raindrops;
