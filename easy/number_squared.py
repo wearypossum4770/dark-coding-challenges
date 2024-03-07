@@ -1,6 +1,5 @@
-
-def number_squared():
-	"""
-	DOCUMENTATION
-	"""
-	return None
+def number_squared(num):
+    """
+    DOCUMENTATION
+    """
+    return pow(num, 2)
