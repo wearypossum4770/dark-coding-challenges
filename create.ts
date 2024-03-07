@@ -1,8 +1,43 @@
-import { writeFile } from "fs";
+import { writeFile, readFile, readdir } from "fs";
 import prompts from "prompts";
 import { camelCase, snakeCase, kebabCase } from "change-case";
 
-const logger = (err: unknown) => console.log(err);
+const logger = (err: unknown, actor?: string) =>
+    console.log(actor, err as Error);
+const delimiter = "// -------------------imports-------------------//";
+const organizeRustImports = ({
+    directory,
+    filename,
+}: {
+    directory: string;
+    filename: string;
+}) => {
+    const location = `./src/${directory}`;
+    readdir(location, (dirError, files: string[]) => {
+        if (dirError) return logger(dirError, "readdir");
+        const moduleLocation = `${location}/mod.rs`;
+        const mods = new Set();
+        readFile(moduleLocation, "utf-8", (readError, data) => {
+            if (readError) return logger(readError, "readfile");
+            const contents = data.substring(data.indexOf(delimiter));
+            files.forEach((file: string) => {
+                if (file.endsWith(".rs")) {
+                    const name = file.replace(/\.rs$/, "");
+                    mods.add(name);
+                }
+            });
+            mods.delete("mod.rs");
+            mods.delete("mod");
+            const imports = [...mods].sort().map((file) => `mod ${file}`);
+            writeFile(
+                moduleLocation,
+                `${imports.join(";\n")};\n${contents}`,
+                (writeError) => logger(writeError),
+            );
+        });
+        mods.clear();
+    });
+};
 const createJavascript = ({
     directory,
     functionanme,
@@ -60,7 +95,7 @@ const createRust = ({
 }) => {
     const name = snakeCase(functionanme);
     const contents = `pub fn ${name}() -> bool {\n//\n\n}\n#[cfg(test)]\nmod tests {\nuse super::${name};\n#[test]\nfn test_${name}() {\nassert_eq!(${name}(parameters), returnvalue);\n}\n}`;
-    writeFile(`./src/${directory}/${name}.rs`, contents, logger);
+    return writeFile(`./src/${directory}/${name}.rs`, contents, logger);
 };
 
 const onSubmit = (): void => {};
@@ -92,10 +127,11 @@ const questions = [
 
 async function main() {
     const response = await prompts(questions, { onSubmit, onCancel });
+    await Promise.resolve(createRust(response));
     createJavascript(response);
-    createRust(response);
     createPython(response);
     createZig(response);
+    organizeRustImports(response);
 }
 
 main();
