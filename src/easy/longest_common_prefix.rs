@@ -22,7 +22,10 @@ mod tests {
             )),
             "fl".to_owned()
         );
-        assert_eq!(longest_common_prefix(vec!("".to_owned(), "b".to_owned())), "".to_owned());
+        assert_eq!(
+            longest_common_prefix(vec!("".to_owned(), "b".to_owned())),
+            "".to_owned()
+        );
         assert_eq!(longest_common_prefix(vec!("a".to_owned())), "a".to_owned());
         assert_eq!(
             longest_common_prefix(vec!(
