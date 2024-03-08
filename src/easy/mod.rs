@@ -5,6 +5,7 @@ mod circuit_power;
 mod cubed_number;
 mod dart_score;
 mod division;
+mod farm_animals;
 mod find_digits;
 mod find_pangram;
 mod find_perimeter;
