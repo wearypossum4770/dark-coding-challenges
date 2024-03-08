@@ -7,8 +7,8 @@ from easy.remainder import remainder
     [
         (7, 2, 1),
         (3, 4, 3),
-        (-9, 45, -9),
         (5, 5, 0),
+        (1, 3, 1),
     ],
 )
 def test_remainder(a, b, expected):

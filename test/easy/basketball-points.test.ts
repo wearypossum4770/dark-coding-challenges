@@ -10,7 +10,7 @@ describe("Calculate Baseketball Score", () => {
     ])(
         "The sum of %d 2-point shots and %d 3-point shots is %d",
         async (twoPoints, threePoints, output) => {
-             const result = basketballPoints(twoPoints, threePoints);
+            const result = basketballPoints(twoPoints, threePoints);
             expect(result).toStrictEqual(output);
         },
     );

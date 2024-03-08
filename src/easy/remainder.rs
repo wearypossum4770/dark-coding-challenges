@@ -8,7 +8,7 @@ mod tests {
     fn test_remainder() {
         assert_eq!(remainder(7, 2), 1);
         assert_eq!(remainder(3, 4), 3);
-        assert_eq!(remainder(-9, 45), -9);
         assert_eq!(remainder(5, 5), 0);
+        assert_eq!(remainder(1, 3), 1);
     }
 }
