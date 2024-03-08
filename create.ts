@@ -1,8 +1,43 @@
-import { writeFile } from "fs";
+import { writeFile, readFile, readdir } from "fs";
 import prompts from "prompts";
 import { camelCase, snakeCase, kebabCase } from "change-case";
 
-const logger = (err: unknown) => console.log(err);
+const logger = (err: unknown, actor?: string) =>
+    console.log(actor, err as Error);
+const delimiter = "// -------------------imports-------------------//";
+const organizeRustImports = ({
+    directory,
+    filename,
+}: {
+    directory: string;
+    filename: string;
+}) => {
+    const location = `./src/${directory}`;
+    readdir(location, (dirError, files: string[]) => {
+        if (dirError) return logger(dirError, "readdir");
+        const moduleLocation = `${location}/mod.rs`;
+        const mods = new Set();
+        readFile(moduleLocation, "utf-8", (readError, data) => {
+            if (readError) return logger(readError, "readfile");
+            const contents = data.substring(data.indexOf(delimiter));
+            files.forEach((file: string) => {
+                if (file.endsWith(".rs")) {
+                    const name = file.replace(/\.rs$/, "");
+                    mods.add(name);
+                }
+            });
+            mods.delete("mod.rs");
+            mods.delete("mod");
+            const imports = [...mods].sort().map((file) => `mod ${file}`);
+            writeFile(
+                moduleLocation,
+                `${imports.join(";\n")};\n${contents}`,
+                (writeError) => logger(writeError),
+            );
+        });
+        mods.clear();
+    });
+};
 const createJavascript = ({
     directory,
     functionanme,
@@ -26,9 +61,13 @@ const createZig = ({
     functionanme: string;
     directory: string;
 }) => {
-    const name = snakeCase(functionanme);
-    const contents = `const expect = @import("std").testing.expect;\n\npub fn ${name}(minuend: i32, subtrahend: i32) i32 {\n\treturn minuend - subtrahend;\n}\ntest "integer subtraction" {\n\tconst a: i32 = 3;\n\tconst b: i32 = 2;\n\tconst c: i32 = 945;\n\tconst d: i32 = 422;\n\tconst difference = ${name}(a, b);\n\tconst e = ${name}(c, d);\n\ttry expect(difference == 1);\n\ttry expect(e == 523);\n}`;
-    writeFile(`./src/${directory}/${name}.zig`, contents, logger);
+    const name = camelCase(functionanme);
+    const contents = `const expectEqual = @import("std").testing.expectEqual;\n\npub fn ${name}(minuend: i32, subtrahend: i32) i32 {\n\treturn minuend - subtrahend;\n}\ntest "" {\n\tconst a: i32 = 3;\n\tconst b: i32 = 2;\n\tconst c: i32 = 945;\n\tconst d: i32 = 422;\n\tconst difference = ${name}(a, b);\n\tconst e = ${name}(c, d);\n\ttry expectEqual(difference, 1);\n\ttry expectEqual(e, 523);\n}`;
+    writeFile(
+        `./src/${directory}/${snakeCase(functionanme)}.zig`,
+        contents,
+        logger,
+    );
 };
 const createPython = ({
     directory,
@@ -56,7 +95,7 @@ const createRust = ({
 }) => {
     const name = snakeCase(functionanme);
     const contents = `pub fn ${name}() -> bool {\n//\n\n}\n#[cfg(test)]\nmod tests {\nuse super::${name};\n#[test]\nfn test_${name}() {\nassert_eq!(${name}(parameters), returnvalue);\n}\n}`;
-    writeFile(`./src/${directory}/${name}.rs`, contents, logger);
+    return writeFile(`./src/${directory}/${name}.rs`, contents, logger);
 };
 
 const onSubmit = (): void => {};
@@ -88,10 +127,11 @@ const questions = [
 
 async function main() {
     const response = await prompts(questions, { onSubmit, onCancel });
+    await Promise.resolve(createRust(response));
     createJavascript(response);
-    createRust(response);
     createPython(response);
-    // createZig(response);
+    createZig(response);
+    organizeRustImports(response);
 }
 
 main();
