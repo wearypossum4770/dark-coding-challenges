@@ -21,6 +21,7 @@ mod next_integer;
 mod number_squared;
 mod palindromic_number;
 mod plus_one;
+mod print_array;
 mod raindrops;
 mod remainder;
 mod reverse_string;
