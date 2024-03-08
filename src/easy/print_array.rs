@@ -1,9 +1,5 @@
-pub fn print_array(size: usize) -> Vec<u8> {
-    let mut target = Vec::with_capacity(size);
-    for num in (1..=size) {
-        target.push(num.try_into().unwrap());
-    }
-    target
+pub fn print_array(size: usize) -> Vec<usize> {
+    (1..=size).collect()
 }
 #[cfg(test)]
 mod tests {
