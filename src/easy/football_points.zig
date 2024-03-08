@@ -1,7 +1,8 @@
 const expectEqual = @import("std").testing.expectEqual;
 
 pub fn footballPoints(wins: u32, draws: u32, losses: u32) u32 {
-    return 3 * wins + draws + 0 * losses;
+    _ = losses;
+    return 3 * wins + draws;
 }
 test "Calculate football points" {
     try expectEqual(footballPoints(1, 2, 3), 5);
