@@ -7,8 +7,11 @@ describe("Football Points", () => {
         [1, 0, 0, 3],
         [0, 7, 0, 7],
         [0, 0, 15, 0],
-    ])("with %d wins %d draws and %d loses points are %d", (wins: number, draws: number, losses: number, output: number) => {
-        const result = footballPoints(wins, draws, losses);
-        expect(result).toStrictEqual(output);
-    });
+    ])(
+        "with %d wins %d draws and %d loses points are %d",
+        (wins: number, draws: number, losses: number, output: number) => {
+            const result = footballPoints(wins, draws, losses);
+            expect(result).toStrictEqual(output);
+        },
+    );
 });
