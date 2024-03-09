@@ -25,6 +25,7 @@ mod number_squared;
 mod palindromic_number;
 mod plus_one;
 mod print_array;
+mod profitable_gamble;
 mod raindrops;
 mod remainder;
 mod reverse_string;
