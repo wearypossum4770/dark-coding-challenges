@@ -1,1 +1,1 @@
-export const framesPerSecond = () => {}
+export const framesPerSecond = () => {};
