@@ -1,6 +1,7 @@
 mod age_to_days;
 mod array_pop;
 mod basketball_points;
+mod calculate_fuel;
 mod circuit_power;
 mod cubed_number;
 mod dart_score;
