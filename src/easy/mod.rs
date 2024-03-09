@@ -14,6 +14,7 @@ mod football_points;
 mod frames_per_second;
 mod give_me_something;
 mod grading_students;
+mod hello_love;
 mod hours_minutes_to_seconds;
 mod hours_to_seconds;
 mod is_leap_year;
