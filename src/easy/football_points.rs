@@ -1,5 +1,6 @@
 pub fn football_points(wins: u32, draws: u32, losses: u32) -> u32 {
-    3 * wins + draws + 0 * losses
+    let _losses = losses;
+    3 * wins + draws
 }
 #[cfg(test)]
 mod tests {

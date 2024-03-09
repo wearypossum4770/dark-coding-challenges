@@ -1,6 +1,6 @@
 pub fn profitable_gamble(probability: f32, prize: u32, cost: f32) -> bool {
     let gamble = probability * prize as f32;
-    gamble > cost as f32
+    gamble > cost
 }
 #[cfg(test)]
 mod tests {
