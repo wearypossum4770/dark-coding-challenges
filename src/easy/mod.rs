@@ -10,6 +10,7 @@ mod find_digits;
 mod find_pangram;
 mod find_perimeter;
 mod football_points;
+mod frames_per_second;
 mod give_me_something;
 mod grading_students;
 mod hours_minutes_to_seconds;
