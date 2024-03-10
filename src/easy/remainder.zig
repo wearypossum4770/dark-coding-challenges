@@ -16,7 +16,13 @@ test divisibleByThree {
     try expect(divisibleByThree(3));
 }
 test divisibleByFive {
-    try expect(divisibleByFive(5));
+    try expectEqual(divisibleByFive(7), false);
+    try expectEqual(divisibleByFive(5), true);
+    try expectEqual(divisibleByFive(15), true);
+    try expectEqual(divisibleByFive(33), false);
+    try expectEqual(divisibleByFive(-18), false);
+    try expectEqual(divisibleByFive(999), false);
+    try expectEqual(divisibleByFive(2), false);
 }
 test divisibleBySeven {
     try expect(divisibleBySeven(7));
