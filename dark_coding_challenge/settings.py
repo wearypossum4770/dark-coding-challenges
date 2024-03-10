@@ -26,12 +26,12 @@ print(type(getenv("SECRET_KEY")), "envirnmoent key\n\n\n\n\n")
 # SECURITY WARNING: keep the secret key used in production secret!
 
 # social auth configs for github
-SOCIAL_AUTH_GITHUB_KEY = getenv('GITHUB_KEY')
-SOCIAL_AUTH_GITHUB_SECRET = getenv('GITHUB_SECRET')
+SOCIAL_AUTH_GITHUB_KEY = getenv("GITHUB_KEY")
+SOCIAL_AUTH_GITHUB_SECRET = getenv("GITHUB_SECRET")
 
 # social auth configs for google
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = getenv('GOOGLE_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = getenv('GOOGLE_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = getenv("GOOGLE_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = getenv("GOOGLE_SECRET")
 
 SECRET_KEY = getenv("SECRET_KEY")
 SECRET_KEY_FALLBACKS = [
