@@ -21,6 +21,7 @@ mod is_leap_year;
 mod less_than100;
 mod less_than_or_equal_to_zero;
 mod longest_common_prefix;
+mod make_pair;
 mod makes_ten;
 mod minutes_to_seconds;
 mod next_gigasecond;
