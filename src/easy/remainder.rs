@@ -6,7 +6,7 @@ pub fn divisible_by_five(numerator: i32) -> bool {
 }
 pub fn divisible_by_100(numerator: i32, helper: Option<&str>) -> bool {
     println!("{:?}", helper);
-    divides_evenly(numerator, 1)
+    divides_evenly(numerator, 100)
 }
 pub fn divides_evenly(numerator: i32, denominator: i32) -> bool {
     return remainder(numerator, denominator) == 0;
@@ -45,30 +45,7 @@ mod tests {
         );
     }
     #[test]
-    fn test_divisible_by() {
-        assert_eq!(divides_evenly(98, 7), true);
-        assert_eq!(divides_evenly(87, 49), false);
-        assert_eq!(divides_evenly(34, 14), false);
-        assert_eq!(divides_evenly(78, 6), true);
-        assert_eq!(divides_evenly(30, 4), false);
-        assert_eq!(divides_evenly(87, 73), false);
-        assert_eq!(divides_evenly(74, 7), false);
-        assert_eq!(divides_evenly(87, 29), true);
-        assert_eq!(divides_evenly(48, 24), true);
-        assert_eq!(divides_evenly(99, 20), false);
-        assert_eq!(divides_evenly(98, 49), true);
-        assert_eq!(divides_evenly(100, 6), false);
-        assert_eq!(divides_evenly(64, 4), true);
-        assert_eq!(divides_evenly(70, 35), true);
-        assert_eq!(divides_evenly(38, 38), true);
-        assert_eq!(divides_evenly(29, 3), false);
-        assert_eq!(divides_evenly(20, 8), false);
-        assert_eq!(divides_evenly(66, 50), false);
-        assert_eq!(divides_evenly(95, 1), true);
-        assert_eq!(divides_evenly(58, 2), true);
-    }
-    #[test]
-    fn test_divisible() {
+    fn test_divides_evenly() {
         assert_eq!(divides_evenly(98, 7), true);
         assert_eq!(divides_evenly(87, 49), false);
         assert_eq!(divides_evenly(34, 14), false);

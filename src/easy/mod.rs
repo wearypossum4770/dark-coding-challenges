@@ -13,6 +13,7 @@ mod find_pangram;
 mod find_perimeter;
 mod football_points;
 mod frames_per_second;
+mod geometry;
 mod give_me_something;
 mod grading_students;
 mod hello_love;
