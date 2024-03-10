@@ -3,6 +3,7 @@ mod array_pop;
 mod basketball_points;
 mod calculate_fuel;
 mod circuit_power;
+mod compare_string_length;
 mod cubed_number;
 mod dart_score;
 mod division;
