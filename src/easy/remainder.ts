@@ -1,5 +1,8 @@
-export const remainder = (a: number, b: number): number => a % b;
+export const remainder = (numerator: number, denominator: number): number => numerator % denominator;
 
-export const divisibleByFive = (a: number): boolean => a % 5 === 0;
+export const divisibleByFive = (numerator: number): boolean => dividesEvenly(numerator,5)
 
-export const divisibleBy100 = (a: number) => remainder(a, 100) === 0;
+export const divisibleBy100 = (numerator: number): boolean => dividesEvenly(numerator, 100);
+
+export const dividesEvenly = (numerator: number, denominator: number): boolean =>
+    remainder(numerator, denominator) === 0;

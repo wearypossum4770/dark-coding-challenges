@@ -1,16 +1,19 @@
 const expect = @import("std").testing.expect;
 const expectEqual = @import("std").testing.expectEqual;
 pub fn divisibleByThree(a: i32) bool {
-    return remainder(a, 3) == 0;
+    return dividesEvenly(a, 3);
 }
 pub fn divisibleBy100(a: i32) bool {
-    return remainder(a, 100) == 0;
+    return dividesEvenly(a, 100);
 }
 pub fn divisibleByFive(a: i32) bool {
-    return remainder(a, 5) == 0;
+    return dividesEvenly(a, 5);
 }
 pub fn divisibleBySeven(a: i32) bool {
-    return remainder(a, 7) == 0;
+    return dividesEvenly(a, 7);
+}
+pub fn dividesEvenly(a: i32, b: i32) bool {
+    return remainder(a, b) == 0;
 }
 pub fn remainder(a: i32, b: i32) i32 {
     if (b == 0) {
@@ -20,6 +23,28 @@ pub fn remainder(a: i32, b: i32) i32 {
 }
 test divisibleByThree {
     try expect(divisibleByThree(3));
+}
+test dividesEvenly {
+    try expectEqual(dividesEvenly(98, 7), true);
+    try expectEqual(dividesEvenly(87, 49), false);
+    try expectEqual(dividesEvenly(34, 14), false);
+    try expectEqual(dividesEvenly(78, 6), true);
+    try expectEqual(dividesEvenly(30, 4), false);
+    try expectEqual(dividesEvenly(87, 73), false);
+    try expectEqual(dividesEvenly(74, 7), false);
+    try expectEqual(dividesEvenly(87, 29), true);
+    try expectEqual(dividesEvenly(48, 24), true);
+    try expectEqual(dividesEvenly(99, 20), false);
+    try expectEqual(dividesEvenly(98, 49), true);
+    try expectEqual(dividesEvenly(100, 6), false);
+    try expectEqual(dividesEvenly(64, 4), true);
+    try expectEqual(dividesEvenly(70, 35), true);
+    try expectEqual(dividesEvenly(38, 38), true);
+    try expectEqual(dividesEvenly(29, 3), false);
+    try expectEqual(dividesEvenly(20, 8), false);
+    try expectEqual(dividesEvenly(66, 50), false);
+    try expectEqual(dividesEvenly(95, 1), true);
+    try expectEqual(dividesEvenly(58, 2), true);
 }
 test divisibleBy100 {
     try expectEqual(divisibleBy100(1), false);
