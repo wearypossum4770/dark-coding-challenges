@@ -1,4 +1,5 @@
 .env
+**.sqlite3
 **.lock
 *-lock.json
 /target
