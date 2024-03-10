@@ -4,9 +4,13 @@ pub fn remainder(a: i32, b: i32) -> i32 {
 pub fn divisible_by_five(a: i32) -> bool {
     a % 5 == 0
 }
+pub fn divisible_by_100(a: i32, helper: Option<&str>) -> bool {
+    println!("{:?}", helper);
+    a % 100 == 0
+}
 #[cfg(test)]
 mod tests {
-    use super::{divisible_by_five, remainder};
+    use super::{divisible_by_100, divisible_by_five, remainder};
     #[test]
     fn test_remainder() {
         assert_eq!(remainder(7, 2), 1);
@@ -23,5 +27,18 @@ mod tests {
         assert_eq!(divisible_by_five(-18), false);
         assert_eq!(divisible_by_five(999), false);
         assert_eq!(divisible_by_five(2), false);
+    }
+    #[test]
+    fn test_divisible_by_100() {
+        assert_eq!(divisible_by_100(1, None), false);
+        assert_eq!(divisible_by_100(100, None), true);
+        assert_eq!(divisible_by_100(1000, None), true);
+        assert_eq!(divisible_by_100(111000, None), true);
+        assert_eq!(divisible_by_100(-1, Some("Don't forget negatives.")), false,);
+        assert_eq!(divisible_by_100(0, Some("Cover the 0 cases.")), true,);
+        assert_eq!(
+            divisible_by_100(-100, Some("-100 is divisible by 100.")),
+            true,
+        );
     }
 }
