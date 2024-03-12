@@ -30,6 +30,6 @@ pub fn main() void {
     std.debug.print("\n", .{});
 }
 
-fn printPhrase(part1: []u8, part2: []u8, part3: []u8) void {
+fn printPhrase(part1: []const u8, part2: []const u8, part3: []const u8) void {
     std.debug.print("'{s} {s} {s}.' ", .{ part1, part2, part3 });
 }
