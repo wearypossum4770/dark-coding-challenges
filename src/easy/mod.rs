@@ -30,6 +30,7 @@ mod next_gigasecond;
 mod next_integer;
 mod number_squared;
 mod palindromic_number;
+mod pascals_triangle;
 mod plus_one;
 mod print_array;
 mod profitable_gamble;
