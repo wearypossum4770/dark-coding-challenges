@@ -11,8 +11,8 @@ export const counter = (input: string): Record<string, number> =>
     );
 export const orderChars = (input: string): string => [...input].sort().join("");
 
-export const range = (stop: number, inclusive?: boolean): Array<number>  => {
-    const isInclusive = typeof inclusive === 'boolean' ? inclusive : false
-    const end = isInclusive ? 1:0
-    return [...Array(stop + end ).keys()]
-}
+export const range = (stop: number, inclusive?: boolean): Array<number> => {
+    const isInclusive = typeof inclusive === "boolean" ? inclusive : false;
+    const end = isInclusive ? 1 : 0;
+    return [...Array(stop + end).keys()];
+};
