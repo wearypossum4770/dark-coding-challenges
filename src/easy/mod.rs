@@ -36,6 +36,7 @@ mod palindromic_number;
 mod plus_one;
 mod print_array;
 mod profitable_gamble;
+pub mod radians_to_degrees;
 mod raindrops;
 mod remainder;
 mod reverse_string;
