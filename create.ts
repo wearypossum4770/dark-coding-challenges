@@ -79,7 +79,7 @@ const createPython = ({
     directory: string;
 }) => {
     const name = snakeCase(functionanme);
-    const module = `\ndef ${name}():\n\t"""\n\tDOCUMENTATION\n\t"""\n\treturn None`;
+    const module = `\ndef ${name}():\n\treturn None`;
     const contents = `\nimport pytest\nfrom easy.${name} import ${name}\n@pytest.mark.parametrize("num,expected",[])\ndef test_${name}(num, expected):\n\tassert ${name}(num) == expected`;
     writeFile(`./${directory}/${name}.py`, module, logger);
     writeFile(`./${directory}/test_${name}.py`, contents, logger);
