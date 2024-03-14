@@ -21,6 +21,7 @@ mod grading_students;
 mod hello_love;
 mod hours_minutes_to_seconds;
 mod hours_to_seconds;
+mod increment_items;
 mod is_leap_year;
 mod less_than100;
 mod less_than_or_equal_to_zero;
