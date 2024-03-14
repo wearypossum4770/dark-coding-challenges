@@ -14,6 +14,7 @@ mod find_perimeter;
 mod football_points;
 mod frames_per_second;
 mod geometry;
+mod get_vote_count;
 mod give_me_something;
 mod grading_students;
 mod hello_love;
