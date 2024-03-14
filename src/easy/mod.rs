@@ -39,6 +39,7 @@ mod profitable_gamble;
 mod raindrops;
 mod remainder;
 mod reverse_string;
+mod should_serve_drinks;
 mod space_age;
 mod subtraction;
 mod sum_polygon;
