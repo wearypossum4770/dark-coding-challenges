@@ -48,6 +48,7 @@ mod space_age;
 mod subtraction;
 mod sum_polygon;
 mod summation;
+mod switch_positions;
 mod triangle_area;
 mod triangle_next_edge;
 mod two_sum;
