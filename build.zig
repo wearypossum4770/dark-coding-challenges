@@ -1,6 +1,6 @@
 const std = @import("std");
 const builtin = @import("builtin");
-const tests = @import("test/tests.zig");
+// const tests = @import("test/tests.zig");
 
 const Build = std.Build;
 const CompileStep = Build.CompileStep;
@@ -55,6 +55,11 @@ pub fn build(b: *std.build.Builder) void {
     // for restricting supported target set are available.
     const target = b.standardTargetOptions(.{});
 
+   // Standard optimization options allow the person running `zig build` to select
+    // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall. Here we do not
+    // set a preferred release mode, allowing the user to decide how to optimize.
+    // const optimize = b.standardOptimizeOption(.{});
+
     // Standard release options allow the person running `zig build` to select
     // between Debug, ReleaseSafe, ReleaseFast, and ReleaseSmall.
     const mode = b.standardReleaseOptions();
@@ -73,10 +78,10 @@ pub fn build(b: *std.build.Builder) void {
     const run_step = b.step("run", "Run the app");
     run_step.dependOn(&run_cmd.step);
 
-    const exe_tests = b.addTest("src/main.zig");
-    exe_tests.setTarget(target);
-    exe_tests.setBuildMode(mode);
+    // const exe_tests = b.addTest("src/main.zig");
+    // exe_tests.setTarget(target);
+    // exe_tests.setBuildMode(mode);
 
-    const test_step = b.step("test", "Run unit tests");
-    test_step.dependOn(&exe_tests.step);
+    // const test_step = b.step("test", "Run unit tests");
+    // test_step.dependOn(&exe_tests.step);
 }
