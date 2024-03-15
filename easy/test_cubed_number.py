@@ -1,5 +1,17 @@
 import pytest
-from easy.cubed_number import cubed_number
+from easy.cubed_number import calculate_exponent, cubed_number
+
+
+@pytest.mark.parametrize(
+    "base, exponent ,expected",
+    [
+        (5, 5, 3125),
+        (3, 3, 27),
+        (10, 10, 10000000000),
+    ],
+)
+def test_calculate_exponent(base, exponent, expected):
+    assert calculate_exponent(base, exponent) == expected
 
 
 @pytest.mark.parametrize(
