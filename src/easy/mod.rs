@@ -1,6 +1,7 @@
 mod accept_into_movie;
 mod age_to_days;
 mod array_pop;
+mod array_to_string;
 mod basketball_points;
 mod calculate_fuel;
 mod circuit_power;
