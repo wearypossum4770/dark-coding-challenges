@@ -1,9 +1,19 @@
 pub fn cubed_number(num: i32) -> i32 {
     i32::pow(num, 3)
 }
+pub fn calculate_exponent(base: i64, exponent: u32) -> i64 {
+    i64::pow(base, exponent)
+}
 #[cfg(test)]
 mod tests {
-    use super::cubed_number;
+    use super::{calculate_exponent, cubed_number};
+
+    #[test]
+    fn test_calculate_exponent() {
+        assert_eq!(calculate_exponent(5, 5), 3125);
+        assert_eq!(calculate_exponent(3, 3), 27);
+        assert_eq!(calculate_exponent(10, 10), 10_000_000_000);
+    }
     #[test]
     fn test_cubed_number() {
         assert_eq!(cubed_number(1), 1);
