@@ -26,6 +26,7 @@ mod how_many_walls;
 mod inches_to_feet;
 mod increment_items;
 mod is_leap_year;
+mod leap_year;
 mod less_than100;
 mod less_than_or_equal_to_zero;
 mod longest_common_prefix;
