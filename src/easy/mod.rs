@@ -54,6 +54,7 @@ mod triangle_area;
 mod triangle_next_edge;
 mod two_sum;
 mod utopian_tree;
+mod years_in_one_house;
 // -------------------imports-------------------//
 pub fn distance(x: f32, y: f32, a: f32, b: f32) -> f32 {
     let x_diff: f32 = a - x;
