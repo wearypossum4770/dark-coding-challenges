@@ -22,6 +22,7 @@ mod hello_love;
 mod hours_minutes_to_seconds;
 mod hours_to_seconds;
 mod how_many_walls;
+mod inches_to_feet;
 mod increment_items;
 mod is_leap_year;
 mod less_than100;
