@@ -45,6 +45,7 @@ mod radians_to_degrees;
 mod raindrops;
 mod remainder;
 mod reverse_string;
+mod shape_area;
 mod should_serve_drinks;
 mod space_age;
 mod subtraction;
