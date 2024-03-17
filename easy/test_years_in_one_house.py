@@ -14,4 +14,4 @@ from easy.years_in_one_house import years_in_one_house
     ],
 )
 def test_years_in_one_house(age, moves, expected):
-    assert years_in_one_house(age, moves) == expected
+    assert years_in_one_house(age, moves) == pytest.approx(expected)

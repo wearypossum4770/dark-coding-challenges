@@ -5,7 +5,7 @@ pub fn yearsInOneHouse(age: f32, moves: f32) f32 {
     return age / (moves + 1);
 }
 test "The average time someone moved." {
-    const tolerance:f32 = 0.1;
+    const tolerance: f32 = 0.1;
     try expectApproxEqRel(yearsInOneHouse(30, 1), 15, tolerance);
     try expectApproxEqRel(yearsInOneHouse(15, 2), 5, tolerance);
     try expectApproxEqRel(yearsInOneHouse(80, 0), 80, tolerance);
