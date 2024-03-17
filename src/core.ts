@@ -1,3 +1,9 @@
+export type RecordKeyOf<T extends Record<string, any>, K extends keyof T> = {};
+
+export const isEmpty = <T, U extends Record<string, any>>(
+    value: T[] | U,
+): boolean => Object.keys(value).length === 0;
+
 export const decimalToBinary = (decimalNumber: number): string =>
     decimalNumber.toString(2);
 
