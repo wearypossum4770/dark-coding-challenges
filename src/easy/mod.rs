@@ -5,6 +5,7 @@ mod basketball_points;
 mod calculate_fuel;
 mod circuit_power;
 mod compare_string_length;
+mod compare_triplets;
 mod cubed_number;
 mod dart_score;
 mod division;
