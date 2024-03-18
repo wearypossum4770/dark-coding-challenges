@@ -1,9 +1,10 @@
 pub fn compare_triplets(alice: [u8; 3], bob: [u8; 3]) -> [u8; 2] {
     let mut score: [u8; 2] = [0, 0];
-    for (outdex, outer) in alice.iter().enumerate() {
+    for (outdex, _) in alice.iter().enumerate() {
         if alice[outdex] > bob[outdex] {
             score[0] += 1;
-        } else if alice[outdex] < bob[outdex] {
+        }
+        if alice[outdex] < bob[outdex] {
             score[1] += 1;
         }
     }
