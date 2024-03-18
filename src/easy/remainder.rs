@@ -9,7 +9,7 @@ pub fn divisible_by_100(numerator: i32, helper: Option<&str>) -> bool {
     divides_evenly(numerator, 100)
 }
 pub fn divides_evenly(numerator: i32, denominator: i32) -> bool {
-    return remainder(numerator, denominator) == 0;
+    remainder(numerator, denominator) == 0
 }
 #[cfg(test)]
 mod tests {

@@ -38,7 +38,7 @@ impl Clock {
             total: self.total,
         }
     }
-    fn to_string(&mut self) -> String {
+    fn as_string(&mut self) -> String {
         let obj = self.build();
         format!("{:02}:{:02}", obj.hours, obj.minutes)
     }
@@ -58,48 +58,48 @@ mod tests {
 
     #[test]
     fn on_the_hour() {
-        assert_eq!(Clock::new(8, 0).to_string(), "08:00");
-        assert_eq!(Clock::new(11, 9).to_string(), "11:09");
-        assert_eq!(Clock::new(24, 0).to_string(), "00:00");
-        assert_eq!(Clock::new(25, 0).to_string(), "01:00");
-        assert_eq!(Clock::new(100, 0).to_string(), "04:00");
-        assert_eq!(Clock::new(1, 60).to_string(), "02:00");
-        assert_eq!(Clock::new(0, 160).to_string(), "02:40");
-        assert_eq!(Clock::new(0, 1723).to_string(), "04:43");
-        assert_eq!(Clock::new(25, 160).to_string(), "03:40");
-        assert_eq!(Clock::new(201, 3001).to_string(), "11:01");
-        assert_eq!(Clock::new(72, 8640).to_string(), "00:00");
-        assert_eq!(Clock::new(-1, 15).to_string(), "23:15");
-        assert_eq!(Clock::new(-25, 00).to_string(), "23:00");
-        assert_eq!(Clock::new(-91, 00).to_string(), "05:00");
-        assert_eq!(Clock::new(1, -40).to_string(), "00:20");
-        assert_eq!(Clock::new(1, -160).to_string(), "22:20");
-        assert_eq!(Clock::new(1, -4820).to_string(), "16:40");
-        assert_eq!(Clock::new(2, -60).to_string(), "01:00");
-        assert_eq!(Clock::new(1, -120).to_string(), "23:00");
-        assert_eq!(Clock::new(-25, -160).to_string(), "20:20");
-        assert_eq!(Clock::new(-121, -5810).to_string(), "22:10");
-        assert_eq!(Clock::new(0, -22).to_string(), "23:38");
+        assert_eq!(Clock::new(8, 0).as_string(), "08:00");
+        assert_eq!(Clock::new(11, 9).as_string(), "11:09");
+        assert_eq!(Clock::new(24, 0).as_string(), "00:00");
+        assert_eq!(Clock::new(25, 0).as_string(), "01:00");
+        assert_eq!(Clock::new(100, 0).as_string(), "04:00");
+        assert_eq!(Clock::new(1, 60).as_string(), "02:00");
+        assert_eq!(Clock::new(0, 160).as_string(), "02:40");
+        assert_eq!(Clock::new(0, 1723).as_string(), "04:43");
+        assert_eq!(Clock::new(25, 160).as_string(), "03:40");
+        assert_eq!(Clock::new(201, 3001).as_string(), "11:01");
+        assert_eq!(Clock::new(72, 8640).as_string(), "00:00");
+        assert_eq!(Clock::new(-1, 15).as_string(), "23:15");
+        assert_eq!(Clock::new(-25, 00).as_string(), "23:00");
+        assert_eq!(Clock::new(-91, 00).as_string(), "05:00");
+        assert_eq!(Clock::new(1, -40).as_string(), "00:20");
+        assert_eq!(Clock::new(1, -160).as_string(), "22:20");
+        assert_eq!(Clock::new(1, -4820).as_string(), "16:40");
+        assert_eq!(Clock::new(2, -60).as_string(), "01:00");
+        assert_eq!(Clock::new(1, -120).as_string(), "23:00");
+        assert_eq!(Clock::new(-25, -160).as_string(), "20:20");
+        assert_eq!(Clock::new(-121, -5810).as_string(), "22:10");
+        assert_eq!(Clock::new(0, -22).as_string(), "23:38");
     }
 
     #[test]
     fn add_minutes() {
-        assert_eq!(Clock::new(10, 0).add_minutes(3).to_string(), "10:03");
-        assert_eq!(Clock::new(6, 41).add_minutes(0).to_string(), "06:41");
-        assert_eq!(Clock::new(0, 45).add_minutes(40).to_string(), "01:25");
-        assert_eq!(Clock::new(10, 0).add_minutes(61).to_string(), "11:01");
-        assert_eq!(Clock::new(0, 45).add_minutes(160).to_string(), "03:25");
-        assert_eq!(Clock::new(23, 59).add_minutes(2).to_string(), "00:01");
-        assert_eq!(Clock::new(5, 32).add_minutes(1500).to_string(), "06:32");
-        assert_eq!(Clock::new(1, 1).add_minutes(3500).to_string(), "11:21");
-        assert_eq!(Clock::new(10, 3).add_minutes(-3).to_string(), "10:00");
-        assert_eq!(Clock::new(10, 3).add_minutes(-30).to_string(), "09:33");
-        assert_eq!(Clock::new(10, 3).add_minutes(-70).to_string(), "08:53");
-        assert_eq!(Clock::new(0, 3).add_minutes(-4).to_string(), "23:59");
-        assert_eq!(Clock::new(0, 0).add_minutes(-160).to_string(), "21:20");
-        assert_eq!(Clock::new(6, 15).add_minutes(-160).to_string(), "03:35");
-        assert_eq!(Clock::new(5, 32).add_minutes(-1500).to_string(), "04:32");
-        assert_eq!(Clock::new(2, 20).add_minutes(-3000).to_string(), "00:20");
+        assert_eq!(Clock::new(10, 0).add_minutes(3).as_string(), "10:03");
+        assert_eq!(Clock::new(6, 41).add_minutes(0).as_string(), "06:41");
+        assert_eq!(Clock::new(0, 45).add_minutes(40).as_string(), "01:25");
+        assert_eq!(Clock::new(10, 0).add_minutes(61).as_string(), "11:01");
+        assert_eq!(Clock::new(0, 45).add_minutes(160).as_string(), "03:25");
+        assert_eq!(Clock::new(23, 59).add_minutes(2).as_string(), "00:01");
+        assert_eq!(Clock::new(5, 32).add_minutes(1500).as_string(), "06:32");
+        assert_eq!(Clock::new(1, 1).add_minutes(3500).as_string(), "11:21");
+        assert_eq!(Clock::new(10, 3).add_minutes(-3).as_string(), "10:00");
+        assert_eq!(Clock::new(10, 3).add_minutes(-30).as_string(), "09:33");
+        assert_eq!(Clock::new(10, 3).add_minutes(-70).as_string(), "08:53");
+        assert_eq!(Clock::new(0, 3).add_minutes(-4).as_string(), "23:59");
+        assert_eq!(Clock::new(0, 0).add_minutes(-160).as_string(), "21:20");
+        assert_eq!(Clock::new(6, 15).add_minutes(-160).as_string(), "03:35");
+        assert_eq!(Clock::new(5, 32).add_minutes(-1500).as_string(), "04:32");
+        assert_eq!(Clock::new(2, 20).add_minutes(-3000).as_string(), "00:20");
     }
     //
     // Test Equality

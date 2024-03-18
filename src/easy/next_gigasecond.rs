@@ -1,5 +1,5 @@
 use crate::helpers::{DateTimeParts, GIGASECOND};
-use time::{Date, Duration, Month, OffsetDateTime, PrimitiveDateTime as DateTime, Time};
+use time::{Date, Duration, Month, PrimitiveDateTime as DateTime, Time};
 
 pub fn next_gigasecond(start: DateTime) -> DateTime {
     let seconds = Duration::seconds(GIGASECOND as i64);

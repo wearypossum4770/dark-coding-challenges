@@ -1,5 +1,3 @@
-use std::ops::Div;
-
 pub fn years_in_one_house(age: u32, moves: u32) -> u32 {
     let average = age as f32 / (moves as f32 + 1.0);
     average.round() as u32
