@@ -25,7 +25,7 @@ describe("Add one to a large integer", () => {
             [1, 0, 0],
         ],
     ])(
-        "Given a large integer represented as %s add one to the value to equal %s",
+        "Given a large integer represented as %o add one to the value to equal %o",
         async (digits, output) => {
             const result = plusOne(digits);
             expect(result).toStrictEqual(output);
