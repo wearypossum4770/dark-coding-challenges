@@ -53,7 +53,7 @@ DJANGO_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
 )
-PROJECT_APPS = ()
+PROJECT_APPS = ("elections.apps.ElectionsConfig",)
 INSTALLED_APPS = PYTHON_APPS + DJANGO_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
