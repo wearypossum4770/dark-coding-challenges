@@ -1,3 +1,4 @@
+mod a_very_big_sum;
 mod accept_into_movie;
 mod age_to_days;
 mod array_pop;
@@ -6,6 +7,7 @@ mod calculate_fuel;
 mod circuit_power;
 mod compare_string_length;
 mod compare_triplets;
+mod count_apples_and_oranges;
 mod cubed_number;
 mod dart_score;
 mod division;
