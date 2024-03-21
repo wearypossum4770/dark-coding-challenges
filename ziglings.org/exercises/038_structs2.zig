@@ -32,7 +32,7 @@ pub fn main() void {
         .health = 100,
         .experience = 10,
     };
-    chars[1] = Character {
+    chars[1] = Character{
         .role = Role.bard,
         .gold = 10,
         .health = 100,
