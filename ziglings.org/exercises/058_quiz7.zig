@@ -187,13 +187,13 @@ const TripItem = union(enum) {
 
     // This is a little helper function to print the two different
     // types of item correctly.
-    fn printMe(self: TripItem) void {
-        switch (self) {
+    fn printMe(p: TripItem) void {
+        switch (p) {
             // Oops! The hermit forgot how to capture the union values
             // in a switch statement. Please capture both values as
             // 'p' so the print statements work!
-            .place => print("{s}", .{p.name}),
-            .path => print("--{}->", .{p.dist}),
+            .place => print("{s}", .{p.place.name}),
+            .path => print("--{}->", .{p.path.dist}),
         }
     }
 };
@@ -255,7 +255,7 @@ const HermitsNotebook = struct {
             // dereference and optional value "unwrapping" look
             // together. Remember that you return the address with the
             // "&" operator.
-            if (place == entry.*.?.place) return entry;
+            if (place == entry.*.?.place) return &entry.*.?;
             // Try to make your answer this long:__________;
         }
         return null;
@@ -272,7 +272,7 @@ const HermitsNotebook = struct {
     // If we DO, we check to see if the path is "better" (shorter
     // distance) than the one we'd noted before. If it is, we
     // overwrite the old entry with the new one.
-    fn checkNote(self: *HermitsNotebook, note: NotebookEntry) void {
+    fn checkNote(self: *HermitsNotebook, note: NotebookEntry) !void {
         const existing_entry = self.getEntry(note.place);
 
         if (existing_entry == null) {
@@ -309,7 +309,7 @@ const HermitsNotebook = struct {
     //
     // Looks like the hermit forgot something in the return value of
     // this function. What could that be?
-    fn getTripTo(self: *HermitsNotebook, trip: []?TripItem, dest: *Place) void {
+    fn getTripTo(self: *HermitsNotebook, trip: []?TripItem, dest: *Place) TripError!void {
         // We start at the destination entry.
         const destination_entry = self.getEntry(dest);
 
@@ -380,7 +380,7 @@ pub fn main() void {
         .via_path = null,
         .dist_to_reach = 0,
     };
-    notebook.checkNote(working_note);
+    try notebook.checkNote(working_note);
 
     // Get the next entry from the notebook (the first being the
     // "start" entry we just added) until we run out, at which point
@@ -400,7 +400,7 @@ pub fn main() void {
                 .via_path = path,
                 .dist_to_reach = place_entry.dist_to_reach + path.dist,
             };
-            notebook.checkNote(working_note);
+            try notebook.checkNote(working_note);
         }
     }
 
