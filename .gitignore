@@ -1,6 +1,7 @@
 .env
 **.sqlite3
 **.lock
+**.lockb
 *-lock.json
 /target
 /node_modules
