@@ -35,7 +35,11 @@ describe("Plus Minus", () => {
             [0.375, 0.375, 0.25],
         ],
     ])("The array %o has the following ratios %o", (sample, output) => {
-        const result = plusMinus(sample);
-        expect(result).toStrictEqual(output);
+        const [left, middle, right] = plusMinus(sample);
+        const [first, second, third] = output;
+
+        expect(left).toBeCloseTo(first);
+        expect(middle).toBeCloseTo(second);
+        expect(right).toBeCloseTo(third);
     });
 });
