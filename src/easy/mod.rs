@@ -49,6 +49,7 @@ mod remainder;
 mod reverse_string;
 mod shape_area;
 mod should_serve_drinks;
+mod simple_array_sum;
 mod space_age;
 mod subtraction;
 mod sum_polygon;
