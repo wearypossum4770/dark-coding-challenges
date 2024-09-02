@@ -1,53 +1,89 @@
-const expectEqual = @import("std").testing.expectEqual;
+const std = @import("std");
+const expect = std.testing.expect;
 
-pub fn leapYear(year: i32) bool {
-    if (@mod(year, 4) != 0) return false;
+pub fn isLeapYear(year: i32) bool {
     if (@mod(year, 400) != 0 and @mod(year, 100) == 0) return false;
-    return true;
+    return @mod(year, 4) == 0;
 }
 
 test "Determine if 1850 is a leap year" {
-    try expectEqual(leapYear(1850), false);
+    try expect(!isLeapYear(1850));
 }
 test "Determine if 1565 is a leap year" {
-    try expectEqual(leapYear(1565), false);
+    try expect(!isLeapYear(1565));
 }
 test "Determine if 1920 is a leap year" {
-    try expectEqual(leapYear(1920), true);
+    try expect(isLeapYear(1920));
 }
 test "Determine if 1924 is a leap year" {
-    try expectEqual(leapYear(1924), true);
+    try expect(isLeapYear(1924));
 }
 test "Determine if 1928 is a leap year" {
-    try expectEqual(leapYear(1928), true);
+    try expect(isLeapYear(1928));
 }
 test "Determine if 1940 is a leap year" {
-    try expectEqual(leapYear(1940), true);
+    try expect(isLeapYear(1940));
 }
 test "Determine if 2021 is a leap year" {
-    try expectEqual(leapYear(2021), false);
+    try expect(!isLeapYear(2021));
 }
 test "Determine if 2004 is a leap year" {
-    try expectEqual(leapYear(2004), true);
+    try expect(isLeapYear(2004));
 }
 test "Determine if 8 is a leap year" {
-    try expectEqual(leapYear(8), true);
+    try expect(isLeapYear(8));
 }
 test "Determine if 4 is a leap year" {
-    try expectEqual(leapYear(4), true);
+    try expect(isLeapYear(4));
 }
 test "Determine if 2019 is a leap year" {
-    try expectEqual(leapYear(2019), false);
+    try expect(!isLeapYear(2019));
 }
 test "Determine if 1970 is a leap year" {
-    try expectEqual(leapYear(1970), false);
+    try expect(!isLeapYear(1970));
 }
 test "Determine if 1934 is a leap year" {
-    try expectEqual(leapYear(1934), false);
+    try expect(!isLeapYear(1934));
 }
 test "Determine if 1874 is a leap year" {
-    try expectEqual(leapYear(1874), false);
+    try expect(!isLeapYear(1874));
 }
 test "Determine if 1968 is a leap year" {
-    try expectEqual(leapYear(1968), true);
+    try expect(isLeapYear(1968));
+}
+
+test "year not divisible by 4 in common year" {
+    try expect(!isLeapYear(2015));
+}
+
+test "year divisible by 2, not divisible by 4 in common year" {
+    try expect(!isLeapYear(1970));
+}
+
+test "year divisible by 4, not divisible by 100 in leap year" {
+    try expect(isLeapYear(1996));
+}
+
+test "year divisible by 4 and 5 is still a leap year" {
+    try expect(isLeapYear(1960));
+}
+
+test "year divisible by 100, not divisible by 400 in common year" {
+    try expect(!isLeapYear(2100));
+}
+
+test "year divisible by 100 but not by 3 is still not a leap year" {
+    try expect(!isLeapYear(1900));
+}
+
+test "year divisible by 400 is leap year" {
+    try expect(isLeapYear(2000));
+}
+
+test "year divisible by 400 but not by 125 is still a leap year" {
+    try expect(isLeapYear(2400));
+}
+
+test "year divisible by 200, not divisible by 400 in common year" {
+    try expect(!isLeapYear(1800));
 }
