@@ -12,12 +12,16 @@ const organizeRustImports = ({
     directory: string;
     filename: string;
 }) => {
-    const location = `./src/${directory}`;
+    const location =   new URL("", import.meta.url)
+
+    
+    
+    // `./src/${directory}`;
     readdir(location, (dirError, files: string[]) => {
         if (dirError) return logger(dirError, "readdir");
-        const moduleLocation = `${location}/mod.rs`;
+        const moduleLocation = `${location.href}/mod.rs`;
         const mods = new Set();
-        readFile(moduleLocation, "utf-8", (readError, data) => {
+        readFile(`${moduleLocation}/src`, "utf-8", (readError, data) => {
             if (readError) return logger(readError, "readfile");
             const contents = data.substring(data.indexOf(delimiter));
             files.forEach((file: string) => {
@@ -62,7 +66,7 @@ const createZig = ({
     directory: string;
 }) => {
     const name = camelCase(functionanme);
-    const contents = `const expectEqual = @import("std").testing.expectEqual;\n\npub fn ${name}(minuend: i32, subtrahend: i32) i32 {\n\treturn minuend - subtrahend;\n}\ntest "" {\n\tconst a: i32 = 3;\n\tconst b: i32 = 2;\n\tconst c: i32 = 945;\n\tconst d: i32 = 422;\n\tconst difference = ${name}(a, b);\n\tconst e = ${name}(c, d);\n\ttry expectEqual(difference, 1);\n\ttry expectEqual(e, 523);\n}`;
+    const contents = `const std = @import("std");\nconst expectEqual = std.testing.expectEqual;\n\npub fn ${name}(minuend: i32, subtrahend: i32) i32 {\n\treturn minuend - subtrahend;\n}\ntest "" {\n\tconst a: i32 = 3;\n\tconst b: i32 = 2;\n\tconst c: i32 = 945;\n\tconst d: i32 = 422;\n\tconst difference = ${name}(a, b);\n\tconst e = ${name}(c, d);\n\ttry expectEqual(difference, 1);\n\ttry expectEqual(e, 523);\n}`;
     writeFile(
         `./src/${directory}/${snakeCase(functionanme)}.zig`,
         contents,

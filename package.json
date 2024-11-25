@@ -19,6 +19,7 @@
         "typescript": "^5.0.0"
     },
     "dependencies": {
+        "@paralleldrive/cuid2": "^2.2.2",
         "@types/psd": "^3.4.3",
         "prompts": "^2.4.2",
         "puppeteer": "^22.4.0"
