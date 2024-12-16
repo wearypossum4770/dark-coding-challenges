@@ -9,6 +9,8 @@
 // mod count_apples_and_oranges;
 // mod cubed_number;
 // mod dart_score;
+pub mod decent_number;
+pub mod maximum_toys;
 // mod difference_of_squares;
 // mod division;
 pub mod divisors;

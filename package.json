@@ -13,7 +13,7 @@
         "prettier-plugin-toml": "^2.0.1"
     },
     "scripts": {
-        "lint": "zig fmt src/easy/**.zig && bun run prettier --write ./ && cargo fmt && black ./ && isort ./"
+        "lint": "zig fmt src/easy/**.zig && bun run prettier --write ./{src,test} && cargo fmt"
     },
     "peerDependencies": {
         "typescript": "^5.0.0"
