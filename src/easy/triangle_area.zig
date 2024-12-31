@@ -1,13 +1,20 @@
-const expect = @import("std").testing.expect;
+const expectEqual = @import("std").testing.expectEqual;
 
 pub fn triangleArea(base: i32, height: i32) i32 {
-    const squareArea: i32 = base * height;
-    return @divExact(squareArea, 2);
+    return @divExact(base * height, 2);
 }
-test "integer subtraction" {
-    try expect(triangleArea(3, 2) == 3);
-    try expect(triangleArea(5, 4) == 10);
-    try expect(triangleArea(10, 10) == 50);
-    try expect(triangleArea(0, 60) == 0);
-    try expect(triangleArea(12, 11) == 66);
+test "Find area of a triangle with a base 3 and height 2" {
+    try expectEqual(triangleArea(3, 2), 3);
+}
+test "Find area of a triangle with a base 5 and height 4" {
+    try expectEqual(triangleArea(5, 4), 10);
+}
+test "Find area of a triangle with a base 10 and height 10" {
+    try expectEqual(triangleArea(10, 10), 50);
+}
+test "Find area of a triangle with a base 0 and height 60" {
+    try expectEqual(triangleArea(0, 60), 0);
+}
+test "Find area of a triangle with a base 12 and height 11" {
+    try expectEqual(triangleArea(12, 11), 66);
 }

@@ -16,9 +16,7 @@ pub fn dividesEvenly(a: i32, b: i32) bool {
     return remainder(a, b) == 0;
 }
 pub fn remainder(a: i32, b: i32) i32 {
-    if (b == 0) {
-        return 0;
-    }
+    if (b == 0) return 0;
     return @rem(a, b);
 }
 test divisibleByThree {

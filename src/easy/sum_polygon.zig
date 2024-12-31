@@ -3,6 +3,7 @@ const expectEqual = @import("std").testing.expectEqual;
 pub fn sumPolygon(sides: i32) i32 {
     return (sides - 2) * 180;
 }
+
 test "Find sum of internal angles of a regular polygon" {
     try expectEqual(sumPolygon(3), 180);
     try expectEqual(sumPolygon(4), 360);

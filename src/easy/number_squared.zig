@@ -4,25 +4,38 @@ const expectEqual = @import("std").testing.expectEqual;
 pub fn numberSquared(num: i32) i32 {
     return pow(i32, num, 2);
 }
-test "Square a number" {
+test "Square the number 10" {
+    const result = numberSquared(10);
     try expectEqual(
-        numberSquared(10),
+        result,
         100,
     );
+}
+test "Square the number 69" {
+    const result = numberSquared(69);
     try expectEqual(
-        numberSquared(69),
+        result,
         4761,
     );
+}
+test "Square the number 666" {
+    const result = numberSquared(666);
     try expectEqual(
-        numberSquared(666),
+        result,
         443556,
     );
+}
+test "Square the number -21" {
+    const result = numberSquared(-21);
     try expectEqual(
-        numberSquared(-21),
+        result,
         441,
     );
+}
+test "Square the number 21" {
+    const result = numberSquared(21);
     try expectEqual(
-        numberSquared(21),
+        result,
         441,
     );
 }

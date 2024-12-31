@@ -7,7 +7,14 @@ pub fn summation(x: i32, y: i32) i32 {
 fn addFive(x: u32) u32 {
     return x + 5;
 }
+pub fn sumReduce(comptime T: type, array: []const T) T {
+    var total: T = @as(T, 0);
 
+    for (array) |value| {
+        total += value;
+    }
+    return total;
+}
 test "summation function" {
     const y = summation(2, 9);
     const a = summation(1, 3);

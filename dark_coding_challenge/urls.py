@@ -17,10 +17,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
-from .healthcheck import (
-    health_check,
-    hello_world,
-)
+
+from .healthcheck import health_check, hello_world
 
 urlpatterns = (
     path("admin/", admin.site.urls),
