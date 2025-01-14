@@ -1,0 +1,81 @@
+[tool.poetry]
+name = "dark-coding-challenges"
+version = "0.1.0"
+description = "polyglot coding challenges"
+authors = ["None"]
+readme = "README.md"
+packages = [{include = "dark_coding_challenges"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+cuid2 = "^2.0.1"
+django = "^5.1.4"
+tornado = "^6.4.2"
+celery = "^5.4.0"
+pillow = "^11.1.0"
+django-imagekit = "^5.0.0"
+python-dotenv = "^1.0.1"
+daphne = "^4.1.2"
+dynaconf = "^3.2.6"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+black = "^24.10.0"
+isort = "^5.13.2"
+mypy = "^1.14.1"
+pre-commit = "^4.0.1"
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -vv"
+python_functions = [
+    'test_*',
+    '*_test',
+    'check_*',
+    '*_check',
+    'example_*',
+    'suite_*',
+    '*_example',
+    '*_suite',
+]
+python_classes = [
+    'Suite*',
+    '*Suite',
+    'Test*',
+    '*Test',
+    'Check*',
+    '*Check',
+    'Example*',
+    '*Example',
+
+]
+python_files = [
+    'test_*.py',
+    '*_test.py',
+    'check_*.py',
+    '*_check.py',
+    'example_*.py',
+    'suite_*.py',
+    '*_example.py',
+    '*_suite.py',
+]
+
+testpaths = ['easy', 'medium']
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+# verbose=true
+virtual_env = "poetry"
+honor_noqa = true
+multi_line_output = 5
+
+[tool.black]
+line-length = 100
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
