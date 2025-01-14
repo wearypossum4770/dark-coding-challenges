@@ -1,0 +1,3 @@
+module hard {
+    exports hard;
+}

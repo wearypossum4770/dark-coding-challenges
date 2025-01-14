@@ -1,0 +1,3 @@
+module easy {
+    exports easy;
+}

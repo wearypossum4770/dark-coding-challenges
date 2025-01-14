@@ -1,0 +1,3 @@
+module medium {
+    exports medium;
+}
