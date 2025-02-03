@@ -1,0 +1,10 @@
+name = "dark-coding-challenges"
+type = "module"
+[test]
+setup = "test/setup.ts"
+smol = true
+[install]
+exact = false
+[run]
+# equivalent to `bun --bun` for all `bun run` commands
+bun = true
