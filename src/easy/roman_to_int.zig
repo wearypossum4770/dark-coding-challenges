@@ -17,8 +17,7 @@ pub fn romanToInt(romanNumber: []const u8) i32 {
         }
         index += 1;
     }
-    total += romanNumerals.get(romanNumber[index]) orelse 0;
-    return total;
+    return total + romanNumerals.get(romanNumber[index]) orelse 0;
 }
 
 test "test roman numeral IV" {
