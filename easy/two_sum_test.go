@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-var cases = []struct {
+var twoSumCases = []struct {
 	criteria   string
 	target     int
 	inputArray []int
@@ -33,7 +33,7 @@ var cases = []struct {
 }
 
 func TestTwoSum(t *testing.T) {
-	for _, c := range cases {
+	for _, c := range twoSumCases {
 		t.Run(c.criteria, func(t *testing.T) {
 			t.Parallel()
 			result := TwoSum(c.inputArray, c.target)
