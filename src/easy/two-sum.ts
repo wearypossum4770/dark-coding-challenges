@@ -1,6 +1,6 @@
 /**
  * @description Function to find the indices of the two numbers that add up to the target.
- * # Two Sum Challenge 
+ * # Two Sum Challenge
  * - [Leet Code](https://leetcode.com/problems/two-sum/description/)
  * @example <caption>Explanation: Because nums[0] + nums[1] == 9</caption>
  * // returns [0, 1]
@@ -16,14 +16,13 @@
  * - Example:  [0, 1]
  */
 export const twoSum = (nums: number[], target: number): number[] => {
-	const mapper = new Map<number, number>();
-	for (let i = 0; i < nums.length; i++) {
-	  const complement = mapper.get(target - nums[i]);
-	  if (complement) {
-		return [complement, i];
-	  }
-	  mapper.set(nums[i], i);
-	}
-	return [];
-  };
-  
+  const mapper = new Map<number, number>();
+  for (let i = 0; i < nums.length; i++) {
+    const complement = mapper.get(target - nums[i]);
+    if (complement) {
+      return [complement, i];
+    }
+    mapper.set(nums[i], i);
+  }
+  return [];
+};
