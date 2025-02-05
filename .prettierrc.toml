@@ -1,0 +1,9 @@
+plugins = [
+  "prettier-plugin-java",
+  "prettier-plugin-sh",
+  "prettier-plugin-kotlin",
+  "@prettier/plugin-php",
+  "prettier-plugin-toml",
+  "@prettier/plugin-xml",
+]
+
