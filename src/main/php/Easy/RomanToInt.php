@@ -27,7 +27,9 @@ class RomanToInt
             return 0;
         }
         for ($i = strlen($roman) - 1; $i >= 0; $i--) {
-            $currentValue = array_key_exists($roman[$i], $romanNumerals) ? $romanNumerals[$roman[$i]] : 0;
+            $currentValue = array_key_exists($roman[$i], $romanNumerals)
+                ? $romanNumerals[$roman[$i]]
+                : 0;
             if ($currentValue < $prevValue) {
                 $result -= $currentValue;
             } else {
