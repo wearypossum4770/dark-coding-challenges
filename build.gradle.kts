@@ -27,6 +27,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // testImplementation("")
+    // testImplementation 'io.kotest:kotest-runner-junit5:$version'
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0") // JUnit 5 for testing
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.0")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0") // Or the latest version
@@ -54,13 +55,13 @@ tasks.withType<JavaCompile> {
 	options.isIncremental = true // This is automatically enabled in modern Gradle versions
     options.encoding = "UTF-8"
 }
-tasks.test {
-    useJUnitPlatform()  // Specify to use JUnit Platform for tests (JUnit 5)
-    testLogging {
+tasks.withType<Test>().configureEach {
+   useJUnitPlatform()
+      testLogging {
 		events("passed", "skipped", "failed")
-	}
-
 }
+}
+
 
 
 
