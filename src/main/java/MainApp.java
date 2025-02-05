@@ -3,17 +3,18 @@
  */
 
 public class MainApp {
-  public String getGreeting() {
-    return "Hello World!";
-  }
 
-  public static void main(String[] args) {
-    // Example of running challenges from different levels
-    System.out.println("Running...\n");
+    public String getGreeting() {
+        return "Hello World!";
+    }
 
-    System.out.println("Running...\n");
-    System.out.println(new App().getGreeting());
+    public static void main(String[] args) {
+        // Example of running challenges from different levels
+        System.out.println("Running...\n");
 
-    System.out.println("Running...\n");
-  }
+        System.out.println("Running...\n");
+        System.out.println(new App().getGreeting());
+
+        System.out.println("Running...\n");
+    }
 }

@@ -12,13 +12,13 @@
  */
 public class Main {
 
-  /**
-   * The main method is the entry point of the application. It is executed when the program starts
-   * and is used to run the program's logic.
-   *
-   * @param args Command-line arguments passed to the application.
-   */
-  public static void main(String[] args) {
-    System.out.println("Hello, World!");
-  }
+    /**
+     * The main method is the entry point of the application. It is executed when the program starts
+     * and is used to run the program's logic.
+     *
+     * @param args Command-line arguments passed to the application.
+     */
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
 }
