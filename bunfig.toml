@@ -1,10 +1,20 @@
+
 name = "dark-coding-challenges"
-type = "module"
-[test]
-setup = "test/setup.ts"
+logLevel = "debug" # "debug" | "warn" | "error"
 smol = true
+telemetry = true
+type = "module"
+
 [install]
-exact = false
+	exact = false
+
+[paths]
+	"@/*" = "./src/*"
+
 [run]
-# equivalent to `bun --bun` for all `bun run` commands
-bun = true
+	bun = true
+
+[test]
+	coverage = true
+	preload = [ "test/setup.ts" ]
+	
