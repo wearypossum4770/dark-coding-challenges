@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/wearypossum4770/dark-coding-challenges/dark_coding_challenges"
+	"github.com/wearypossum4770/dark-coding-challenges/easy" // Import easy package
+)
 
 func main() {
-    fmt.Println("Hello, Go!")
+	fmt.Println("Hello, Go!")
+	fmt.Println("Easy Challenge: Is Palindrome 'madam'?", easy.IsPalindrome("madam"))
+	fmt.Println("this is a shared file:?", dark_coding_challenges.FilterNonAlphaNumCharacters("\b5Ὂg̀9! ℃ᾭG"))
+
 }
