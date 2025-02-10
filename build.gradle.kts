@@ -25,6 +25,8 @@ dependencies {
 
     // Add Kotlin standard library
     implementation(kotlin("stdlib"))
+        testImplementation(kotlin("test"))
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // testImplementation("")
     // testImplementation 'io.kotest:kotest-runner-junit5:$version'
