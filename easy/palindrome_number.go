@@ -3,7 +3,15 @@ package easy
 import (
 	"strconv"
 )
-
+// Package easy contains x``PalindromeNumber checks if the given integer is a palindrome.
+// A palindrome reads the same backward as forward.
+//
+// Example:
+//
+//     fmt.Println(PalindromeNumber(121)) // Output: true
+//     fmt.Println(PalindromeNumber(-121)) // Output: false
+//     fmt.Println(PalindromeNumber(10)) // Output: false
+//gi
 func PalindromeNumber(x int) bool {
 	if x < 0 || (x%10 == 0 && x != 0) {
 		return false
