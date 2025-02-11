@@ -17,3 +17,33 @@ pub fn palindromeNumber(param: i32) bool {
     }
     return true;
 }
+test "Scenario: negative numbers cannot be palindromic" {
+    try expect(!palindromeNumber(-121));
+    try expect(!palindromeNumber(-101));
+    try expect(!palindromeNumber(-10));
+    try expect(!palindromeNumber(-1));
+    try expect(!palindromeNumber(-101));
+}
+test "Scenario: zero is a palindrome" {
+    try expect(palindromeNumber(0));
+}
+test "Scenario: single digit numbers are palindromic" {
+    try expect(palindromeNumber(1));
+    try expect(palindromeNumber(3));
+    try expect(palindromeNumber(8));
+    try expect(palindromeNumber(9));
+}
+test "Scenario: double digit numbers not duplicate numbers are not palindromic" {
+    try expect(!palindromeNumber(10));
+}
+
+test "Scenario: duplicated double digit numbers are palindromic" {
+    try expect(palindromeNumber(11));
+}
+test "Scenario: higher order numbers possibly palindromic" {
+    try expect(!palindromeNumber(100));
+    try expect(palindromeNumber(121));
+    try expect(!palindromeNumber(123));
+    try expect(palindromeNumber(313));
+    try expect(!palindromeNumber(1000030001));
+}
