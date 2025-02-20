@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %}{{ title }}{% endblock %} {% block
+content %}
+<h1>Search Results</h1>
+<form action="{% url 'search_results' %}" method="get">
+    <div>
+        <label for="city-search">
+            <input
+                id="city-search"
+                name="city"
+                type="text"
+                placeholder="Search City..."
+            />
+        </label>
+    </div>
+    <div>
+        <label for="country-search">
+            <input
+                id="country-search"
+                name="country"
+                type="text"
+                placeholder="Search Country..."
+            />
+        </label>
+    </div>
+</form>
+
+{% endblock %}
