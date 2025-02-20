@@ -1,0 +1,85 @@
+[project]
+name = "dark-coding-challenges"
+version = "0.1.0"
+description = ""
+authors = [{ name = "Your Name", email = "you@example.com" }]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "cuid2>=2.0.1,<3.0.0",
+    "django>=5.1.4,<6.0.0",
+    "tornado>=6.4.2,<7.0.0",
+    "celery>=5.4.0,<6.0.0",
+    "pillow>=11.1.0,<12.0.0",
+    "django-imagekit>=5.0.0,<6.0.0",
+    "python-dotenv>=1.0.1,<2.0.0",
+    "daphne>=4.1.2,<5.0.0",
+    "dynaconf>=3.2.6,<4.0.0",
+    "pendulum>=3.0.0,<4.0.0",
+    "channels[daphne] (>=4.2.0,<5.0.0)",
+]
+# [tool.poetry]
+# packages = [{ include = "dark_coding_challenges" }]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+black = "^25.1.0"
+isort = "^6.0.0"
+mypy = "^1.14.1"
+pre-commit = "^4.1.0"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -vv"
+python_functions = [
+    'test_*',
+    '*_test',
+    'check_*',
+    '*_check',
+    'example_*',
+    'suite_*',
+    '*_example',
+    '*_suite',
+]
+python_classes = [
+    'Suite*',
+    '*Suite',
+    'Test*',
+    '*Test',
+    'Check*',
+    '*Check',
+    'Example*',
+    '*Example',
+
+]
+python_files = [
+    'test_*.py',
+    '*_test.py',
+    'check_*.py',
+    '*_check.py',
+    'example_*.py',
+    'suite_*.py',
+    '*_example.py',
+    '*_suite.py',
+]
+
+testpaths = ['easy', 'medium', 'advanced']
+[tool.isort]
+profile = "black"
+skip_gitignore = true
+# verbose=true
+virtual_env = "poetry"
+honor_noqa = true
+multi_line_output = 5
+
+[tool.black]
+line-length = 100
+
+[tool.mypy]
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
