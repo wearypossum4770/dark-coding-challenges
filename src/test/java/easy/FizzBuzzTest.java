@@ -26,35 +26,29 @@ public class FizzBuzzTest {
             List.of("1", "2", "Fizz", "4", "Buzz")
             // spotless:on
             ),
-           
         Arguments.of(
             3,
             // spotless:off
             List.of("1", "2", "Fizz")
             // spotless:on
             ),
-           
         Arguments.of(
             16,
             // spotless:off
             List.of("1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz","16")
             // spotless:on
             ),
-           
         Arguments.of(
             15,
             // spotless:off
             List.of("1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14", "FizzBuzz")
             // spotless:on
             ),
-           
         Arguments.of(
             35,
             // spotless:off
             List.of("1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz","16","17","Fizz","19","Buzz","Fizz","22","23","Fizz","Buzz","26","Fizz","28","29","FizzBuzz","31","32","Fizz","34","Buzz")
             // spotless:on
-            )
-           
-        );
+            ));
   }
 }
