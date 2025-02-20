@@ -1,3 +1,12 @@
+// Package easy contains “PalindromeNumber checks if the given integer is a palindrome.
+// A palindrome reads the same backward as forward.
+//
+// Example:
+//
+//	fmt.Println(PalindromeNumber(121)) // Output: true
+//	fmt.Println(PalindromeNumber(-121)) // Output: false
+//	fmt.Println(PalindromeNumber(10)) // Output: false
+
 package easy
 
 import (
