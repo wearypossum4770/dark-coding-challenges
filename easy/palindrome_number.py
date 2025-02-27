@@ -1,4 +1,4 @@
-def palindrome_number(self, x: int) -> bool:
+def palindrome_number(x: int) -> bool:
     if x < 0 or (x % 10 == 0 and x != 0):
         return False
     number = str(x)
