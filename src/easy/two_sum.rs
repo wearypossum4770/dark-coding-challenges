@@ -1,5 +1,24 @@
 use std::collections::HashMap;
-
+/// [Leet Code](https://leetcode.com/problems/two-sum/)
+/// [Code Signal](https://learn.codesignal.com/preview/lessons/1609/)
+/// Runtime: 0 ms Beats 100.00%
+/// Memory: 2.63 MB Beats 20.47%
+/**
+ * Function to find the indices of the two numbers that add up to the target.
+ *
+ * # Arguments
+ *
+ * * `nums` - A vector of integers.
+ * * `target` - The target sum.
+ *
+ * # Returns
+ *
+ * A vector containing the indices of the two numbers that add up to the target.
+ *
+ * # Panics
+ *
+ * Panics if no two sum solution is found.
+ */
 pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
     let mut mapper: HashMap<i32, usize> = HashMap::new();
     for (index, &num) in nums.iter().enumerate() {
