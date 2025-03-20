@@ -1,0 +1,11 @@
+pub mod armstrong_numbers;
+pub mod counting_sort;
+pub mod factorial;
+pub mod find_content_children;
+pub mod fizz_buzz;
+pub mod is_palindrome;
+pub mod is_pangram;
+pub mod length_of_last_word;
+pub mod palindrome_number;
+pub mod roman_to_int;
+pub mod two_sum;
