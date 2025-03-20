@@ -2,6 +2,7 @@ package easy;
 
 public class ArmstrongNumbers {
   public int isArmstrongNumber(int input) {
+    if (input < 0) return 0;
     int total = 0;
     int index = 0;
     String target = Integer.toString(input);
