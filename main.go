@@ -16,12 +16,17 @@ func main() {
     if err != nil {
         log.Fatal("Error loading .env file")
     }
+    leaves := []int { 10, 5, 15}
+    tree := easy.BuildTreeNode(leaves)
 
     // Access environment variables
     goFlags := os.Getenv("GOFLAGS")
-    log.Println("GOFLAGS:", goFlags)
-	fmt.Println("Hello, Go!")
-	fmt.Println("Easy Challenge: Is Palindrome 'madam'?", easy.IsPalindrome("madam"))
-	fmt.Println("this is a shared file:?", dark_coding_challenges.FilterNonAlphaNumCharacters("\b5Ὂg̀9! ℃ᾭG"))
-
+    log.Println("\nGOFLAGS:", goFlags)
+	fmt.Println("\nHello, Go!")
+    fmt.Println("\nEasy Challenge", tree)
+	fmt.Println("\nEasy Challenge: Is Palindrome 'madam'?", easy.IsPalindrome("madam"))
+	fmt.Println("\nthis is a shared file:?", dark_coding_challenges.FilterNonAlphaNumCharacters("\b5Ὂg̀9! ℃ᾭG"))
+    dark_coding_challenges.GetVersion()
 }
+
+

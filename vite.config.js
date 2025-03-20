@@ -1,11 +1,8 @@
 import { defineConfig } from "vite";
-import laravel from "laravel-vite-plugin";
+import { createConfig } from './config'
 
-export default defineConfig({
-    plugins: [
-        laravel({
-            input: ["resources/css/app.css", "resources/js/app.js"],
-            refresh: true,
-        }),
-    ],
-});
+export default defineConfig((args) => createConfig(args));
+
+
+
+// Good Afternoon, I hope this message finds you well. I came across your profile while researching ClickHouse. Currently I'm exploring opportunities as a software developer and would love to connect.

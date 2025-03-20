@@ -29,14 +29,14 @@ load_dotenv(dotenv_path)
 SECRET_KEY = getenv("DJANGO_SECRET_KEY", "abcd")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv("DEBUG", False)
+DEBUG = getenv("APP_DEBUG", False)
 
 ALLOWED_HOSTS = ()
 
 SOCIAL_AUTH_GITHUB_KEY = getenv("GITHUB_KEY", "GITHUB_KEY")
 SOCIAL_AUTH_GITHUB_SECRET = getenv("GITHUB_SECRET", "GITHUB_SECRET")
 
-AUTH_USER_MODEL = "users.apps.UsersConfig"
+AUTH_USER_MODEL = "users.NormalUser"
 # Application definition
 DEFAULT_APPS = (
     "django.contrib.admin",
@@ -52,7 +52,7 @@ PROJECT_APPS = ("chat", "users.apps.UsersConfig")
 
 THIRD_PARTY_APPS = ("daphne",)
 
-INSTALLED_APPS = DEFAULT_APPS + PROJECT_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = THIRD_PARTY_APPS + DEFAULT_APPS + PROJECT_APPS
 
 MIDDLEWARE = (
     "django.middleware.security.SecurityMiddleware",
@@ -63,7 +63,12 @@ MIDDLEWARE = (
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 )
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "sesame.backends.ModelBackend",
+]
 
+SESAME_MAX_AGE = 600
 ROOT_URLCONF = "dark_coding_challenges.urls"
 
 TEMPLATES = (
@@ -82,19 +87,38 @@ TEMPLATES = (
     },
 )
 
-WSGI_APPLICATION = "dark_coding_challenges.asgi.application"
-
-
+WSGI_APPLICATION = "dark_coding_challenges.wsgi.application"
+ASGI_APPLICATION = "dark_coding_challenges.asgi.application"
+sqlite_backend = BASE_DIR / "db.sqlite3"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+REDIS_CONNECTION_PROTOCOL = ("redis", "rediss", "unix")
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": sqlite_backend,
+        "TEST": {"NAME": sqlite_backend},
     }
 }
-
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"{REDIX_CONNECTION_PROTOCOL[0]}://127.0.0.1:6379/",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": getenv("REDIS_PASSWORD", ""),
+        },
+    }
+}
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

@@ -2,6 +2,10 @@ const std = @import("std");
 const Builder = std.build.Builder;
 const Pkg = std.build.Pkg;
 
+pub const testable = . {
+    .{"test_semver_parser", "src/version.zig"},
+};
+
 // Although this function looks imperative, note that its job is to
 // declaratively construct a build graph that will be executed by an external
 // runner.
@@ -47,7 +51,6 @@ pub fn build(b: *std.Build) void {
     // step is evaluated that depends on it. The next line below will establish
     // such a dependency.
     const run_cmd = b.addRunArtifact(exe);
-
     // By making the run step depend on the install step, it will be run from the
     // installation directory rather than directly from within the cache directory.
     // This is not necessary, however, if the application depends on other installed
@@ -64,8 +67,13 @@ pub fn build(b: *std.Build) void {
     // and can be selected like this: `zig build run`
     // This will evaluate the `run` step rather than the default, which is "install".
     const run_step = b.step("run", "Run the app");
-    run_step.dependOn(&run_cmd.step);
+    const run_all = b.step("all", "Run all unit tests");
 
+    run_step.dependOn(&run_cmd.step);
+    for (testable) |example| {
+        const step_name, const step_path = example;
+        std.debug.print("the step name: {step_name} is located at {step_path}");
+    }
     // Creates a step for unit testing. This only builds the test executable
     // but does not run it.
     const lib_unit_tests = b.addTest(.{

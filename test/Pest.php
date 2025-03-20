@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types=1);
+ini_set('memory_limit', '512M');
+arch()->preset()->security()->strict();
 
 uses(TestCase::class)
 // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)

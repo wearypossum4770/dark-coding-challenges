@@ -22,17 +22,18 @@ repositories {
 }
 
 dependencies {
-
+    val junitVersion = "5.10.0"
     // Add Kotlin standard library
     implementation(kotlin("stdlib"))
         testImplementation(kotlin("test"))
-
+    implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // testImplementation("")
     // testImplementation 'io.kotest:kotest-runner-junit5:$version'
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0") // JUnit 5 for testing
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0") // Or the latest version
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion") // JUnit 5 for testing
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion") // Or the latest version
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
 }
@@ -56,6 +57,9 @@ application {
 tasks.withType<JavaCompile> {
 	options.isIncremental = true // This is automatically enabled in modern Gradle versions
     options.encoding = "UTF-8"
+}
+tasks.withType<Test> {
+        maxParallelForks = Runtime.getRuntime().availableProcessors()
 }
 tasks.withType<Test>().configureEach {
    useJUnitPlatform()
