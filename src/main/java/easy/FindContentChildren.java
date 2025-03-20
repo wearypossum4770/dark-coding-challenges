@@ -9,15 +9,13 @@ public class FindContentChildren {
     Arrays.sort(cookies);
     int i = 0;
     int j = 0;
-    int content = 0;
     while (i < children.length && j < cookies.length) {
       if (cookies[j] >= children[i]) {
-        content++;
         i++;
       }
       j += 1;
     }
-    return content;
+    return i;
   }
 
   public int solve(int[] children, int[] cookies) {
