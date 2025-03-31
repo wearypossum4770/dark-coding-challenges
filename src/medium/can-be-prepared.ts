@@ -1,5 +1,10 @@
 const allowedIngredients = new Set(["O", "E", "M", "F", "B"]);
-const slicer = (value: string) => (value.startsWith("(") && value.endsWith(")")) ? value.slice(1, -1) : value
+const slicer = (value: string) => {
+    if (value.startsWith("(") && value.endsWith(")")) return  value.slice(1, -1)
+    if (value.startsWith("(")) return value.slice(1)
+    if (value.endsWith(")")) return value.slice(0, -1)
+    return value;
+}
 
 export const canBePrepared = (
     recipe: string,
@@ -7,17 +12,15 @@ export const canBePrepared = (
     canSubstitute: boolean = false,
 ): boolean => {
     const allowed = new Set(ingredients);
-    
-    const parser = (recipe: string): string[][] => {
-        const outer: string[][] = []
-        if (recipe.length === 1)  return [[recipe]]
+        const parser = (recipe: string): boolean [][] => {
+        const outer: boolean[][] = []
+        if (recipe.length === 1)  return [[allowed.has(recipe)]]
         const handleComplex = (value: string) => {
             let step = [];
             for (const ingredient of value) {
                 if (/[a-z]/i.test(ingredient)) {
-                    step.push(ingredient);
-                } else if (ingredient === "|" || ingredient === "(") {
-                    if (step.length === 0) continue
+                    step.push(allowed.has(ingredient));
+                } else if (ingredient === "|") {
                     outer.push(step)
                     step = [];
                 }
@@ -25,26 +28,9 @@ export const canBePrepared = (
             outer.push(step)
             return step
         }
-        
         handleComplex(slicer(recipe));
         return outer    
-
     }
- 
-    return parser(recipe).map(item => item.map(ingredients=> allowed.has(ingredients)).some(x=> !x))
-
+    return parser(recipe).map(part=> part.every(Boolean)).some(Boolean)
 };
 
-console.log(canBePrepared("O", ["O"])); //, true)
-console.log(canBePrepared("B|O", ["O"])); //, true)
-console.log(canBePrepared("B", ["O"])); // false)
-console.log(canBePrepared("(O&M)", ["O"])); // false)
-console.log(canBePrepared("(M&O)", ["O"])); // false)
-console.log(canBePrepared("(O|B)", ["O", "B"])); //, true)
-console.log(canBePrepared("(M&F)", ["M", "F"])); //, true)
-console.log(canBePrepared("(M&F)", ["M", "E"])); // false)
-console.log(canBePrepared("(E|(M&F))", ["M", "E"])); //, true)
-console.log(canBePrepared("(E|(M&F))", ["M", "B"]), false)
-console.log(canBePrepared( "( M & F )", ["M", 'F']), true)
-console.log(canBePrepared("(E|(M&F))", ["M", "F"]), true)
-console.log(canBePrepared("(M&(F&G))", [""]))
