@@ -1,36 +1,26 @@
-const allowedIngredients = new Set(["O", "E", "M", "F", "B"]);
-const slicer = (value: string) => {
-    if (value.startsWith("(") && value.endsWith(")")) return  value.slice(1, -1)
-    if (value.startsWith("(")) return value.slice(1)
-    if (value.endsWith(")")) return value.slice(0, -1)
-    return value;
-}
-
 export const canBePrepared = (
     recipe: string,
     ingredients: string[],
-    canSubstitute: boolean = false,
 ): boolean => {
     const allowed = new Set(ingredients);
-        const parser = (recipe: string): boolean [][] => {
-        const outer: boolean[][] = []
-        if (recipe.length === 1)  return [[allowed.has(recipe)]]
-        const handleComplex = (value: string) => {
-            let step = [];
-            for (const ingredient of value) {
-                if (/[a-z]/i.test(ingredient)) {
-                    step.push(allowed.has(ingredient));
-                } else if (ingredient === "|") {
-                    outer.push(step)
-                    step = [];
+    const outer: boolean[] = [];
+    const inner: boolean[] = [];
+    for (const piece of recipe) {
+        console.log(piece, inner, outer);
+        switch (piece) {
+            case "|":
+            case "(":
+                if (inner.length > 0) {
+                    outer.push(inner.every(Boolean));
+                    inner.length = 0;
                 }
-            }
-            outer.push(step)
-            return step
+            default:
+                if (/[a-z]/i.test(piece)) inner.push(allowed.has(piece));
         }
-        handleComplex(slicer(recipe));
-        return outer    
     }
-    return parser(recipe).map(part=> part.every(Boolean)).some(Boolean)
+    if (inner.length > 0) {
+        outer.push(inner.every(Boolean));
+        inner.length = 0;
+    }
+    return outer.some(Boolean);
 };
-
