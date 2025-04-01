@@ -6,7 +6,6 @@ export const canBePrepared = (
     const outer: boolean[] = [];
     const inner: boolean[] = [];
     for (const piece of recipe) {
-        console.log(piece, inner, outer);
         switch (piece) {
             case "|":
             case "(":
