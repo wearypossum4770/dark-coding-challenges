@@ -11,3 +11,18 @@ pub fn reverse_string(s: &mut [char]) {
 	}
 
 }
+#[cfg(test)]
+mod tests {
+use super::reverse_string;
+use rstest::rstest;
+
+#[rstest]
+#[case(&mut vec!['h', 'e', 'l', 'l', 'o'], &vec!['o', 'l', 'l', 'e', 'h'])]
+#[case(&mut vec!['a', 'b', 'c', 'd'], &vec!['d', 'c', 'b', 'a'])]
+#[case(&mut vec!['z'], &vec!['z'])]
+#[case(&mut vec![], &vec![])]
+fn test_reverse_string(#[case] input: &mut [char], #[case] expected: &Vec<char>) {
+	reverse_string(input);
+	assert_eq!(input, expected);
+	}
+}
