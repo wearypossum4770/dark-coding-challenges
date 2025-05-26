@@ -1,6 +1,7 @@
 package easy
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -32,7 +33,7 @@ func TestArmstrongNumbers(t *testing.T) {
 		{9474, 1},
 	}
 	for _, c := range cases {
-		t.Run("", func(t *testing.T) {
+		t.Run(fmt.Sprintf("\n\tGiven: the integer %d.\n\tThen: it is an Armstrong number %p", c.num, &c.expected), func(t *testing.T) {
 			t.Parallel()
 			result := ArmstrongNumbers(c.num)
 			if result != c.expected {
