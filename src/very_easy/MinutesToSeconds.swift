@@ -1,3 +1,1 @@
-func minutesToSeconds(_ minutes: Int) -> Int {
-  return minutes * 60
-}
+func minutesToSeconds(_ minutes: Int) -> Int { return minutes * 60 }
