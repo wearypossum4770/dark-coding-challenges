@@ -1,52 +1,42 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "go",
-			"label": "go: test package",
-			"command": "test",
-			"args": [
-				"${fileDirname}"
-			],
-			"problemMatcher": [
-				"$go"
-			],
-			"group": "build",
-			"detail": "cd /home/devsteve/dev/dark-coding-challenges; go test ${fileDirname}"
-		},
-		{
-			"type": "go",
-			"label": "go: test workspace",
-			"command": "test",
-			"args": [
-				"./..."
-			],
-			"problemMatcher": [
-				"$go"
-			],
-			"group": "build",
-			"detail": "cd /home/devsteve/dev/dark-coding-challenges; go test ./..."
-		},
-		{
-			"type": "gradle",
-			"id": "/home/devsteve/dev/dark-coding-challengesspotlessApplydark-coding-challenges",
-			"script": "spotlessApply",
-			"description": "Applies code formatting steps to sourcecode in-place.",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"project": "dark-coding-challenges",
-			"buildFile": "/home/devsteve/dev/dark-coding-challenges/build.gradle.kts",
-			"rootProject": "dark-coding-challenges",
-			"projectFolder": "/home/devsteve/dev/dark-coding-challenges",
-			"workspaceFolder": "/home/devsteve/dev/dark-coding-challenges",
-			"args": "",
-			"javaDebug": false,
-			"problemMatcher": [
-				"$gradle"
-			],
-			"label": "gradle: spotlessApply"
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "go",
+            "label": "go: test package",
+            "command": "test",
+            "args": ["${fileDirname}"],
+            "problemMatcher": ["$go"],
+            "group": "build",
+            "detail": "cd /home/devsteve/dev/dark-coding-challenges; go test ${fileDirname}"
+        },
+        {
+            "type": "go",
+            "label": "go: test workspace",
+            "command": "test",
+            "args": ["./..."],
+            "problemMatcher": ["$go"],
+            "group": "build",
+            "detail": "cd /home/devsteve/dev/dark-coding-challenges; go test ./..."
+        },
+        {
+            "type": "gradle",
+            "id": "/home/devsteve/dev/dark-coding-challengesspotlessApplydark-coding-challenges",
+            "script": "spotlessApply",
+            "description": "Applies code formatting steps to sourcecode in-place.",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "project": "dark-coding-challenges",
+            "buildFile": "/home/devsteve/dev/dark-coding-challenges/build.gradle.kts",
+            "rootProject": "dark-coding-challenges",
+            "projectFolder": "/home/devsteve/dev/dark-coding-challenges",
+            "workspaceFolder": "/home/devsteve/dev/dark-coding-challenges",
+            "args": "",
+            "javaDebug": false,
+            "problemMatcher": ["$gradle"],
+            "label": "gradle: spotlessApply"
+        }
+    ]
 }

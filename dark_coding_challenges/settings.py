@@ -101,16 +101,16 @@ DATABASES = {
         "TEST": {"NAME": sqlite_backend},
     }
 }
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": f"{REDIX_CONNECTION_PROTOCOL[0]}://127.0.0.1:6379/",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "PASSWORD": getenv("REDIS_PASSWORD", ""),
-        },
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": f"{REDIX_CONNECTION_PROTOCOL[0]}://127.0.0.1:6379/",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#             "PASSWORD": getenv("REDIS_PASSWORD", ""),
+#         },
+#     }
+# }
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
