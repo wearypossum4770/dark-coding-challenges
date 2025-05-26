@@ -1,1 +1,12 @@
-pub mod array_sum;
+pub mod convert_to_string_decimal;
+pub mod count_hand_washes;
+pub mod csv_to_array;
+pub mod extracting_numbers;
+pub mod find_largest_num;
+pub mod has_same_bread;
+pub mod hash_plus_count;
+pub mod leap_year;
+pub mod letter_counter;
+pub mod reverse_alpha_case;
+pub mod reverse_sentence;
+pub mod triangular_number_sequence;
