@@ -17,19 +17,15 @@ void main() {
     ];
 
     for (final step in testCases) {
-      // Safely cast values to List<int> for nums and expected
       final nums = step.nums;
       final node = ListNode.fromArray(nums);
       final expected = step.expected;
       final result = reverseLinkedList(node);
       final output = ListNode.toArray(result);
 
-      test(
-        "\n\tGiven: a linked list $node\n\t\t(represented as $nums).\n\tWhen: nodes are reversed.\n\tThen: it will be $output\n\t\t(represented as $expected)",
-        () {
-          expect(output, equals(expected));
-        },
-      );
+      test("\n\tGiven: a linked list $node\n\t\t(represented as $nums).\n\tWhen: nodes are reversed.\n\tThen: it will be $output\n\t\t(represented as $expected)", () {
+        expect(output, equals(expected));
+      });
     }
   });
 }

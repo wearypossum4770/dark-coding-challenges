@@ -1,3 +1,1 @@
-func boolToString(_ value: Bool) -> String {
-  return String.init(value)
-}
+func boolToString(_ value: Bool) -> String { return String.init(value) }

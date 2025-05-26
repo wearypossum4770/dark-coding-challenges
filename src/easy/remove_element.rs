@@ -11,7 +11,7 @@ pub fn remove_optional_element(input: &mut [Option<i32>], target: i32) -> i32 {
     }
     count
 }
-pub fn remove_element(nums: &mut Vec<i32>, target: i32) -> i32 {
+pub fn remove_element(nums: &mut [i32], target: i32) -> i32 {
     let mut count = 0;
     for index in 0..nums.len() {
         if nums[index] != target {
@@ -23,14 +23,19 @@ pub fn remove_element(nums: &mut Vec<i32>, target: i32) -> i32 {
 }
 #[cfg(test)]
 mod tests {
-    use super::{remove_optional_element, remove_element};
+    use super::{remove_element, remove_optional_element};
     use rstest::rstest;
 
     #[rstest]
     #[case(&mut vec![3, 2, 2, 3], 3, vec![2, 2], 2)]
-    fn test_remove_element(#[case] input: &mut Vec<i32>, #[case] target: i32, #[case] _result: Vec<i32>, #[case] count: i32) {
-       let output = remove_element(input, target);
-       assert_eq!(output, count);
+    fn test_remove_element(
+        #[case] input: &mut Vec<i32>,
+        #[case] target: i32,
+        #[case] _result: Vec<i32>,
+        #[case] count: i32,
+    ) {
+        let output = remove_element(input, target);
+        assert_eq!(output, count);
     }
     #[rstest]
     #[case(&mut vec![Some(3), Some(2), Some(2), Some(3)], 3, 2, &mut vec![None, Some(2), Some(2), None])]

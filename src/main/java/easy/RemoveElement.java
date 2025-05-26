@@ -5,7 +5,7 @@ import java.util.Optional;
 public class RemoveElement {
   public int removeElement(int[] nums, int val) {
     int result = 0;
-    for (Integer i: nums) {
+    for (Integer i : nums) {
       if (!i.equals(val)) {
         nums[result] = i;
         result++;
@@ -13,6 +13,7 @@ public class RemoveElement {
     }
     return result;
   }
+
   public int removeOptionalElement(Optional<Integer>[] nums, Integer val) {
     int result = 0;
     Optional<Integer> value = Optional.of(val);

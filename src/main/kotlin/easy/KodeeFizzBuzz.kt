@@ -8,4 +8,3 @@ fun integerToFizzBuzz(candidate: Int): String {
 }
 
 fun kodeeFizzBuzz(candidate: Int): List<String> = (1..candidate).map { num -> integerToFizzBuzz(num) }
-

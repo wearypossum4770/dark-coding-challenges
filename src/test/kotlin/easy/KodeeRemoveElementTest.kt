@@ -20,6 +20,7 @@ class KodeeRemoveElementTest {
         assertEquals(expected, result)
         assertContentEquals(nums, output, "Array are not equal")
     }
+
     fun kodeeRemoveElementTest(
         nums: Array<Int>,
         subject: Int,
@@ -29,14 +30,16 @@ class KodeeRemoveElementTest {
         val result = kodeeRemoveElement(nums, subject)
         assertEquals(expected, result)
         assertContentEquals(nums, output, "Array are not equal")
-
     }
+
     companion object {
         @JvmStatic
-        fun removeElementData(): Stream<Arguments> = Stream.of(
-            Arguments.of(arrayOf(3, 2, 2, 3), 3, 2, arrayOf( 2, 2 )),
-            Arguments.of(arrayOf(0, 1, 2, 2, 3, 0, 4, 2), 2, 5, arrayOf(0, 1, 3, 0, 4)),
-        )
+        fun removeElementData(): Stream<Arguments> =
+            Stream.of(
+                Arguments.of(arrayOf(3, 2, 2, 3), 3, 2, arrayOf(2, 2)),
+                Arguments.of(arrayOf(0, 1, 2, 2, 3, 0, 4, 2), 2, 5, arrayOf(0, 1, 3, 0, 4)),
+            )
+
         @JvmStatic
         fun removeElementOptionalData(): Stream<Arguments> =
             Stream.of(

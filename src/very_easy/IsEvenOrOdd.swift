@@ -1,3 +1,1 @@
-func isEvenOrOdd(_ num: Int) -> String {
-  return num % 2 == 0 ? "even" : "odd"
-}
+func isEvenOrOdd(_ num: Int) -> String { return num % 2 == 0 ? "even" : "odd" }

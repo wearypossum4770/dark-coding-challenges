@@ -8,7 +8,7 @@ class RomanToIntTestCases {
 }
 
 void main() {
-  group("Feature:", () {
+  group("\n\tFeature: Roman Arabic Integer", () {
     final testCases = [
       RomanToIntTestCases("IV", 4),
       RomanToIntTestCases("XC", 90),
@@ -34,13 +34,10 @@ void main() {
     for (final step in testCases) {
       final roman = step.roman;
       final arabic = step.arabic;
-      test(
-        "Testing the roman numeral $roman correctly converts to the appropriate arabic number $arabic",
-        () {
-          int result = romanToInt(roman);
-          expect(result, equals(arabic));
-        },
-      );
+      test("Testing the roman numeral \x1b[38;5;221m'$roman'\x1b[0m correctly converts to the appropriate arabic number $arabic\x1b[0m", () {
+        int result = romanToInt(roman);
+        expect(result, equals(arabic));
+      });
     }
   });
 }

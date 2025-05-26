@@ -58,13 +58,13 @@ test "two sum inner duplicates" {
     const result = twoSum(usize, &nums, target) orelse return error.TestFailed;
     try expectEqualSlices(usize, &result, &output);
 }
-// test "two sum outer duplicates" {
-//     const nums = [_]usize{ 0, 4, 3, 0 };
-//     const target: usize = 0;
-//     const output = [_]usize{ 0, 3 };
-//     const result = twoSum(usize, &nums, target) orelse return error.TestFailed;
-//     try expectEqualSlices(usize, &result, &output);
-// }
+test "two sum outer duplicates" {
+    const nums = [_]usize{ 0, 4, 3, 0 };
+    const target: usize = 0;
+    const output = [_]usize{ 0, 3 };
+    const result = twoSum(usize, &nums, target) orelse return error.TestFailed;
+    try expectEqualSlices(usize, &result, &output);
+}
 test "two sum crossing zero" {
     const nums = [_]isize{ -3, 4, 3, 90 };
     const target: isize = 0;

@@ -9,7 +9,7 @@ class CanBePreparedTestCases {
 }
 
 void main() {
-  group("Feature:", () {
+  group("\n\tFeature: Can Recipe Be Prepared", () {
     final testCases = [
       CanBePreparedTestCases("", [], false),
       CanBePreparedTestCases("O", [0x4f], true),
@@ -54,7 +54,7 @@ void main() {
       final ingredients = step.ingredients;
       final expected = step.expected;
       test(
-        "Given the recipe $recipe\nAnd a list of ingredients: $ingredients recipe can be made? $expected",
+        "\n\tGiven the recipe \x1b[38;5;221m'$recipe'\x1b[0m\n\tAnd: a list of ingredients \x1b[38;5;221m'$ingredients'\x1b[0m.\n\tThen: the recipe can be made? \x1b[38;5;81m$expected\x1b[0m",
         () {
           bool result = canBePrepared(recipe, ingredients);
           expect(result, equals(expected));

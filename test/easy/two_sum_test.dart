@@ -9,7 +9,7 @@ class TwoSumTestCase {
 }
 
 void main() {
-  group("Feature: Two Sum Challenge", () {
+  group("\n\tFeature: Two Sum Challenge", () {
     final testCases = [
       TwoSumTestCase([2, 7, 11, 15], 9, [0, 1]),
       TwoSumTestCase([3, 3], 6, [0, 1]),
@@ -24,7 +24,7 @@ void main() {
       final target = step.target;
       final expected = step.expected;
 
-      test("Testing sum for $nums with target $target", () {
+      test("\n\tGiven: the array $nums\x1b[0m.\n\tAnd: the target value \x1B[95m$target\x1b[0m.\n\tThen: it's first sum is the pair $expected\x1b[0m", () {
         List<int> result = twoSum(nums, target);
         expect(result, equals(expected));
       });

@@ -15,8 +15,8 @@ describe("Feature: Reverse a string", () => {
     ])(
         "\n\t\tGiven the array %p\n\t\tThen reversed in-place it is %p",
         (inputs: string[], output: string[]) => {
-            const result = reverseString(inputs);
-            expect(result).toStrictEqual(output);
+            reverseString(inputs);
+            expect(inputs).toStrictEqual(output);
         },
     );
 });

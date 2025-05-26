@@ -1,7 +1,10 @@
 const std = @import("std");
 const utilities = @import("./utilities.zig");
+
 const expectEqual = std.testing.expectEqual;
+
 const Allocator = std.mem.Allocator;
+
 pub fn romanToInt(romanNumber: []const u8, allocator: Allocator) i32 {
     var romanNumerals = utilities.createRomanNumerals(i32, allocator);
     defer romanNumerals.deinit();

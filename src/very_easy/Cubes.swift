@@ -1,3 +1,1 @@
-func cubes(_ s: Int) -> Int {
-  return s * s * s
-}
+func cubes(_ s: Int) -> Int { return s * s * s }

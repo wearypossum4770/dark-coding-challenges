@@ -24,13 +24,10 @@ void main() {
       final cookies = step.cookies;
       final expected = step.expected;
 
-      test(
-        "Testing is the children $children can be satisfied by cookies $cookies",
-        () {
-          int result = findContentChildren(children, cookies);
-          expect(result, equals(expected));
-        },
-      );
+      test("Testing is the children $children\x1b[0m can be satisfied by cookies $cookies\x1b[0m", () {
+        int result = findContentChildren(children, cookies);
+        expect(result, equals(expected));
+      });
     }
   });
 }

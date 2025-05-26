@@ -21,7 +21,6 @@ import Testing
   ("two sum sparse negatives and positives", -6, [-18, 12, 3, 0], [0, 1]),
   ("two sum mixed order small positives", 6, [1, 3, 4, 2], [2, 3]),
 
-])
-func twoSum(criteria: String, target: Int, nums: [Int], outcome: [Int]) {
+]) func twoSum(criteria: String, target: Int, nums: [Int], outcome: [Int]) {
   #expect(twoSum(nums, target) == outcome)
 }

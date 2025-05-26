@@ -29,7 +29,5 @@ import Testing
     (839, false),
     (4234, false),
     (13, false),
-  ])
-func palindromeNumberTest(_ candidate: Int, _ output: Bool) async throws {
-  #expect(palindromeNumber(candidate) == output)
-}
+  ]) func palindromeNumberTest(_ candidate: Int, _ output: Bool) async throws
+{ #expect(palindromeNumber(candidate) == output) }

@@ -23,7 +23,7 @@ fun kodeeRemoveElement(
 ): Int {
     var result = 0
     for (index in nums) {
-        if(index != subject) {
+        if (index != subject) {
             nums[result] = index
             result += 1
         }

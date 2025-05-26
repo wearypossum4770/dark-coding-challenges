@@ -1,8 +1,8 @@
-export const removeElement = (nums: number[], val: number): number => {
+export const removeElement = (arr: number[], target: number): number => {
     let result = 0;
-    for (let num of nums) {
-        if (num !== val) {
-            nums[result] = num;
+    for (let num of arr) {
+        if (num !== target) {
+            arr[result] = num;
             result++;
         }
     }

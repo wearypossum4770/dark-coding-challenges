@@ -15,7 +15,10 @@ fun kodeeCanBePrepared(
                     inner.clear()
                 }
             }
-            c.isLetter() -> inner.add(c)
+
+            c.isLetter() -> {
+                inner.add(c)
+            }
         }
     }
     if (inner.isNotEmpty()) {

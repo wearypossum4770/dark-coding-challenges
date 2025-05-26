@@ -5,22 +5,12 @@ import Testing
 @Test(
 
   arguments: [
-    ("O", ["O"], true),
-    ("B|O", ["O"], true),
-    ("B", ["O"], false),
-    ("(O&M)", ["O"], false),
-    ("(M&O)", ["O"], false),
-    ("(O|B)", ["O", "B"], true),
-    ("(M&F)", ["M", "F"], true),
-    ("(M&F)", ["M", "E"], false),
-    ("(B|O|L)", ["B", "M", "F"], true),
-    ("(B&M&S&F)", ["B", "M", "F", "S"], true),
-    ("(E|(M&F))", ["M", "E"], true),
-    ("(E|(M&F))", ["M", "B"], false),
-    ("( M & F )", ["M", "F"], true),
-    ("(E|(M&F))", ["M", "F"], true),
-    ("(M&(F&G))", ["M", "F", "G"], true),
-    ("(M&(F&G))", [], false),
+    ("O", ["O"], true), ("B|O", ["O"], true), ("B", ["O"], false), ("(O&M)", ["O"], false),
+    ("(M&O)", ["O"], false), ("(O|B)", ["O", "B"], true), ("(M&F)", ["M", "F"], true),
+    ("(M&F)", ["M", "E"], false), ("(B|O|L)", ["B", "M", "F"], true),
+    ("(B&M&S&F)", ["B", "M", "F", "S"], true), ("(E|(M&F))", ["M", "E"], true),
+    ("(E|(M&F))", ["M", "B"], false), ("( M & F )", ["M", "F"], true),
+    ("(E|(M&F))", ["M", "F"], true), ("(M&(F&G))", ["M", "F", "G"], true), ("(M&(F&G))", [], false),
     ("(M&(F&E))", ["M", "F", "G"], false),
     // test cases provided by Chat GPT
     ("", [], false),  // Empty recipe and empty ingredients list
@@ -48,7 +38,5 @@ import Testing
     ("((((A&B)|C)&D)|E)", ["A", "B", "D"], true),  // Complex expression satisfied by nested conditions
     // // failing
     // ("((((A&B)|C)&D)|E)", ["A", "B"], false),  // Complex expression missing required condition
-  ])
-func canBePrepared(recipe: String, ingredients: [String], outcome: Bool) {
-  #expect(canBePrepared(recipe, ingredients) == outcome)
-}
+  ]) func canBePrepared(recipe: String, ingredients: [String], outcome: Bool)
+{ #expect(canBePrepared(recipe, ingredients) == outcome) }

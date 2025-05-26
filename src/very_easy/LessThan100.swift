@@ -1,3 +1,1 @@
-func lessThan100(_ a: Int, _ b: Int) -> Bool {
-  return a + b < 100
-}
+func lessThan100(_ a: Int, _ b: Int) -> Bool { return a + b < 100 }

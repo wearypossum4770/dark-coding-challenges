@@ -11,8 +11,7 @@ class RemoveElement
         $i = 0;
         foreach ($nums as $num) {
             if ($num != $tar) {
-                $nums[$i] = $num;
-                $i++;
+                $nums[$i++] = $num;
             }
         }
 
