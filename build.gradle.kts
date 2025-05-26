@@ -6,9 +6,13 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 plugins {
-    kotlin("jvm") version "2.0.21"  // Use the latest Kotlin plugin
-    id("application")              // Apply application plugin for easy running of the app
+    kotlin("jvm") version "2.0.21" // Use the latest Kotlin plugin
+    id("application") // Apply application plugin for easy running of the app
     id("com.diffplug.spotless") version "7.0.2"
+    id("com.ncorti.ktfmt.gradle") version "0.22.0"
+
+    // id("io.gitlab.arturbosch.detekt") version "1.19.0"
+
 
 }
 // task myJavadocs(type: Javadoc) {
@@ -18,14 +22,14 @@ plugins {
 //   }
 
 repositories {
-    mavenCentral()  // Use Maven Central repository for dependencies
+    mavenCentral() // Use Maven Central repository for dependencies
 }
 
 dependencies {
     val junitVersion = "5.10.0"
     // Add Kotlin standard library
     implementation(kotlin("stdlib"))
-        testImplementation(kotlin("test"))
+    testImplementation(kotlin("test"))
     implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -34,7 +38,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion") // JUnit 5 for testing
     testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion") // Or the latest version
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("io.vavr:vavr:0.10.6")
 
 }
 java {
@@ -43,6 +48,9 @@ java {
 }
 kotlin {
     jvmToolchain(21)
+    compilerOptions {
+        freeCompilerArgs.add("-Xmulti-dollar-interpolation")
+    }
 }
 allprojects {
     repositories {
@@ -54,24 +62,19 @@ application {
     mainClass.set("MainApp") // replace with your actual main class
 }
 
-tasks.withType<JavaCompile> {
-	options.isIncremental = true // This is automatically enabled in modern Gradle versions
+tasks.withType < JavaCompile > {
+    options.isIncremental = true // This is automatically enabled in modern Gradle versions
     options.encoding = "UTF-8"
 }
-tasks.withType<Test> {
-        maxParallelForks = Runtime.getRuntime().availableProcessors()
+tasks.withType < Test > {
+    maxParallelForks = Runtime.getRuntime().availableProcessors()
 }
-tasks.withType<Test>().configureEach {
-   useJUnitPlatform()
-      testLogging {
-		events("passed", "skipped", "failed")
+tasks.withType < Test > ().configureEach {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
-}
-
-
-
-
-
 spotless {
     java {
         // https://github.com/google/google-java-format
@@ -83,12 +86,19 @@ spotless {
         trimTrailingWhitespace() // Remove trailing whitespace
         endWithNewline() // Ensure files end with a newline
     }
-
+    ktfmt {
+        // Google style - 2 space indentation & automatically adds/removes trailing commas
+        googleStyle()
+        maxWidth.set(170)
+        // KotlinLang style - 4 space indentation - From kotlinlang.org/docs/coding-conventions.html
+        kotlinLangStyle()
+    }
     kotlin {
         // https://github.com/pinterest/ktlint
         ktlint("1.5.0") // Use ktlint for Kotlin
         toggleOffOn()
-
+        // trimTrailingWhitespace()
+        // indentWithSpaces(4)
     }
 
 }

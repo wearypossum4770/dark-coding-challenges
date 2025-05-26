@@ -16,3 +16,8 @@ indent_size = 2
 
 [docker-compose.yml]
 indent_size = 4
+
+[*.{kt,kts}]
+ktlint_code_style = ktlint_official
+ktlint_max_line_length = 170
+ktlint_experimental=enabled

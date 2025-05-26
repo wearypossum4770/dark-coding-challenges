@@ -1,4 +1,9 @@
 {
-	"lldb.library": "/home/linuxbrew/.linuxbrew/Cellar/swift/6.0.3/libexec/lib/liblldb.so",
-	"lldb.launch.expressions": "native"
+    "lldb.library": "/home/linuxbrew/.linuxbrew/Cellar/swift/6.0.3/libexec/lib/liblldb.so",
+    "lldb.launch.expressions": "native",
+    "cSpell.words": [
+        "deuteroprime",
+        "orelse",
+        "rstest"
+    ]
 }
