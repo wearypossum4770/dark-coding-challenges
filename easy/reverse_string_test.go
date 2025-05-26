@@ -17,6 +17,7 @@ func TestReverseString(t *testing.T) {
 	}
 	for _, c := range cases {
 		t.Run("", func(t *testing.T) {
+			t.Parallel()
 			ReverseString(c.input)
 			if !reflect.DeepEqual(c.input, c.expected) {
 				t.Errorf("ReverseString(%d) is expected %v", c.input, c.expected)

@@ -18,6 +18,7 @@ func TestFindContentChildren(t *testing.T) {
 	}
 	for _, c := range cases {
 		t.Run("", func(t *testing.T) {
+			t.Parallel()
 			result := FindContentChildren(c.children, c.cookies)
 			if result != c.expected {
 				t.Errorf("FindContentChildren(%d) == %v, expected %v", c.children, result, c.expected)

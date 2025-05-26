@@ -18,6 +18,7 @@ func TestFizzBuzz(t *testing.T) {
 	}
 	for _, c := range cases {
 		t.Run("Give any array of string representing as fizzbuzz", func(t *testing.T) {
+			t.Parallel()
 			result := FizzBuzz(c.candidate)
 			if !reflect.DeepEqual(result, c.expected) {
 				t.Errorf("FizzBuzz(%d) == %v, expected %v", c.candidate, result, c.expected)
