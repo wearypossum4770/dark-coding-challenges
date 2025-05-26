@@ -2,7 +2,6 @@ import pytest
 from easy.remove_element import remove_element
 
 
-
 @pytest.mark.parametrize(
     "nums, subject, expected, actual",
     [

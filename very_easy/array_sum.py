@@ -1,3 +1,2 @@
-
 def array_sum():
-	return None
+    return None
