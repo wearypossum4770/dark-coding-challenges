@@ -20,7 +20,11 @@ uses(TestCase::class)
 
 pest()->extend(Tests\TestCase::class)
     ->group('easy')
-    ->in('easy');
+    ->in('easy')
+    ->in('very_easy')
+    ->in('very_hard')
+    ->in('hard')
+    ->in('medium');
 /*
 |--------------------------------------------------------------------------
 | Expectations
