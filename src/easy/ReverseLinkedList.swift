@@ -1,7 +1,7 @@
-func reverseLinkedList<T: Equatable>(_ head: LinkedListNode<T>?) -> LinkedListNode<T>? {
-  var previous: LinkedListNode<T>? = nil
-  var next: LinkedListNode<T>? = nil
-  var current: LinkedListNode<T>? = head
+func reverseLinkedList<T: Equatable>(_ head: ListNode<T>?) -> ListNode<T>? {
+  var previous: ListNode<T>? = nil
+  var next: ListNode<T>? = nil
+  var current: ListNode<T>? = head
   while current != nil {
     next = current?.next
     current?.next = previous
