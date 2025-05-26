@@ -2,8 +2,13 @@ package easy
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
+import org.junit.jupiter.api.parallel.Execution
+import org.junit.jupiter.api.parallel.ExecutionMode
+
+
 
 class RomanToIntKotlinTest {
+    @Execution(ExecutionMode.CONCURRENT)
     @ParameterizedTest
     @CsvSource(
         "'IV', 4",
