@@ -15,3 +15,21 @@ pub fn valid_parentheses(s: String) -> bool {
     }
     stack.is_empty()
 }
+#[cfg(test)]
+mod tests {
+    use super::valid_parentheses;
+    use rstest::rstest;
+
+    #[rstest]
+    #[case("()", true)]
+    #[case("()[]{}", true)]
+    #[case("(]", false)]
+    #[case("([)]", false)]
+    #[case("{[]}", true)]
+    #[case("(((", false)]
+    #[case("]", false)]
+
+    fn test_valid_parentheses(#[case] text: String, #[case] expected: bool) {
+        assert_eq!(valid_parentheses(text), expected);
+    }
+}
