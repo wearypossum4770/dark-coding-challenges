@@ -3,8 +3,7 @@
 
 use Src\Easy\RemoveElement;
 
-describe('TestValue', function () {
-
+describe("\n\tFeature: Remove Element from Array.", function () {
     test('Testing', function ($nums, $target, $expected, $output) {
         $instance = new RemoveElement;
         $result = $instance->solve($nums, $target);
