@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
@@ -9,17 +10,30 @@
          failOnWarning="true"
          failOnRisky="true"
 >
-
     <testsuites>
-    <!-- https://docs.phpunit.de/en/10.5/fixtures.html#sharing-fixture -->
+        <!-- https://docs.phpunit.de/en/10.5/fixtures.html#sharing-fixture -->
         <testsuite name="easy">
-        <directory> test/easy</directory>
+            <directory> test/easy</directory>
+        </testsuite>
+        <testsuite name="medium">
+            <directory> test/medium</directory>
+        </testsuite>
+        <testsuite name="hard">
+            <directory>test/hard</directory>
+        </testsuite>
+        <testsuite name="very_easy">
+            <directory>test/very_easy</directory>
+        </testsuite>
+        <testsuite name="very_hard">
+            <directory>test/very_hard</directory>
         </testsuite>
     </testsuites>
     <source>
         <include>
             <directory>app</directory>
             <directory>src/main/php/easy</directory>
+            <directory>src/main/php/helpers</directory>
+            <!-- <directory>src/main/php/veryeasy</directory> -->
         </include>
     </source>
     <php>
@@ -39,25 +53,7 @@
     </php>
     <extensions></extensions>
     <!-- Logging and Coverage -->
-    <!-- <logging>
-        <log type="testdox-text" target="tests/logs/testdox.txt"/>
-        <log type="junit" target="tests/logs/junit.xml"/>
-        <log type="teamcity" target="tests/logs/teamcity.xml"/>
-    </logging> -->
+    <!-- <logging><log type="testdox-text" target="tests/logs/testdox.txt"/><log type="junit" target="tests/logs/junit.xml"/><log type="teamcity" target="tests/logs/teamcity.xml"/></logging> -->
     <!-- Code Coverage Configuration -->
-    <!-- <coverage processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
-        <exclude>
-            <directory suffix=".php">src/Helpers</directory>
-            <file>src/Config.php</file>
-        </exclude>
-        <report>
-            <clover outputFile="tests/logs/clover.xml"/>
-            <html outputDirectory="tests/coverage"/>
-            <text outputFile="tests/logs/coverage.txt"/>
-        </report>
-    </coverage> -->
-
+    <!-- <coverage processUncoveredFiles="true"><include><directory suffix=".php">src</directory></include><exclude><directory suffix=".php">src/Helpers</directory><file>src/Config.php</file></exclude><report><clover outputFile="tests/logs/clover.xml"/><html outputDirectory="tests/coverage"/><text outputFile="tests/logs/coverage.txt"/></report></coverage> -->
 </phpunit>
