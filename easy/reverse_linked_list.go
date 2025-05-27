@@ -1,13 +1,13 @@
 package easy
 
-func ReverseLinkedList[T comparable](head *ListNode[T]) *ListNode[T] {
+func ReverseLinkedList[T ComparableOrdered](head *ImprovedListNode[T]) *ImprovedListNode[T] {
 	current := head
-	var previous *ListNode[T]
-	var next *ListNode[T]
+	var previous *ImprovedListNode[T]
+	var next *ImprovedListNode[T]
 
 	for current != nil {
-		next = current.next
-		current.next = previous
+		next = current.Next
+		current.Next = previous
 		previous = current
 		current = next
 	}
