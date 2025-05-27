@@ -23,6 +23,7 @@ dependencies = [
     "django-sesame (>=3.2.2,<4.0.0)",
     "django-redis (>=5.4.0,<6.0.0)",
     "beautifulsoup4 (>=4.13.3,<5.0.0)",
+    "pytest-mypy (>=1.0.1,<2.0.0)",
 ]
 # [tool.poetry]
 # packages = [{ include = "dark_coding_challenges" }]
@@ -74,7 +75,7 @@ python_files = [
     '*_suite.py',
 ]
 
-testpaths = ['easy', 'medium', 'advanced']
+testpaths = ['easy', 'medium', 'advanced', 'hard', 'very_easy']
 [tool.isort]
 profile = "black"
 skip_gitignore = true
