@@ -16,20 +16,17 @@ public class RemoveLinkedListElements<T> {
    * @return The head of the modified linked list, or null if the list is empty after removal.
    */
   public DukeListNode<T> solve(DukeListNode<T> head, T val) {
-    if (head == null) {
-      return null; // Return null if the list is empty
-    }
-
     DukeListNode<T> dummy = new DukeListNode<>();
+    if (head == null) {
+      return dummy;
+    }
     dummy.next = head;
     DukeListNode<T> current = dummy;
 
     while (current.next != null) {
-      if (current.next.val.equals(val)) {
-
+      if (current.next.val != null && current.next.val.equals(val)) {
         current.next = current.next.next;
       } else {
-
         current = current.next;
       }
     }

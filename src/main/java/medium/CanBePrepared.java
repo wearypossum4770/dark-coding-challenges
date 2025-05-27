@@ -8,7 +8,7 @@ public class CanBePrepared {
   List<Character> inner = new ArrayList<>();
 
   public boolean recipeHasAllIngredients(String recipe, List<Character> ingredients) {
-
+    if (recipe.isEmpty() || ingredients.isEmpty()) return false;
     for (char c : recipe.toCharArray()) {
       switch (c) {
         case ('|' | '(') -> {

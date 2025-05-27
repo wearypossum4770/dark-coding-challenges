@@ -1,10 +1,7 @@
 package easy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,15 +14,12 @@ public class ReverseLinkedListTest {
   @MethodSource("reverseLinkedListData")
   public void testReverseLinkedList(int[] nums, int[] reversed) {
 
-    List<Integer> inputList = Arrays.stream(nums).boxed().collect(Collectors.toList());
-    List<Integer> expectedList = Arrays.stream(reversed).boxed().collect(Collectors.toList());
-
-    DukeListNode<Integer> nodes = DukeListNode.fromIterable(inputList);
+    DukeListNode<Integer> nodes = DukeListNode.fromIntArray(nums);
     DukeListNode<Integer> result = instance.solve(nodes);
 
-    List<Integer> resultList = result.toArray();
+    int[] outcome = result.toIntegerArray();
 
-    assertEquals(expectedList, resultList);
+    assertArrayEquals(outcome, reversed);
   }
 
   public static Stream<Arguments> reverseLinkedListData() {

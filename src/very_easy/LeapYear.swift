@@ -1,3 +1,10 @@
+import BigInt
+import Foundation
+
 func leapYear(_ year: Int) -> Bool {
-  return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
+  return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)
+}
+
+func leapYearBigInt(_ year: BigUInt) -> Bool {
+  return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)
 }
