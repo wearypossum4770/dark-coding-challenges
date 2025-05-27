@@ -1,3 +1,4 @@
+import Nimble
 import Testing
 
 @testable import easy
@@ -25,7 +26,7 @@ import Testing
   (8208, 1),
   (9474, 1),
 
-])
-func armstrongNumbers(number: Int, outcome: Int) {
+]) func armstrongNumbers(number: Int, outcome: Int) {
+  expect(armstrongNumbers(number)).to(equal(outcome))
   #expect(armstrongNumbers(number) == outcome)
 }

@@ -8,9 +8,9 @@ import Testing
   ([], []),
   (nil, []),
   ([1, 1, 2, 2, 3], [3, 2, 2, 1, 1]),
-])
-func reverseLinkedListTest(nums: [Int]?, outcome: [Int]) {
-  let head = LinkedListNode.fromArray(nums)
-  let result = LinkedListNode.toArray(reverseLinkedList(head))
-  #expect(result == outcome)
+]) func reverseLinkedListTest(input: [Int]?, output: [Int]) {
+  let head = ListNode<Int>.fromArray(input)
+  let result: ListNode<Int>? = reverseLinkedList(head)
+  let outcome = ListNode<Int>.toArray(result)
+  #expect(output == outcome)
 }
