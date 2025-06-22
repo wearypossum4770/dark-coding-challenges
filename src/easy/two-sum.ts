@@ -1,4 +1,4 @@
-x/**
+x; /**
  * @description Function to find the indices of the two numbers that add up to the target.
  * # Two Sum Challenge
  * - [Leet Code](https://leetcode.com/problems/two-sum/description/)
