@@ -15,3 +15,16 @@ pub fn find_the_difference(s: &str, t: &str) -> char {
     }
     return ' ';
 }
+#[cfg(test)]
+mod tests {
+    use super::find_the_difference;
+    use rstest::rstest;
+    #[rstest]
+    #[case("abcd", "abcde", 'e')]
+    #[case("", "y", 'y')]
+    #[case("a", "aa", 'a')]
+    #[case("aabbcc", "aabbccd", 'd')]
+    fn test_find_the_difference(#[case] s: &str, #[case] t: &str, #[case] expected: char) {
+        assert_eq!(find_the_difference(s, t), expected);
+    }
+}
