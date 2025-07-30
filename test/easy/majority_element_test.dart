@@ -13,8 +13,8 @@ void main() {
       MajorityElementTestCases([2, 1, 2], 2),
       MajorityElementTestCases([100], 100),
       MajorityElementTestCases([2, 1, 1], 1),
-      MajorityElementTestCases([2,2,1,1,1,2,2], 2),
-      MajorityElementTestCases([3,2,3], 3),
+      MajorityElementTestCases([2, 2, 1, 1, 1, 2, 2], 2),
+      MajorityElementTestCases([3, 2, 3], 3),
     ];
 
     for (final step in testCases) {

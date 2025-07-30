@@ -1,13 +1,11 @@
 package easy
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
-
-
-class RomanToIntKotlinTest {
+class KodeeRomanToIntTest {
     @Execution(ExecutionMode.CONCURRENT)
     @ParameterizedTest
     @CsvSource(
@@ -35,7 +33,7 @@ class RomanToIntKotlinTest {
         roman: String,
         arabic: Int,
     ) {
-        val result = romanToKotlinInt(roman)
+        val result = kodeeRomanToInt(roman)
         assertEquals(arabic, result)
     }
 }

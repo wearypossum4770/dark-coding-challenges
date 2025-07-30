@@ -24,9 +24,8 @@ class KodeeMajorityElementTest {
                 Arguments.of(intArrayOf(2, 1, 2), 2),
                 Arguments.of(intArrayOf(100), 100),
                 Arguments.of(intArrayOf(2, 1, 1), 1),
-                Arguments.of(intArrayOf(3,2,3), 3),
-                Arguments.of(intArrayOf(2,2,1,1,1,2,2), 2),
-
+                Arguments.of(intArrayOf(3, 2, 3), 3),
+                Arguments.of(intArrayOf(2, 2, 1, 1, 1, 2, 2), 2),
             )
     }
 }
