@@ -3,7 +3,7 @@ bool uglyNumber(num n) {
   List<num> primes = [2, 3, 5];
   for (var prime in primes) {
     while (n % prime == 0) {
-      n /= prime;
+      n ~/= prime;
     }
   }
   return n == 1;
