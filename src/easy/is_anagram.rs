@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-pub fn is_anagram(first: String, second: String) -> bool {
+pub fn is_anagram<'a>(first: &'a str, second: &'a str) -> bool {
     if first.len() != second.len() {
         return false;
     }
