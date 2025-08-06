@@ -9,3 +9,13 @@ export const isAnagram = (s: string, t: string): boolean => {
     }
     return ![...frequency.values()].some((v) => v !== 0);
 };
+
+
+export const DetectAnagram = (word: string, candidates: string[]): string[] => {
+    const lowerWord = word.toLowerCase();
+    return candidates.flatMap((candidate) => {
+    const lowerCandidate = candidate.toLowerCase()
+    return lowerCandidate !== lowerWord && isAnagram(lowerWord, lowerCandidate) ? candidate : []
+
+    })
+}
