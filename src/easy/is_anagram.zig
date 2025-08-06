@@ -45,6 +45,198 @@ pub fn detectAnagrams(allocator: Allocator, word: []const u8, candidates: []cons
     return valid.toOwnedSlice() catch return null;
 }
 
+test "no matches" {
+    const expected = [_][]const u8{};
+    const word = "diaper";
+    const candidates = [_][]const u8{ "hello", "world", "zombies", "pants" };
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "detects two anagrams" {
+    const expected = [_][]const u8{ "lemons", "melons" };
+    const word = "solemn";
+    const candidates = [_][]const u8{ "lemons", "cherry", "melons" };
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "does not detect anagram subsets" {
+    const expected = [_][]const u8{};
+    const word = "good";
+    const candidates = [_][]const u8{ "dog", "goody" };
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "detects anagram" {
+    const expected = [_][]const u8{"inlets"};
+    const word = "listen";
+    const candidates = [_][]const u8{ "enlists", "google", "inlets", "banana" };
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "detects three anagrams" {
+    const expected = [_][]const u8{ "gallery", "regally", "largely" };
+    const word = "allergy";
+    const candidates = [_][]const u8{ "gallery", "ballerina", "regally", "clergy", "largely", "leading" };
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "detects multiple anagrams with different case" {
+    const expected = [_][]const u8{ "Eons", "ONES" };
+    const word = "nose";
+    const candidates = [_][]const u8{ "Eons", "ONES" };
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "does not detect non-anagrams with identical checksum" {
+    const expected = [_][]const u8{};
+    const word = "mass";
+    const candidates = [_][]const u8{"last"};
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "detects anagrams case-insensitively" {
+    const expected = [_][]const u8{"Carthorse"};
+    const word = "Orchestra";
+    const candidates = [_][]const u8{ "cashregister", "Carthorse", "radishes" };
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "detects anagrams using case-insensitive subject" {
+    const expected = [_][]const u8{"carthorse"};
+    const word = "Orchestra";
+    const candidates = [_][]const u8{ "cashregister", "carthorse", "radishes" };
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "detects anagrams using case-insensitive possible matches" {
+    const expected = [_][]const u8{"Carthorse"};
+    const word = "orchestra";
+    const candidates = [_][]const u8{ "cashregister", "Carthorse", "radishes" };
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "does not detect an anagram if the original word is repeated" {
+    const expected = [_][]const u8{};
+    const word = "go";
+    const candidates = [_][]const u8{"goGoGO"};
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "anagrams must use all letters exactly once" {
+    const expected = [_][]const u8{};
+    const word = "tapper";
+    const candidates = [_][]const u8{"patter"};
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "words are not anagrams of themselves" {
+    const expected = [_][]const u8{};
+    const word = "BANANA";
+    const candidates = [_][]const u8{"BANANA"};
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "words are not anagrams of themselves even if letter case is partially different" {
+    const expected = [_][]const u8{};
+    const word = "BANANA";
+    const candidates = [_][]const u8{"Banana"};
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "words are not anagrams of themselves even if letter case is completely different" {
+    const expected = [_][]const u8{};
+    const word = "BANANA";
+    const candidates = [_][]const u8{"banana"};
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "words other than themselves can be anagrams" {
+    const expected = [_][]const u8{"Silent"};
+    const word = "LISTEN";
+    const candidates = [_][]const u8{ "LISTEN", "Silent" };
+    const allocator = std.testing.allocator;
+    const result = detectAnagrams(allocator, word, &candidates);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices([]const u8, &expected, actual);
+    } else return error.SkipZigTest;
+}
+
 test "perfect anagram with all matching characters" {
     const first = "anagram";
     const second = "nagaram";
