@@ -5,11 +5,14 @@ const expectEqualSlices = std.testing.expectEqualSlices;
 const expectEqual = std.testing.expectEqual;
 const safeGet = TextTools.safeGet;
 const safelyDecrement = TextTools.safelyDecrement;
+const Allocator = std.mem.Allocator;
 
 pub fn isAnagram(first: []const u8, second: []const u8) bool {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
+
     var frequencyOptional = TextTools.countCharacters(u8, allocator, first);
+
     if (frequencyOptional) |*frequency| {
         for (second) |char| {
             if (safeGet(u8, char, frequency) > 0) {
@@ -22,6 +25,24 @@ pub fn isAnagram(first: []const u8, second: []const u8) bool {
         }
     }
     return true;
+}
+
+pub fn detectAnagrams(allocator: Allocator, word: []const u8, candidates: []const []const u8) ?[][]const u8 {
+    const lowerWord = TextTools.toLowerCase(allocator, word) orelse "";
+    var valid = std.ArrayList([]const u8).init(allocator);
+    defer {
+        valid.deinit();
+        allocator.free(lowerWord);
+    }
+
+    for (candidates) |candidate| {
+        const lowerCandidate = TextTools.toLowerCase(allocator, candidate) orelse "";
+        defer allocator.free(lowerCandidate);
+        if (!std.mem.eql(u8, lowerCandidate, lowerWord) and isAnagram(lowerWord, lowerCandidate)) {
+            valid.append(candidate) catch return null;
+        }
+    }
+    return valid.toOwnedSlice() catch return null;
 }
 
 test "perfect anagram with all matching characters" {
