@@ -15,3 +15,18 @@ fun kodeeIsAnagram(
     }
     return charDict.values.all { it == 0 }
 }
+
+fun kodeeDetectAnagram(
+    word: String,
+    candidates: Array<String>,
+): Array<String> {
+    var valid = mutableListOf<String>()
+    val lowerWord = word.lowercase()
+    for (candidate in candidates) {
+        val lowerCandidate = candidate.lowercase()
+        if (lowerCandidate != lowerWord && kodeeIsAnagram(lowerWord, lowerCandidate)) {
+            valid.add(candidate)
+        }
+    }
+    return valid.toTypedArray()
+}
