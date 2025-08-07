@@ -16,3 +16,13 @@ bool isAnagram(String s, String t) {
   }
   return true;
 }
+
+List<String> detectAnagram(String word, List<String> candidates) {
+  String lowerWord = word.toLowerCase();
+  List<String> valid = [];
+  for (var candidate in candidates) {
+    String lowerCandidate = candidate.toLowerCase();
+    if (lowerCandidate != lowerWord && isAnagram(lowerCandidate, lowerWord)) valid.add(candidate);
+  }
+  return valid;
+}
