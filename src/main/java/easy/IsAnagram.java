@@ -1,6 +1,8 @@
 package easy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class IsAnagram {
   public boolean solve(String s, String t) {
@@ -20,5 +22,17 @@ public class IsAnagram {
       if (i != 0) return false;
     }
     return true;
+  }
+
+  public String[] detectAnagrams(String word, String[] candidates) {
+    List<String> valid = new ArrayList<>();
+    String lowerWord = word.toLowerCase();
+    for (String candidate : candidates) {
+      String lowerCandidate = candidate.toLowerCase();
+      if (!lowerCandidate.equals(lowerWord) && this.solve(lowerCandidate, lowerWord)) {
+        valid.add(candidate);
+      }
+    }
+    return valid.toArray(String[]::new);
   }
 }
