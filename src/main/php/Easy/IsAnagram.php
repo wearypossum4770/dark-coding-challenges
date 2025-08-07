@@ -30,4 +30,18 @@ class IsAnagram
     {
         return $this->transformIsAnagram($s, $t);
     }
+
+    public function detectAnagram(string $word, array $candidates): array
+    {
+        $lowerWord = strtolower($word);
+        $valid = [];
+        foreach ($candidates as $candidate) {
+            $lowerCandidate = strtolower($candidate);
+            if ($lowerCandidate !== $lowerWord && $this->transformIsAnagram($lowerWord, $lowerCandidate)) {
+                array_push($valid, $candidate);
+            }
+        }
+
+        return $valid;
+    }
 }
