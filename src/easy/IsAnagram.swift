@@ -10,3 +10,15 @@ func isAnagram(_ s: String, _ t: String) -> Bool {
   }
   return frequency.allSatisfy { $0.value == 0 }
 }
+
+func DetectAnagram(_ word: String, _ candidates: [String]) -> [String] {
+  let lowerWord = word.lowercased()
+  var valid = [String]()
+  for candidate in candidates {
+    let lowerCandidate = candidate.lowercased()
+    if lowerWord != lowerCandidate && isAnagram(lowerWord, lowerCandidate) {
+      valid.append(candidate)
+    }
+  }
+  return valid
+}
