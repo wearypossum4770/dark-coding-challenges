@@ -6,3 +6,11 @@
 **Thoughts:** This one is easy, I wonder how combining the "Cycle Detection" algorithm with this would work.
 
 **Link to work:** [Find The Difference](https://github.com/wearypossum4770/dark-coding-challenges/issues/389)
+
+### Day 1: August 7, 2025
+
+**Today's Progress**:  Did the Merge Sorted Array challenge in Zig, and partially got Python completed. I will be doing two versions on this challenge one will be returning a new array and the other will be in-place. 
+
+**Thoughts:** I will use a three-pointer technique to keep track of indices during iteration, Since the array sizes are known beforehand there should be no need to. My original thought was that this was going to be easy but it was not. I first attempted the challenge in python. Once I figured out that there was an issue with my logic, I used a little AI to help me look at the indexing issue, but specifically asked it not to solve the issue. Once I got a little way in I switched to Zig for this challenge. I needed to take a different approach. I did not want to attempt in-place mutations in Zig until I got more familiar and comfortable with the language. I put some notes on one of the test cases because I had to increase the first array/slice by one slot due to returning a new array from the function. If I was doing in-place mutations using the correct array size would work.
+
+**Link to work:** [Merge Sorted Array](https://github.com/wearypossum4770/dark-coding-challenges/issues/88)
