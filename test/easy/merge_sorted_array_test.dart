@@ -24,6 +24,10 @@ void main() {
       final second = step.second;
       final secondSize = step.secondSize;
       final expected = step.expected;
+      test("\n\tGiven: two arrays $first with size $firstSize\n\t\t\tAnd: $second with size $secondSize.\n\tWhen: merged mergeSortedArray\n\tThen: the result is $expected", () {
+        List<int> result = mergeSortedArray(first, firstSize, second, secondSize);
+        expect(result, equals(expected));
+      });
       test(
         "\n\tGiven: two arrays $first with size $firstSize\n\t\t\tAnd: $second with size $secondSize.\n\tWhen: merged mergeSortedArrayInPlace\n\tThen: the result is $expected",
         () {
