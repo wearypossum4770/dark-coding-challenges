@@ -16,3 +16,11 @@ it('Merges Sorted Arrays in place', function (array &$first, int $firstSize, arr
     expect($first)->toBe($expected);
 
 })->with('mergeSortedArrayData');
+it('Merge Sorted Arrays', function (array $first, int $firstSize, array $second, int $secondSize, array $expected) {
+    $instance = new MergeSortedArray;
+
+    $result = $instance->solve($first, $firstSize, $second, $secondSize);
+
+    expect($result)->toBe($expected);
+
+})->with('mergeSortedArrayData');
