@@ -9,6 +9,17 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class MergeSortedArrayTest {
   MergeSortedArray instance = new MergeSortedArray();
+
+  @ParameterizedTest
+  @MethodSource("dataMergeSortedArray")
+  public void testMergeSortedArray(
+      int[] first, int firstSize, int[] second, int secondSize, int[] expected) {
+
+    int[] result = instance.solve(first, firstSize, second, secondSize);
+
+    assertArrayEquals(expected, result);
+  }
+
   @ParameterizedTest
   @MethodSource("dataMergeSortedArray")
   public void testMergeSortedArrayInPlace( int[] first, int firstSize, int[] second, int secondSize, int[] expected) {
