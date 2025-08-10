@@ -20,6 +20,19 @@ class KodeeMergeSortedArrayTest {
         assertContentEquals(expected, result)
     }
     
+    @ParameterizedTest
+    @MethodSource("mergeSortedArrayData")
+    fun kodeeMergeSortedArrayInPlaceTest(
+        first: IntArray,
+        firstSize: Int,
+        second: IntArray,
+        secondSize: Int,
+        expected: IntArray,
+    ) {
+        kodeeMergeSortedArrayInPlace(first, firstSize, second, secondSize)
+        assertContentEquals(first, expected)
+    }
+
     companion object {
         @JvmStatic
         fun mergeSortedArrayData(): Stream<Arguments> =
