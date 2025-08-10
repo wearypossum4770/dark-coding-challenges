@@ -15,3 +15,27 @@ def merge_sorted_array_in_place(nums1: list[int], m: int, nums2: list[int], n: i
         n -= 1
         k -= 1
 
+def merge_sorted_array(nums1: list[int], m: int, nums2: list[int], n: int):
+    '''
+
+    '''
+    i, j, k = 0, 0, 0
+    
+    result = [0] * (m + n)
+    while i < m and j < n:
+        if nums1[i] <= nums2[j]:
+            result[k] = nums1[i]
+            i += 1
+        else:
+            result[k] = nums2[j]
+            j += 1
+        k += 1
+    while i < m:
+        result[k] = nums1[i]
+        i += 1
+        k += 1
+    while j < n:
+        result[k] = nums2[j]
+        j += 1
+        k += 1
+    return result
