@@ -25,3 +25,34 @@ fun kodeeMergeSortedArrayInPlace(
         k--
     }
 }
+
+fun kodeeMergeSortedArray(
+    nums1: IntArray,
+    m: Int,
+    nums2: IntArray,
+    n: Int,
+): IntArray {
+    val result = IntArray(m + n) { 0 }
+    var (i, j, k) = Triple(0, 0, 0)
+    while (i < m && j < n) {
+        if (nums1[i] <= nums2[j]) {
+            result[k] = nums1[i]
+            i++
+        } else {
+            result[k] = nums2[j]
+            j++
+        }
+        k++
+    }
+    while (i < m) {
+        result[k] = nums1[i]
+        i++
+        k++
+    }
+    while (j < n) {
+        result[k] = nums2[j]
+        j++
+        k++
+    }
+    return result
+}
