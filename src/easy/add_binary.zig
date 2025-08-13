@@ -31,3 +31,26 @@ pub fn addBinary(allocator: Allocator, a: []const u8, b: []const u8) ?[]const u8
     }
     return target[k..];
 }
+
+test "adding 11 to 1 equals 100" {
+    const a = "11";
+    const b = "1";
+    const expected = "100";
+    const allocator = std.testing.allocator;
+    const result = addBinary(allocator, a, b);
+    if (result) |actual| {
+        try expectEqualSlices(u8, expected, actual);
+        defer allocator.free(actual);
+    } else return error.SkipZigTest;
+}
+test "adding 1010 to 1011 equals 10101" {
+    const a = "1010";
+    const b = "1011";
+    const expected = "10101";
+    const allocator = std.testing.allocator;
+    const result = addBinary(allocator, a, b);
+    if (result) |actual| {
+        try expectEqualSlices(u8, expected, actual);
+        defer allocator.free(actual);
+    } else return error.SkipZigTest;
+}
