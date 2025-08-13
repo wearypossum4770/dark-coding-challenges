@@ -44,3 +44,12 @@
 **Thoughts:** Since a day was skipped restarted at day 1.
 
 **Link to work:** [Merge Sorted Array](https://github.com/wearypossum4770/dark-coding-challenges/issues/67)
+
+
+### Day 2: August 13, 2025
+
+**Today's Progress**:  Implemented the Add Binary Challenge algorithm in zig, python, kotlin, java and go. 
+
+**Thoughts:** Not wanting to do it in swift, rust, or dart. Seems to be a bit more complicated in those.
+
+**Link to work:** [Add Binary](https://github.com/wearypossum4770/dark-coding-challenges/issues/67)
