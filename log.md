@@ -32,3 +32,15 @@
 **Thoughts:** The majority of the code has decent performance, could use some optimizations.
 
 **Link to work:** [Merge Sorted Array](https://github.com/wearypossum4770/dark-coding-challenges/issues/88)
+
+---
+# Restart
+---
+
+### Day 1: August 12, 2025
+
+**Today's Progress**:  Implemented the Add Binary Challenge algorithm in TS. 
+
+**Thoughts:** Since a day was skipped restarted at day 1.
+
+**Link to work:** [Merge Sorted Array](https://github.com/wearypossum4770/dark-coding-challenges/issues/67)
