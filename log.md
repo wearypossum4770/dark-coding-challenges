@@ -53,3 +53,12 @@
 **Thoughts:** Not wanting to do it in swift, rust, or dart. Seems to be a bit more complicated in those.
 
 **Link to work:** [Add Binary](https://github.com/wearypossum4770/dark-coding-challenges/issues/67)
+
+
+### Day 3: August 15, 2025
+
+**Today's Progress**: Completed the challenge in java. 
+
+**Thoughts:** this challenge was easy.
+
+**Link to work:** [Perfect Number](https://github.com/wearypossum4770/dark-coding-challenges/issues/507)
