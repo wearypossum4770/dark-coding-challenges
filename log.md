@@ -70,3 +70,12 @@
 **Thoughts:** this challenge was easy, just copied same technique from java. It is amazing how the different programming languages handle memory and how some users use a lot of memory. My code ran in 1ms while the longest took 2_098 ms. My code took approx 39MB of memory while the most memory was about 42MB.
 
 **Link to work:** [Perfect Number](https://github.com/wearypossum4770/dark-coding-challenges/issues/507)
+
+
+### Day 5: August 17, 2025
+
+**Today's Progress**: Completed the challenge in swift. 
+
+**Thoughts:** Having issues with the testing for this swift keeps crashing. Not sure why or how to fix it..
+
+**Link to work:** [Perfect Number](https://github.com/wearypossum4770/dark-coding-challenges/issues/507)
