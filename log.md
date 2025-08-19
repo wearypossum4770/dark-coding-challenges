@@ -79,3 +79,12 @@
 **Thoughts:** Having issues with the testing for this swift keeps crashing. Not sure why or how to fix it..
 
 **Link to work:** [Perfect Number](https://github.com/wearypossum4770/dark-coding-challenges/issues/507)
+
+
+### Day 6: August 18, 2025
+
+**Today's Progress**: Did some challenges related to coding interview. 
+
+**Thoughts:** Not feeling it today.
+
+**Link to work:** [example.com not real link](https://example.com)
