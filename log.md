@@ -88,3 +88,11 @@
 **Thoughts:** Not feeling it today.
 
 **Link to work:** [example.com not real link](https://example.com)
+
+### Day 7: August 19, 2025
+
+**Today's Progress**: Did some challenges related to coding interview. 
+
+**Thoughts:** Not feeling it today.
+
+**Link to work:** [example.com not real link](https://example.com)
