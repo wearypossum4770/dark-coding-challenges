@@ -1,4 +1,5 @@
 package easy
+
 // [Leet Code](https://leetcode.com/problems/ugly-number/)
 fun kodeeUglyNumber(n: Int): Boolean {
     var number = n

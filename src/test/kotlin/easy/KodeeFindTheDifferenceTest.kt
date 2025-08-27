@@ -22,10 +22,10 @@ class KodeeFindTheDifferenceTest {
         @JvmStatic
         fun findTheDifferenceData(): Stream<Arguments> =
             Stream.of(
-            Arguments.of("abcd", "abcde", 'e'),
-            Arguments.of("", "y", 'y'),
-            Arguments.of("a", "aa", 'a'),
-            Arguments.of("aabbcc", "aabbccd", 'd'),
+                Arguments.of("abcd", "abcde", 'e'),
+                Arguments.of("", "y", 'y'),
+                Arguments.of("a", "aa", 'a'),
+                Arguments.of("aabbcc", "aabbccd", 'd'),
             )
     }
 }

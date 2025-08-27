@@ -39,6 +39,6 @@ class AddBinary
 
     public function solve(string $a, string $b): string
     {
-        return $this->transformAddBinary($n);
+        return $this->transformAddBinary($a, $b);
     }
 }

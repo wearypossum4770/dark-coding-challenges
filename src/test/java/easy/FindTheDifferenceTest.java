@@ -1,7 +1,8 @@
 package easy;
 
-import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,10 +21,9 @@ public class FindTheDifferenceTest {
 
   public static Stream<Arguments> dataFindTheDifference() {
     return Stream.of(
-      Arguments.of("abcd", "abcde", 'e'),
-      Arguments.of("", "y", 'y'),
-      Arguments.of("a", "aa", 'a'),
-      Arguments.of("aabbcc", "aabbccd", 'd')
-      );
+        Arguments.of("abcd", "abcde", 'e'),
+        Arguments.of("", "y", 'y'),
+        Arguments.of("a", "aa", 'a'),
+        Arguments.of("aabbcc", "aabbccd", 'd'));
   }
 }

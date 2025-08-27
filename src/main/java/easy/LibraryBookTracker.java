@@ -34,7 +34,7 @@ class Inventory implements Comparable<Inventory> {
 
   public int remove(int quantity) {
     if (this.quantity < quantity) {
-			int remaining = quantity - this.quantity;
+      int remaining = quantity - this.quantity;
       this.quantity = 0;
       return remaining;
     }
@@ -61,7 +61,32 @@ class Inventory implements Comparable<Inventory> {
 }
 
 public class LibraryBookTracker {
-  Map<String, List<Inventory>> inventories = new HashMap<>();
+  private final Map<String, List<Inventory>> inventories = new HashMap<>();
+  private final List<Integer> dueOuts = new ArrayList<>();
+
+  public void restock() {
+    try {
+      throw new Exception("not implemented");
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
+  }
+
+  public void purchase() {
+    try {
+      throw new Exception("not implemented");
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
+  }
+
+  public void refurbish() {
+    try {
+      throw new Exception("not implemented");
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
+  }
 
   public void acquisition(String category, int quantity, int price) {
     List<Inventory> inventory = this.inventories.computeIfAbsent(category, k -> new ArrayList<>());
@@ -69,58 +94,78 @@ public class LibraryBookTracker {
     inventory.add(new Inventory(quantity, price));
   }
 
-  public void printInventories() {
-    for (Map.Entry<String, List<Inventory>> entry : inventories.entrySet()) {
-      System.out.println("Category: " + entry.getKey());
-      for (Inventory item : entry.getValue()) {
-        System.out.println(String.format("\t %s", item));
-      }
-    }
-  }
-
   public void checkout(String category, int quantity) {
     List<Inventory> inventory = this.inventories.computeIfAbsent(category, k -> new ArrayList<>());
     if (inventory.isEmpty()) return;
     Collections.sort(inventory);
     int remaining = quantity;
+    int checkedOut = 0;
     for (Inventory book : inventory) {
       if (book.isEmpty()) continue;
+      int before = book.getQuantity();
+
       remaining = book.remove(remaining);
+      int removed = before - book.getQuantity();
+      checkedOut += removed * book.getPrice();
       if (remaining == 0) break;
+    }
+    dueOuts.add(checkedOut);
+  }
+
+  public void reclassify(String category, int quantity, int previousPrice, int nextPrice) {
+    List<Inventory> inventory = this.inventories.get(category);
+    if (inventory == null || inventory.isEmpty()) return;
+    List<Inventory> original = new ArrayList<>(inventory);
+    int remaining = quantity;
+    for (Inventory book : original) {
+      if (book.getPrice() != previousPrice) continue;
+      if (remaining <= 0) break;
+      if (book.getQuantity() <= remaining) {
+        book.setPrice(nextPrice);
+        remaining -= book.getQuantity();
+      } else {
+        int split = remaining;
+        book.setQuantity(book.getQuantity() - split);
+        inventory.add(new Inventory(split, nextPrice));
+        remaining = 0;
+      }
     }
   }
 
-  public void reclassify(String category, int quantity, int previousPrice, int updatedPrice) {
-	List<Inventory> inventory = this.inventories.get(category);
-	if (inventory == null || inventory.isEmpty()) return ;
-	List<Inventory> original = new ArrayList<>(inventory);
-		int remaining = quantity;
-		for (Inventory book: original) {
-			if (book.getPrice() != previousPrice) continue;
-			if (remaining <= 0) break;
-			if (book.getQuantity() <= remaining) {
-				book.setPrice(updatedPrice);
-				remaining -= book.getQuantity();
-			} else {
-				int split = remaining;
-				book.setQuantity(book.getQuantity() - split);
-				inventory.add(new Inventory(split, updatedPrice));
-				remaining = 0;
-			}
-		}
-		
-	}
+  public static int parseIntOrDefault(String s, int defaultValue) {
+    try {
+      return Integer.parseInt(s);
+    } catch (NumberFormatException | NullPointerException e) {
+      return defaultValue;
+    }
+  }
 
   public int[] solve(String[][] operations) {
-    List<Integer> inventory = new ArrayList<>();
-		for (String[] op: operations) {
-					String category = op[1];
-					int quantity = Integer.parseInt(op[1]);
-					int price = Integer.parseInt(op[2]);
-			switch(op[0]) {
-				case "acquisition" -> acquisition(category, quantity, price);
-			}
-		}
-	return inventory.stream().mapToInt(Integer::intValue).toArray();
+    for (String[] op : operations) {
+      String action = op[0];
+      String category = op[1];
+      int quantity = parseIntOrDefault(op[2], 0);
+      int prevPrice = op.length > 3 ? parseIntOrDefault(op[3], 0) : 0;
+      int nextPrice = op.length > 4 ? parseIntOrDefault(op[4], 0) : 0;
+      switch (action) {
+        case "acquisition" -> acquisition(category, quantity, parseIntOrDefault(op[3], 0));
+        case "restock" -> restock();
+        case "purchase" -> purchase();
+        case "refurbish" -> refurbish();
+        case "checkout" -> checkout(category, quantity);
+        case "reclassify" -> reclassify(category, quantity, prevPrice, nextPrice);
+      }
+    }
+    return dueOuts.stream().mapToInt(Integer::intValue).toArray();
+  }
+
+  public int getBookCount() {
+    int count = 0;
+    for (Map.Entry<String, List<Inventory>> entry : inventories.entrySet()) {
+      for (Inventory book : entry.getValue()) {
+        count += book.getQuantity();
+      }
+    }
+    return count;
   }
 }

@@ -1,6 +1,6 @@
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
-from django.db.models import (Model, CASCADE, OneToOneField)
+from django.db.models import CASCADE, Model, OneToOneField
 
 
 class NormalUser(AbstractUser):

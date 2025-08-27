@@ -12,7 +12,6 @@ fn main() {
     let target = 5;
     helpers::image::base64_to_hex("R0lGODlhAQABAAAAACwAAAAAAQABAAAC");
 
-    easy::counting_sort::counting_sort(&[1, 1, 3, 2, 1]);
     medium::can_be_prepared::can_be_prepared("(E|(M&F))".to_string(), vec!['M', 'B']);
     match nums.binary_search(&target) {
         Ok(index) => println!("Found {} at index {}", target, index),

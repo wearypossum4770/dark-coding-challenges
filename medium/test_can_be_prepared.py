@@ -184,5 +184,7 @@ from medium.can_be_prepared import can_be_prepared
         # ("((((A&B)|C)&D)|E)", ('A', 'B',), False),
     ),
 )
-def test_can_be_prepared(recipe: str, ingredients: Tuple[str, ...], expected: bool):
+def test_can_be_prepared(
+    recipe: str, ingredients: Tuple[str, ...], expected: bool
+):
     assert can_be_prepared(recipe, ingredients) == expected

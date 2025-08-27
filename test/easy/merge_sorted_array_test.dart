@@ -32,7 +32,7 @@ void main() {
         "\n\tGiven: two arrays $first with size $firstSize\n\t\t\tAnd: $second with size $secondSize.\n\tWhen: merged mergeSortedArrayInPlace\n\tThen: the result is $expected",
         () {
           mergeSortedArrayInPlace(first, firstSize, second, secondSize);
-					print("first: $first, expected: $expected, the results\n\n\n\n\n");
+          print("first: $first, expected: $expected, the results\n\n\n\n\n");
           expect(first, equals(expected));
         },
       );

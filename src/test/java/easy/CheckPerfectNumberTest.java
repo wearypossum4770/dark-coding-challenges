@@ -1,22 +1,22 @@
 package easy;
 
-import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 public class CheckPerfectNumberTest {
   CheckPerfectNumber instance = new CheckPerfectNumber();
-  
+
   @ParameterizedTest
   @MethodSource("dataClassifyPerfectNumber")
   public void testClassifyPerfectNumber(String expected, long n) {
     String actual = instance.classifyPerfectNumber(n);
     assertEquals(expected, actual);
   }
-  
+
   @ParameterizedTest
   @MethodSource("dataCalculatePerfectNumber")
   public void testCalculatePerfectNumber(long n, long expected) {

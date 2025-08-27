@@ -19,7 +19,7 @@ class KodeeMergeSortedArrayTest {
         val result = kodeeMergeSortedArray(first, firstSize, second, secondSize)
         assertContentEquals(expected, result)
     }
-    
+
     @ParameterizedTest
     @MethodSource("mergeSortedArrayData")
     fun kodeeMergeSortedArrayInPlaceTest(
