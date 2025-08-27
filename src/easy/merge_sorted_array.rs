@@ -16,19 +16,19 @@ pub fn merge_sorted_array_in_place(nums1: &mut Vec<i32>, m: i32, nums2: &mut Vec
 }
 
 pub fn merge_sorted_array(nums1: &mut Vec<i32>, m: i32, nums2: &mut Vec<i32>, n: i32) -> Vec<i32> {
-    let mut result = vec![0;( m + n).try_into().unwrap()];
+    let mut result = vec![0; (m + n).try_into().unwrap()];
     let mut i: usize = 0;
     let mut j: usize = 0;
     let mut k: usize = 0;
-    while i < m as usize && j < n  as usize{
-      if nums1[i] <= nums2[j] {
-        result[k] = nums1[i];
-        i += 1;
-      }else {
-        result[k] = nums2[j];
-        j += 1;
-      }
-      k += 1;
+    while i < m as usize && j < n as usize {
+        if nums1[i] <= nums2[j] {
+            result[k] = nums1[i];
+            i += 1;
+        } else {
+            result[k] = nums2[j];
+            j += 1;
+        }
+        k += 1;
     }
     while i < m as usize {
         result[k] = nums1[i];

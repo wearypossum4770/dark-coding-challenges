@@ -6,7 +6,7 @@ import Testing
 func checkPerfectNumberSkipTest() {
   #expect(true == true)
 }
- 
+
 // @Test(arguments: [
 //   (496, 496),
 //   (8128, 8128),
