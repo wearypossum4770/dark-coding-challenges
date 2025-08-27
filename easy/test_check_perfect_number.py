@@ -1,28 +1,84 @@
 import pytest
 from easy.check_perfect_number import (
     calculate_perfect_number,
-    is_perfect_number,
     classify_perfect_number,
+    is_perfect_number,
 )
 
 
 @pytest.mark.parametrize(
     "n, expected",
     [
-        pytest.param(496, True, id="Perfect number 496", ),
-        pytest.param(8128, True, id="Perfect number 8_128", ),
-        pytest.param(8589869056, True, id="Perfect number 8_589_869_056", ),
-        pytest.param(137438691328, True, id="Perfect number 137_438_691_328", ),
-        pytest.param(6, True, id="Smallest perfect number", ),
-        pytest.param(28, True, id="Medium perfect number", ),
-        pytest.param(33550336, True, id="Large perfect number", ),
-        pytest.param(12, False, id="Smallest abundant number", ),
-        pytest.param(30, False, id="Medium abundant number", ),
-        pytest.param(33550335, False, id="Large abundant number", ),
-        pytest.param(2, False, id="Smallest prime deficient number", ),
-        pytest.param(4, False, id="Smallest non-prime deficient number", ),
-        pytest.param(32, False, id="Medium deficient number", ),
-        pytest.param(33550337, False, id="Large deficient number", ),
+        pytest.param(
+            496,
+            True,
+            id="Perfect number 496",
+        ),
+        pytest.param(
+            8128,
+            True,
+            id="Perfect number 8_128",
+        ),
+        pytest.param(
+            8589869056,
+            True,
+            id="Perfect number 8_589_869_056",
+        ),
+        pytest.param(
+            137438691328,
+            True,
+            id="Perfect number 137_438_691_328",
+        ),
+        pytest.param(
+            6,
+            True,
+            id="Smallest perfect number",
+        ),
+        pytest.param(
+            28,
+            True,
+            id="Medium perfect number",
+        ),
+        pytest.param(
+            33550336,
+            True,
+            id="Large perfect number",
+        ),
+        pytest.param(
+            12,
+            False,
+            id="Smallest abundant number",
+        ),
+        pytest.param(
+            30,
+            False,
+            id="Medium abundant number",
+        ),
+        pytest.param(
+            33550335,
+            False,
+            id="Large abundant number",
+        ),
+        pytest.param(
+            2,
+            False,
+            id="Smallest prime deficient number",
+        ),
+        pytest.param(
+            4,
+            False,
+            id="Smallest non-prime deficient number",
+        ),
+        pytest.param(
+            32,
+            False,
+            id="Medium deficient number",
+        ),
+        pytest.param(
+            33550337,
+            False,
+            id="Large deficient number",
+        ),
     ],
 )
 def test_is_perfect_number(n: int, expected: bool):
@@ -69,8 +125,14 @@ def test_calculate_perfect_number(n: int, expected: int):
         ("deficient", 4),
         ("deficient", 32),
         ("deficient", 33550337),
-        ("deficient", 0, ),
-        ("deficient", 1, ),
+        (
+            "deficient",
+            0,
+        ),
+        (
+            "deficient",
+            1,
+        ),
     ],
 )
 def test_classify_perfect_number(expected: str, n: int):

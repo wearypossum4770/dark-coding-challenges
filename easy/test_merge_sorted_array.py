@@ -1,5 +1,8 @@
 import pytest
-from easy.merge_sorted_array import merge_sorted_array, merge_sorted_array_in_place
+from easy.merge_sorted_array import (
+    merge_sorted_array,
+    merge_sorted_array_in_place,
+)
 
 
 @pytest.mark.parametrize(

@@ -12,4 +12,4 @@ def add_binary(a: str, b: str) -> str:
         res[k] = str(s % 2)
         carry = s // 2
         k -= 1
-    return "".join(res[k+1:])
+    return "".join(res[k + 1 :])

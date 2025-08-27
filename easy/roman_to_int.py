@@ -12,7 +12,9 @@ roman_numerals = {
 def roman_to_int(roman: str) -> int:
     total = 0
     for index in range(len(roman) - 1):
-        current, next = roman_numerals.get(roman[index], 0), roman_numerals.get(roman[index + 1], 0)
+        current, next = roman_numerals.get(
+            roman[index], 0
+        ), roman_numerals.get(roman[index + 1], 0)
         if current < next:
             total -= current
         else:
