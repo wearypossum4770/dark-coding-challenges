@@ -48,8 +48,10 @@
         "lint:dart": "dart format ./ && dart fix --apply",
         "lint:swift": "swift-format format -r -i .",
         "lint:black": "black ./ && isort ./",
+        "lint:go": "go fmt  ./{easy,medium,very_easy,very_hard,hard}",
         "lint:yapf": "yapf  -i -r ./ && isort ./",
         "test:swift": "swift test  --enable-code-coverage --parallel --enable-swift-testing",
+        "lint:all": "bun run lint && bun run lint:dart && bun run lint:black && bun run lint:swift && bun run lint:kt && bun run lint:php && bun run lint:go",
         "docs:go": "godoc -http=:6060",
         "lint:kt": "gradle spotlessApply --continue",
         "dev": "react-router dev"

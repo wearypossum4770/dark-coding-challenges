@@ -5,6 +5,8 @@
  * Learn more about Gradle by exploring our Samples at https://docs.gradle.org/8.12/samples
  * This project uses @Incubating APIs which are subject to change.
  */
+import java.time.Duration
+
 plugins {
     kotlin("jvm") version "2.0.21" // Use the latest Kotlin plugin
     id("application") // Apply application plugin for easy running of the app
@@ -59,7 +61,8 @@ allprojects {
 }
 application {
     // Specify the main class to run (for application projects)
-    mainClass.set("MainApp") // replace with your actual main class
+    // mainClass.set("MainApp") // replace with your actual main class
+    mainClass.set("Main")
 }
 
 tasks.withType < JavaCompile > {
@@ -68,6 +71,8 @@ tasks.withType < JavaCompile > {
 }
 tasks.withType < Test > {
     maxParallelForks = Runtime.getRuntime().availableProcessors()
+    timeout.set(Duration.ofSeconds(30)) // Kill after 30s
+
 }
 tasks.withType < Test > ().configureEach {
     useJUnitPlatform()

@@ -20,7 +20,8 @@ func main() {
 	}
 	leaves := []int{10, 5, 15}
 	tree := easy.BuildTreeNode(leaves)
-
+	diagram := "\nRC\nGG"
+	fmt.Println(diagram[1:])
 	// Access environment variables
 	goFlags := os.Getenv("GOFLAGS")
 	log.Println("\nGOFLAGS:", goFlags)
