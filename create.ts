@@ -106,6 +106,10 @@ const determineBaseDirectory = ({
                 `src/main/${languages}/${difficulty}`,
                 `src/test/${languages}/${difficulty}`,
             ];
+        case "c":
+        case "cpp":
+        case "csharp":
+            return [`src/${languages}/${difficulty}`, `test/${languages}/${difficulty}`];
     }
 };
 const createRust = ({ challengeName }: ChallengeSkeleton): string => {
@@ -124,7 +128,75 @@ const createTypeScriptTest = ({
     const filename = kebabCase(challengeName ?? "");
     return `import { describe, test, expect } from "bun:test";\nimport { ${name} } from "@/src/${difficulty}/${filename}";\ndescribe("${name}", () => {\ntest.each([])("", (inputs, output) => {\nconst result = ${name}(inputs);\nexpect(result).toStrictEqual(output);\n});\n});`;
 };
+// Create C source file
+const createC = ({ challengeName }: ChallengeSkeleton): string => {
+    const name = camelCase(challengeName ?? "");
+    return `#include <stdio.h>\n\nint ${name}(int param) {\n    return param;\n}\n`;
+};
 
+// Create C test file (using a simple test framework like minunit)
+const createCTest = ({ challengeName, difficulty }: ChallengeSkeleton): string => {
+    const name = camelCase(challengeName ?? "");
+    return `#include <stdio.h>\n#include "${name}.h"\n\n#define mu_assert(message, test) do { if (!(test)) return message; } while (0)\n#define mu_run_test(test) do { char *message = test(); tests_run++; if (message) return message; } while (0)\n\nint tests_run = 0;\n\nstatic char *test_${name}() {\n    mu_assert("Test failed: ${name} should return input", ${name}(42) == 42);\n    return 0;\n}\n\nstatic char *all_tests() {\n    mu_run_test(test_${name});\n    return 0;\n}\n\nint main() {\n    char *result = all_tests();\n    if (result != 0) {\n        printf("%s\\n", result);\n    } else {\n        printf("ALL TESTS PASSED\\n");\n    }\n    printf("Tests run: %d\\n", tests_run);\n    return result != 0;\n}\n`;
+};
+
+// Create C header file
+const createCHeader = ({ challengeName }: ChallengeSkeleton): string => {
+    const name = camelCase(challengeName ?? "");
+    return `#ifndef ${name.toUpperCase()}_H\n#define ${name.toUpperCase()}_H\n\nint ${name}(int param);\n\n#endif\n`;
+};
+
+// Create C++ source file
+const createCpp = ({ challengeName }: ChallengeSkeleton): string => {
+    const name = camelCase(challengeName ?? "");
+    return `#include <string>\n\nint ${name}(int param) {\n    return param;\n}\n`;
+};
+
+// Create C++ test file (using a simple assert-based test)
+const createCppTest = ({ challengeName, difficulty }: ChallengeSkeleton): string => {
+    const name = camelCase(challengeName ?? "");
+    return `#include <cassert>\n#include "${name}.h"\n\nint main() {\n    assert(${name}(42) == 42 && "Test failed: ${name} should return input");\n    return 0;\n}\n`;
+};
+
+// Create C++ header file
+const createCppHeader = ({ challengeName }: ChallengeSkeleton): string => {
+    const name = camelCase(challengeName ?? "");
+    return `#ifndef ${name.toUpperCase()}_H\n#define ${name.toUpperCase()}_H\n\nint ${name}(int param);\n\n#endif\n`;
+};
+
+// Create C# source file
+const createCSharp = ({ challengeName, difficulty }: ChallengeSkeleton): string => {
+    const className = pascalCase(challengeName ?? "");
+    return `namespace ${pascalCase(difficulty)};\n\npublic class ${className} {\n    public int Solve(int param) {\n        return param;\n    }\n}\n`;
+};
+
+// Create C# test file (using xUnit)
+const createCSharpTest = ({ challengeName, difficulty }: ChallengeSkeleton): string => {
+    const className = pascalCase(challengeName ?? "");
+    return `using Xunit;\nusing ${pascalCase(difficulty)};\n\npublic class ${className}Tests {\n    [Theory]\n    [InlineData(42, 42)]\n    public void Solve_ShouldReturnInput(int input, int expected) {\n        var instance = new ${className}();\n        var result = instance.Solve(input);\n        Assert.Equal(expected, result);\n    }\n}\n`;
+};
+
+// Create C# .csproj file
+const createCSharpCsproj = ({ difficulty }: ChallengeSkeleton): string => {
+    return `<Project Sdk="Microsoft.NET.Sdk">\n  <PropertyGroup>\n    <TargetFramework>net9.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n  </PropertyGroup>\n</Project>`;
+};
+
+// Create C# test .csproj file
+const createCSharpTestCsproj = ({ difficulty }: ChallengeSkeleton): string => {
+    return `<Project Sdk="Microsoft.NET.Sdk">\n  <PropertyGroup>\n    <TargetFramework>net9.0</TargetFramework>\n    <ImplicitUsings>enable</ImplicitUsings>\n    <Nullable>enable</Nullable>\n    <IsTestProject>true</IsTestProject>\n  </PropertyGroup>\n  <ItemGroup>\n    <PackageReference Include="xunit" Version="2.9.2" />\n    <PackageReference Include="xunit.runner.visualstudio" Version="2.9.2" />\n    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />\n  </ItemGroup>\n  <ItemGroup>\n    <ProjectReference Include="..\\${difficulty}\\${difficulty}.csproj" />\n  </ItemGroup>\n</Project>`;
+};
+
+// Create Makefile for C
+const createCMakefile = ({ challengeName }: ChallengeSkeleton): string => {
+    const name = snakeCase(challengeName ?? "");
+    return `CC = gcc\nCFLAGS = -Wall -g\nTARGET = ${name}\n\nall: $(TARGET)\n\n$(TARGET): ${name}.c ${name}.h\n\t$(CC) $(CFLAGS) -o $(TARGET) ${name}.c test_${name}.c\n\nclean:\n\trm -f $(TARGET)\n`;
+};
+
+// Create Makefile for C++
+const createCppMakefile = ({ challengeName }: ChallengeSkeleton): string => {
+    const name = snakeCase(challengeName ?? "");
+    return `CXX = g++\nCXXFLAGS = -Wall -g\nTARGET = ${name}\n\nall: $(TARGET)\n\n$(TARGET): ${name}.cpp ${name}.h\n\t$(CXX) $(CXXFLAGS) -o $(TARGET) ${name}.cpp test_${name}.cpp\n\nclean:\n\trm -f $(TARGET)\n`;
+};
 const createJava = ({
     challengeName,
     difficulty,
@@ -208,6 +280,9 @@ const skeletonsKeys = new Map<string, [CallableFunction, CallableFunction]>([
     ["java", [createJava, createJavaTestFiles]],
     ["kotlin", [createKotlin, createKotlinTestFiles]],
     ["python", [createPython, createPythonTestFiles]],
+    ["c", [createC, createCTest]],
+    ["cpp", [createCpp, createCppTest]],
+    ["csharp", [createCSharp, createCSharpTest]],
 ]);
 const saveFile = async (pathname: string, data: string) => {
     try {
@@ -293,6 +368,12 @@ const generateFilename = ({ challengeName, languages }: ChallengeSkeleton) => {
         case "kotlin":
             // Kodee
             return [`Kodee${jName}`, `Kodee${jName}Test`];
+case "c":
+            return [snake, `test_${snake}`];
+        case "cpp":
+            return [snake, `test_${snake}`];
+        case "csharp":
+            return [jName, `${jName}Tests`];
         default:
             return [snake, ""];
     }
@@ -310,6 +391,12 @@ const parseExtension = (languages: string) => {
             return "rs";
         case "kotlin":
             return "kt";
+            case "c":
+            return "c";
+        case "cpp":
+            return "cpp";
+        case "csharp":
+            return "cs";
         default:
             return languages;
     }
