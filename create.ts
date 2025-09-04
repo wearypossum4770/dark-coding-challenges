@@ -1,5 +1,5 @@
 import { exec } from "node:child_process";
-import { writeFile, mkdir, readdir, access, exists } from "node:fs/promises";
+import { writeFile, mkdir, readdir, access, constants } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import prompts, { type PromptObject, type Answers } from "prompts";
@@ -280,9 +280,9 @@ const skeletonsKeys = new Map<string, [CallableFunction, CallableFunction]>([
     ["java", [createJava, createJavaTestFiles]],
     ["kotlin", [createKotlin, createKotlinTestFiles]],
     ["python", [createPython, createPythonTestFiles]],
-    ["c", [createC, createCTest]],
-    ["cpp", [createCpp, createCppTest]],
-    ["csharp", [createCSharp, createCSharpTest]],
+    // ["c", [createC, createCTest]],
+    // ["cpp", [createCpp, createCppTest]],
+    // ["csharp", [createCSharp, createCSharpTest]],
 ]);
 const saveFile = async (pathname: string, data: string) => {
     try {
@@ -449,20 +449,20 @@ const getSubModules = (files: string[]) => {
     }, new Set<string>());
 };
 
-const saveModuleEntry = (modules: Set<string>, challengeDirectory: string) => {
+const saveModuleEntry = async (modules: Set<string>, challengeDirectory: string) => {
     if (modules.size > 0) {
-        Promise.resolve(
-            writeFile(
+        
+        await    writeFile(
                 `${challengeDirectory}/mod.rs`,
                 Array.from([...modules.keys()]).reduce(
-                    (accum, curr) => accum.concat(`pub mod ${curr};\n`),
+                    (acc, curr) => acc.concat(`pub mod ${curr};\n`),
                     "",
                 ),
-            ),
+
         );
     }
 };
-const organizeImports = () => {
+const organizeImports = async () => {
     for (let difficulty of allowedDirectories.keys()) {
         const challengeDirectory: string = path.join(
             __dirname,
@@ -470,10 +470,10 @@ const organizeImports = () => {
             difficulty,
         );
         try {
-            Promise.resolve(access(challengeDirectory));
-            getDirectories(challengeDirectory)
-                .then((files) => getSubModules(files))
-                .then((files) => saveModuleEntry(files, challengeDirectory));
+            await access(challengeDirectory);
+            const files = await getDirectories(challengeDirectory);
+            const modules = getSubModules(files);
+            await saveModuleEntry(modules, challengeDirectory);
         } catch (error) {
             console.log(
                 `An error occured accessing: ${challengeDirectory}`,
@@ -500,7 +500,7 @@ export const createDotNetTests = ({ difficulty }: { difficulty: string }) => {
         ];
     });
 };
-const generateFile = (skeleton: ChallengeSkeleton, lang: string) => {
+const generateFile = async (skeleton: ChallengeSkeleton, lang: string) => {
     const extension = parseExtension(lang);
     const [challengeFilename, testingFilename] = generateFilename({
         ...skeleton,
@@ -514,33 +514,80 @@ const generateFile = (skeleton: ChallengeSkeleton, lang: string) => {
         ...skeleton,
         languages: lang,
     });
-    if (testingFilename.length > 2) {
-        const url = path.join(
-            __dirname,
-            `${testingDirectory}/${testingFilename}.${extension}`,
-        );
-        console.log(url);
-        Promise.resolve(
-            saveFile(
-                path.join(
-                    __dirname,
-                    `${testingDirectory}/${testingFilename}.${extension}`,
-                ),
-                testCallback(skeleton),
-            ),
-        );
-    }
-    const url = path.join(
+
+    // Ensure directories exist
+    await mkdir(path.join(__dirname, challengeDirectory), { recursive: true });
+    await mkdir(path.join(__dirname, testingDirectory), { recursive: true });
+
+    // Save challenge file
+    const challengeUrl = path.join(
         __dirname,
         `${challengeDirectory}/${challengeFilename}.${extension}`,
     );
-    console.log(url);
-    Promise.resolve(saveFile(url, challengeCallback(skeleton)));
+    console.log(challengeUrl);
+    await saveFile(challengeUrl, challengeCallback(skeleton));
+
+    // Save test file if applicable
+    if (testingFilename.length > 0) {
+        const testUrl = path.join(
+            __dirname,
+            `${testingDirectory}/${testingFilename}.${extension}`,
+        );
+        console.log(testUrl);
+        await saveFile(testUrl, testCallback(skeleton));
+    }
+
+    // Save additional files (e.g., header files for C/C++, .csproj for C#)
+    if (lang === "c") {
+        const headerUrl = path.join(
+            __dirname,
+            `${challengeDirectory}/${challengeFilename}.h`,
+        );
+        console.log(headerUrl);
+        await saveFile(headerUrl, createCHeader(skeleton));
+
+        const makefileUrl = path.join(__dirname, `${challengeDirectory}/Makefile`);
+        console.log(makefileUrl);
+        await saveFile(makefileUrl, createCMakefile(skeleton));
+    } else if (lang === "cpp") {
+        const headerUrl = path.join(
+            __dirname,
+            `${challengeDirectory}/${challengeFilename}.h`,
+        );
+        console.log(headerUrl);
+        await saveFile(headerUrl, createCppHeader(skeleton));
+
+        const makefileUrl = path.join(__dirname, `${challengeDirectory}/Makefile`);
+        console.log(makefileUrl);
+        await saveFile(makefileUrl, createCppMakefile(skeleton));
+    } else if (lang === "csharp") {
+        const csprojUrl = path.join(
+            __dirname,
+            `${challengeDirectory}/${skeleton.difficulty}.csproj`,
+        );
+        console.log(csprojUrl);
+        await saveFile(csprojUrl, createCSharpCsproj(skeleton));
+
+        const testCsprojUrl = path.join(
+            __dirname,
+            `${testingDirectory}/${skeleton.difficulty}Tests.csproj`,
+        );
+        console.log(testCsprojUrl);
+        await saveFile(testCsprojUrl, createCSharpTestCsproj(skeleton));
+    }
 };
+async function dirExists(path: string): Promise<boolean> {
+    try {
+        await access(path, constants.F_OK);
+        return true;
+    } catch {
+        return false;
+    }
+}
 const main = async () => {
     allowedDirectories.forEach(async (level) => {
         const levelDir = path.join(baseDir, level);
-        if (!(await exists(levelDir))) {
+        if (!(await dirExists(levelDir))) {
             await mkdir(levelDir, { recursive: true });
             console.log(`Created directory: ${levelDir}`);
         }
@@ -570,4 +617,5 @@ const main = async () => {
         });
 };
 
-main().then(organizeImports);
+await main();
+await organizeImports();
