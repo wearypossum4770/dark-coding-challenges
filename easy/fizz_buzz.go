@@ -1,13 +1,23 @@
 package easy
 
-import (
-	"github.com/wearypossum4770/dark-coding-challenges/dark_coding_challenges"
-)
+import "strconv"
 
-func FizzBuzz(candidate int) []string {
-	target := make([]string, candidate)
-	for i := 0; i < candidate; i++ {
-		target[i] = dark_coding_challenges.IntegerToFizzBuzz(i + 1)
+func IntToFizzBuzz(n int) string {
+	if n%15 == 0 {
+		return "FizzBuzz"
 	}
-	return target
+	if n%5 == 0 {
+		return "Buzz"
+	}
+	if n%3 == 0 {
+		return "Fizz"
+	}
+	return strconv.Itoa(n)
+}
+func FizzBuzz(n int) []string {
+	result := make([]string, n)
+	for i := range n {
+		result[i] = IntToFizzBuzz(i + 1)
+	}
+	return result
 }
