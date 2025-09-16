@@ -22,7 +22,7 @@ use rstest::rstest;
 	#[case("🟢 Single element", vec![5], vec![5])]
 	#[case("🟢 Negative numbers", vec![-1, -2, -3], vec![-1, -3, -6])]
 	#[case("🟢 Alternating positives & negatives", vec![1, -1, 1, -1, 1], vec![1, 0, 1, 0, 1])]
-fn test_running_array_sum(#[case] criteria: &str, #[case] nums: Vec<i64>, #[case] expected: Vec<i64>) {
+fn test_running_array_sum(#[case] _criteria: &str, #[case] nums: Vec<i64>, #[case] expected: Vec<i64>) {
 assert_eq!(running_array_sum(nums), expected);
 }
 }
