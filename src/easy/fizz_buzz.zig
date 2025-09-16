@@ -23,3 +23,43 @@ pub fn fizzBuzz(comptime T: type, allocator: Allocator, n: T) ?[][]const u8 {
     }
     return result;
 }
+
+test "fizzbuzz of 3" {
+    const n: usize = 3;
+    const expected = [_][]const u8{ "1", "2", "Fizz" };
+    const allocator = std.testing.allocator;
+    const result = fizzBuzz(@TypeOf(n), allocator, n);
+    if (result) |actual| {
+        for (actual, 0..) |str, i| {
+            try expectEqualStrings(expected[i], str);
+            defer allocator.free(str);
+        }
+        defer allocator.free(actual);
+    } else return error.SkipZigTest;
+}
+test "fizzbuzz of 5" {
+    const n: usize = 5;
+    const expected = [_][]const u8{ "1", "2", "Fizz", "4", "Buzz" };
+    const allocator = std.testing.allocator;
+    const result = fizzBuzz(@TypeOf(n), allocator, n);
+    if (result) |actual| {
+        for (actual, 0..) |str, i| {
+            try expectEqualStrings(expected[i], str);
+            defer allocator.free(str);
+        }
+        defer allocator.free(actual);
+    } else return error.SkipZigTest;
+}
+test "fizzbuzz of 15" {
+    const n: usize = 15;
+    const expected = [_][]const u8{ "1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz", "11", "Fizz", "13", "14", "FizzBuzz" };
+    const allocator = std.testing.allocator;
+    const result = fizzBuzz(@TypeOf(n), allocator, n);
+    if (result) |actual| {
+        for (actual, 0..) |str, i| {
+            try expectEqualStrings(expected[i], str);
+            defer allocator.free(str);
+        }
+        defer allocator.free(actual);
+    } else return error.SkipZigTest;
+}
