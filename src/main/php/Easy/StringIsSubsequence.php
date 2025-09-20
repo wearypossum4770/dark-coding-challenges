@@ -6,11 +6,6 @@ namespace Src\Easy;
 
 class StringIsSubsequence
 {
-	   /**
-     * @param String $s
-     * @param String $t
-     * @return Boolean
-     */
     public function transformStringIsSubsequence(string $s, string $t): bool
     {
         $left = 0;
