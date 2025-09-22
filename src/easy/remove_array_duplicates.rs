@@ -19,8 +19,8 @@ mod tests {
     #[case(&mut vec![1, 1, 2], 2)]
     #[case(&mut vec![1, 2, 2, 3, 3], 3)]
     #[case(&mut vec![1, 1, 2, 2, 3, 3, 4], 4)]
-    #[case(&mut vec![0], 0)]
-    
+    #[case(&mut vec![0], 1)]
+
     fn test_remove_array_duplicates(#[case] nums: &mut Vec<i32>, #[case] expected: i32) {
         assert_eq!(remove_array_duplicates(nums), expected);
     }
