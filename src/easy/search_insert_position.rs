@@ -1,20 +1,20 @@
 pub fn search_insert_position(nums: Vec<i32>, target: i32) -> usize {
-			let mut left: usize = 0;
-			let mut right: usize = nums.len().saturating_sub(1);
-			while left <= right {
-					let mid = left + (right - left) / 2;
-					if nums[mid] == target {
-							return mid;
-					}
-					if nums[mid] < target {
-							left = mid + 1;
-					} else if mid > 0 {
-							right = mid - 1;
-					} else {
-							break;
-					}
-			}
-			left
+    let mut left: usize = 0;
+    let mut right: usize = nums.len().saturating_sub(1);
+    while left <= right {
+        let mid = left + (right - left) / 2;
+        if nums[mid] == target {
+            return mid;
+        }
+        if nums[mid] < target {
+            left = mid + 1;
+        } else if mid > 0 {
+            right = mid - 1;
+        } else {
+            break;
+        }
+    }
+    left
 }
 #[cfg(test)]
 mod tests {
