@@ -24,7 +24,7 @@ class ReverseInteger
 
     }
 
-    public function solve(int $n): array
+    public function solve(int $n): int
     {
         return $this->transformReverseInteger($n);
     }
