@@ -202,7 +202,7 @@ const createJava = ({
     difficulty,
 }: ChallengeSkeleton): string => {
     const className = pascalCase(challengeName ?? "");
-    return `package ${difficulty.toLowerCase()};\npublic class ${className} {\n\n// Add your fields, constructors, and methods here.\n\npublic String solve(String input) {\n// Your implementation here\nreturn input;\n}}`;
+    return `package ${difficulty.toLowerCase()};\npublic class ${className} {\npublic String solve(String input) {\nreturn input;\n}}`;
 };
 const createJavaTestFiles = ({
     challengeName,
@@ -216,14 +216,14 @@ const createKotlin = ({
     difficulty,
 }: ChallengeSkeleton): string => {
     const className = pascalCase(challengeName ?? "");
-    return `package ${difficulty.toLowerCase().replace(/_/g, "")};\nfun kodee${className}(input: String): String  {\nreturn input\n}`;
+    return `package ${difficulty.toLowerCase().replace(/_/g, "")}\nfun kodee${className}(input: String): String  {\nreturn input\n}`;
 };
 const createKotlinTestFiles = ({
     challengeName,
     difficulty,
 }: ChallengeSkeleton): string => {
     const testName = pascalCase(challengeName ?? "");
-    return `\npackage ${difficulty.toLowerCase().replace(/_/g, "")}\nimport org.junit.jupiter.params.ParameterizedTest\nimport org.junit.jupiter.params.provider.Arguments\nimport org.junit.jupiter.params.provider.MethodSource\nimport java.util.stream.Stream\nimport kotlin.test.assertEquals\n\nclass Kodee${testName}Test {\n@ParameterizedTest\n@MethodSource("${camelCase(challengeName ?? "")}Data")\nfun kodee${testName}Test(\nnumberToCheck: Int,\nexpected: Int,\n) {\nval result = kodee${testName}(numberToCheck)\nassertEquals(expected, result)\n}\ncompanion object {\n@JvmStatic\nfun ${camelCase(challengeName ?? "")}Data(): Stream<Arguments> =\nStream.of(\nArguments.of(2, 1),\n\n)\n}\n}`;
+    return `\npackage ${difficulty.toLowerCase().replace(/_/g, "")}\nimport org.junit.jupiter.params.ParameterizedTest\nimport org.junit.jupiter.params.provider.Arguments\nimport org.junit.jupiter.params.provider.MethodSource\nimport java.util.stream.Stream\nimport kotlin.test.assertEquals\n\nclass Kodee${testName}Test {\n@ParameterizedTest\n@MethodSource("${camelCase(challengeName ?? "")}Data")\nfun kodee${testName}Test(\nnumberToCheck: Int,\nexpected: Int,\n) {\nval result = kodee${testName}(numberToCheck)\nassertEquals(expected, result)\n}\ncompanion object {\n@JvmStatic\nfun ${camelCase(challengeName ?? "")}Data(): Stream<Arguments> =\nStream.of(\n)\n}\n}`;
 };
 const createPython = ({ challengeName }: ChallengeSkeleton) => {
     const name = snakeCase(challengeName ?? "");
@@ -267,7 +267,7 @@ const dartFileCreate = ({ difficulty, challengeName }: ChallengeSkeleton) =>
     `List<String> ${camelCase(challengeName ?? "")}(List<String> args) {\nreturn args\n}`;
 
 const dartTestCreate = ({ difficulty, challengeName }: ChallengeSkeleton) =>
-    `import 'package:test/test.dart';\nimport 'package:dark_coding_challenges/${difficulty}/${snakeCase(challengeName ?? "")}.dart';\nclass ${pascalCase(challengeName ?? "")}TestCases {\n\t${pascalCase(challengeName ?? "")}TestCases();\n}\nvoid main(){\ngroup("Feature:", () {\nfinal testCases = [];\n\nfor (final step in testCases) {\n// Safely cast values to List<int> for nums and expected\nfinal nums = step.nums;\ntest("Testing sum for $nums with target $target", () {\nList<int> result = ${camelCase(challengeName ?? "")}(nums, target);\nexpect(result, equals(expected));\n});\n}\n});}`;
+    `import 'package:test/test.dart';\nimport 'package:dark_coding_challenges/${difficulty}/${snakeCase(challengeName ?? "")}.dart';\nclass ${pascalCase(challengeName ?? "")}TestCases {\n\t${pascalCase(challengeName ?? "")}TestCases();\n}\nvoid main(){\ngroup("Feature:", () {\nfinal testCases = [];\n\nfor (final step in testCases) {\nfinal nums = step.nums;\nfinal expected = step.expected;\ntest("", () {\nList<int> actual = ${camelCase(challengeName ?? "")}(nums);\nexpect(actual, equals(expected));\n});\n}\n});}`;
 
 const skeletonsKeys = new Map<string, [CallableFunction, CallableFunction]>([
     ["swift", [createSwift, createSwiftTests]],
