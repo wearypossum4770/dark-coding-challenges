@@ -1,3 +1,4 @@
+pub mod array_of_multiples;
 pub mod convert_to_string_decimal;
 pub mod count_hand_washes;
 pub mod csv_to_array;
@@ -5,8 +6,13 @@ pub mod extracting_numbers;
 pub mod find_largest_num;
 pub mod has_same_bread;
 pub mod hash_plus_count;
+pub mod is_special_array;
 pub mod leap_year;
 pub mod letter_counter;
+pub mod next_square;
 pub mod reverse_alpha_case;
 pub mod reverse_sentence;
+pub mod same_ascii;
+pub mod time_for_milk_and_cookies;
 pub mod triangular_number_sequence;
+pub mod war_of_numbers;
