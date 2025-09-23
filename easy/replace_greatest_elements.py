@@ -7,4 +7,3 @@ def replace_greatest_elements(arr: list[int]) -> list[int]:
             max = temp
         right -= 1
     return arr
-
