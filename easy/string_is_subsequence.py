@@ -5,4 +5,3 @@ def string_is_subsequence(s: str, t: str) -> bool:
             left += 1
         right += 1
     return left == len(s)
-
