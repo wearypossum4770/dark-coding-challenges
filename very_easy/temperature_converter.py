@@ -13,3 +13,14 @@ def to_kelvin(celsius: float) -> float:
 def convert_temperature(celsius: float) -> list[float]:
     return [to_kelvin(celsius), to_fahrenheit(celsius)]
 
+
+def temperature_converter(deg: str) -> str:
+    temp = int(
+        "".join([x for x in deg if x.isnumeric() or x == "." or x == "-"])
+    )
+    if deg.endswith("°F"):
+        return f"{round(to_celsius(temp))}°C"
+    elif deg.endswith("°C"):
+        return f"{round(to_fahrenheit(temp))}°F"
+    else:
+        return "Error"
