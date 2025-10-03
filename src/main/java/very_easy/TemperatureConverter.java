@@ -19,4 +19,17 @@ public class TemperatureConverter {
     return celsius + 273.15;
   }
 
+  public String solve(String deg) {
+    StringBuilder result = new StringBuilder();
+    for (char c : deg.toCharArray()) {
+      if (c >= '0' && c <= '9' || c == '-' || c == '.') {
+        result.append(c);
+      }
+    }
+    double temperature = Double.parseDouble(result.toString());
+    if (deg.endsWith("°F")) return String.format("%d°C", (int) Math.round(toCelsius(temperature)));
+    if (deg.endsWith("°C"))
+      return String.format("%d°F", (int) Math.round(toFahrenheit(temperature)));
+    return "Error";
+  }
 }
