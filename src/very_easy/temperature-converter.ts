@@ -8,3 +8,15 @@ export const convertTemperature = (celsius: number): number[] => [
     toFahrenheit(celsius),
 ];
 
+export const temperatureConverter = (deg: string): string => {
+    let temp = "";
+    for (const char of deg) {
+        if (/[0-9.]/.test(char) || char === "-") {
+            temp += char;
+        }
+    }
+    const temperature = Number(temp);
+    if (deg.endsWith("°F")) return `${Math.round(toCelsius(temperature))}°C`;
+    if (deg.endsWith("°C")) return `${Math.round(toFahrenheit(temperature))}°F`;
+    return "Error";
+};
