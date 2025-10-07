@@ -8,3 +8,7 @@ List<List<int>> pascalsTriangle(int numRows) {
   }
   return result;
 }
+
+List<int> pascalsTriangleAtRow(int rowIndex) {
+  return pascalsTriangle(rowIndex + 1)[rowIndex];
+}
