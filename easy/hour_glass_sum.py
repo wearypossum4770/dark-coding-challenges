@@ -1,10 +1,10 @@
-from dark_coding_challenges import MIN_INT
+from sys import maxsize
 
 
 def hour_glass_sum(matrix: list[list[int]]) -> int:
     if len(matrix) < 3:
         return 0
-    result = MIN_INT
+    result = -maxsize - 1
     for i in range(len(matrix) - 2):
         for j in range(len(matrix[i]) - 2):
             s = (

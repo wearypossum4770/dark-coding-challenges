@@ -1,11 +1,11 @@
 pub fn common_factors(a: i32, b: i32) -> i32 {
-		let max = a.max(b) + 1;
-		let mut count: i32 = 0;
-		for i in 1..max {
-			if a % i == 0 && b % i == 0 {
-				count += 1;
-			}
-		}
+    let max = a.max(b) + 1;
+    let mut count: i32 = 0;
+    for i in 1..max {
+        if a % i == 0 && b % i == 0 {
+            count += 1;
+        }
+    }
     count
 }
 
@@ -29,9 +29,6 @@ mod tests {
     #[case(1, 1000, 1)]
 
     fn test_common_factors(#[case] a: i32, #[case] b: i32, #[case] expected: i32) {
-        assert_eq!(
-            common_factors(a, b),
-            expected
-        );
+        assert_eq!(common_factors(a, b), expected);
     }
 }

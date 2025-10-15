@@ -1,4 +1,3 @@
-
 pub fn string_integer_is_balanced(num: String) -> bool {
     let mut even: u32 = 0;
     let mut odd: u32 = 0;

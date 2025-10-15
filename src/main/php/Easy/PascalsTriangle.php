@@ -6,6 +6,11 @@ namespace Src\Easy;
 
 class PascalsTriangle
 {
+    public function pascalsTriangleAtRow(int $n): array
+    {
+        return $this->transformPascalsTriangle($n + 1)[$n];
+    }
+
     public function transformPascalsTriangle(int $num): array
     {
         $result = [];
@@ -29,6 +34,3 @@ class PascalsTriangle
         return $this->transformPascalsTriangle($n);
     }
 }
-
-$instance = new PascalsTriangle;
-echo implode(' ', array_merge(...$instance->solve(5)));

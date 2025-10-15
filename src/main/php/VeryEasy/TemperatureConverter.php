@@ -29,6 +29,25 @@ class TemperatureConverter
         return $celsius + 273.15;
     }
 
+    public function transformTemperatureConverter(string $deg): string
+    {
+        $temp = preg_replace('/[^0-9\.\-]/', '', $deg);
+        if ($temp === '' || ! is_numeric($temp)) {
+            return 'Error';
+        }
+        $temperature = (float) $temp;
+
+        if (str_ends_with($deg, '°F')) {
+            return sprintf('%.0f°C', self::toCelsius($temperature));
+        }
+
+        if (str_ends_with($deg, '°C')) {
+            return sprintf('%.0f°F', self::toFahrenheit($temperature));
+        }
+
+        return 'Error';
+    }
+
     public function solve(string $temperature): string
     {
         return $this->transformTemperatureConverter($temperature);

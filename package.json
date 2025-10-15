@@ -43,7 +43,7 @@
         "test:dart": "dart test -r expanded --concurrency=20",
         "test:bun": "bunx  test ",
         "test:kt": "gradle test --parallel",
-        "test:php": "./vendor/bin/pest --parallel",
+        "test:php": "./vendor/bin/pest --parallel --profile",
         "lint:php": "./vendor/bin/duster fix",
         "lint:dart": "dart format ./;  dart fix --apply",
         "lint:swift": "swift-format format -r -i .",

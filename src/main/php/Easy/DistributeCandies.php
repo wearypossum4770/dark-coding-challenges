@@ -8,7 +8,7 @@ class DistributeCandies
 {
     public function transformDistributeCandies(array $candyType): int
     {
-        return min(count($candyType) / 2, count(array_unique($candyType)));
+        return min(intdiv(count($candyType), 2), count(array_unique($candyType)));
     }
 
     public function solve(array $candyType): int
