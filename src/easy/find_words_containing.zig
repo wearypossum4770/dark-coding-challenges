@@ -23,3 +23,37 @@ pub fn findWordsContaining(allocator: Allocator, words: []const []const u8, x: u
     std.mem.copyForwards(usize, copy, result[0..index]);
     return copy;
 }
+
+test "indices of given character in ['abc','bcd','aaaa','cbc']" {
+    const words = [_][]const u8{ "abc", "bcd", "aaaa", "cbc" };
+    const x: u8 = 'a';
+    const expected = [_]usize{ 0, 2 };
+    const allocator = std.testing.allocator;
+    const result = findWordsContaining(allocator, &words, x);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(usize, &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "indices of given character in ['leet','code']" {
+    const words = [_][]const u8{ "leet", "code" };
+    const x: u8 = 'e';
+    const expected = [_]usize{ 0, 1 };
+    const allocator = std.testing.allocator;
+    const result = findWordsContaining(allocator, &words, x);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(usize, &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "indices of given character in ['abc','bcd','aaaa','cbc'']" {
+    const words = [_][]const u8{ "abc", "bcd", "aaaa", "cbc" };
+    const x: u8 = 'z';
+    const expected = [_]usize{};
+    const allocator = std.testing.allocator;
+    const result = findWordsContaining(allocator, &words, x);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(usize, &expected, actual);
+    } else return error.SkipZigTest;
+}
