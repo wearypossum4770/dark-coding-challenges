@@ -2,7 +2,7 @@
 /**
  * @return {Function}
  */
-const createHelloWorld = (): Function  => (..._args: unknown[])=> "Hello World";
+export const createHelloWorld = (): Function  => (..._args: unknown[])=> "Hello World";
 
 /**
  * const f = createHelloWorld();
