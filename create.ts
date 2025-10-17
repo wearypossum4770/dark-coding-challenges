@@ -1,9 +1,20 @@
 import { exec } from "node:child_process";
-import { writeFile, mkdir, readdir, access, constants, readFile } from "node:fs/promises";
+import {
+    writeFile,
+    mkdir,
+    readdir,
+    access,
+    constants,
+    readFile,
+} from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import prompts, { type PromptObject, type Answers, type  } from "prompts";
-type PromptTypeFunction = (prev: Answers<string>, values: Answers<string>[], prompt: PromptObject<string>) => string | null | false;
+import prompts, { type PromptObject, type Answers, type } from "prompts";
+type PromptTypeFunction = (
+    prev: Answers<string>,
+    values: Answers<string>[],
+    prompt: PromptObject<string>,
+) => string | null | false;
 import {
     camelCase,
     snakeCase,
@@ -38,15 +49,15 @@ export type CommitSubType =
     | "versioning";
 
 export enum ProgrammingLanguage {
-    go ="go",
-    erlang ="erl",
-    typescript ="ts",
-    python ="py",
-    rust ="rs",
-    kotlin ="kt",
-    c ="c",
-    cpp ="cpp",
-    csharp ="cs",
+    go = "go",
+    erlang = "erl",
+    typescript = "ts",
+    python = "py",
+    rust = "rs",
+    kotlin = "kt",
+    c = "c",
+    cpp = "cpp",
+    csharp = "cs",
 }
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -83,12 +94,15 @@ const allowedDirectories = new Set<DifficultyType>([
     "very_hard",
 ]);
 
-const createZig = ({topLevelImports,  challengeName }: ChallengeSkeleton): string => {
+const createZig = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string => {
     const name = camelCase(challengeName ?? "");
-    let contents = ""
+    let contents = "";
     if (topLevelImports) {
-    contents +=`const std = @import("std");\nconst expectEqualSlices = std.testing.expectEqualSlices;\nconst expectEqual = std.testing.expectEqual;\n`
-}
+        contents += `const std = @import("std");\nconst expectEqualSlices = std.testing.expectEqualSlices;\nconst expectEqual = std.testing.expectEqual;\n`;
+    }
     return `${contents}\npub fn ${name}(param: i32) i32 {\n\treturn param;\n}\n`;
 };
 const determineBaseDirectory = ({
@@ -126,7 +140,10 @@ const determineBaseDirectory = ({
         case "c":
         case "cpp":
         case "csharp":
-            return [`src/${languages}/${difficulty}`, `test/${languages}/${difficulty}`];
+            return [
+                `src/${languages}/${difficulty}`,
+                `test/${languages}/${difficulty}`,
+            ];
         case "erlang":
             return [
                 `src/main/${languages}/${difficulty}`,
@@ -134,12 +151,18 @@ const determineBaseDirectory = ({
             ];
     }
 };
-const createRust = ({topLevelImports,  challengeName }: ChallengeSkeleton): string => {
+const createRust = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string => {
     const name = snakeCase(challengeName ?? "");
     return `pub fn ${name}() -> bool {\n//\n\n}\n#[cfg(test)]\nmod tests {\nuse super::${name};\nuse rstest::rstest;\n#[rstest]\nfn test_${name}() {\nassert_eq!(${name}(parameters), returnvalue);\n}\n}`;
 };
 
-const createTypeScript = ({topLevelImports,  challengeName }: ChallengeSkeleton): string =>
+const createTypeScript = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string =>
     `export const ${camelCase(challengeName ?? "")} = () => {}`;
 
 const createTypeScriptTest = ({
@@ -149,67 +172,97 @@ const createTypeScriptTest = ({
 }: ChallengeSkeleton) => {
     const name = camelCase(challengeName ?? "");
     const filename = kebabCase(challengeName ?? "");
-    let contents = ""
-if(topLevelImports){
-    contents += `import { describe, test, expect } from "bun:test";\nimport { ${name} } from "@/src/${difficulty}/${filename}";`
-}
-return `${contents}\ndescribe("${name}", () => {\ntest.each([])("", (inputs, output) => {\nconst result = ${name}(inputs);\nexpect(result).toStrictEqual(output);\n});\n});`;
+    let contents = "";
+    if (topLevelImports) {
+        contents += `import { describe, test, expect } from "bun:test";\nimport { ${name} } from "@/src/${difficulty}/${filename}";`;
+    }
+    return `${contents}\ndescribe("${name}", () => {\ntest.each([])("", (inputs, output) => {\nconst result = ${name}(inputs);\nexpect(result).toStrictEqual(output);\n});\n});`;
 };
 // Create C source file
-const createC = ({topLevelImports,  challengeName }: ChallengeSkeleton): string => {
+const createC = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string => {
     const name = camelCase(challengeName ?? "");
     return `#include <stdio.h>\n\nint ${name}(int param) {\n    return param;\n}\n`;
 };
 
 // Create C test file (using a simple test framework like minunit)
-const createCTest = ({ challengeName, difficulty }: ChallengeSkeleton): string => {
+const createCTest = ({
+    challengeName,
+    difficulty,
+}: ChallengeSkeleton): string => {
     const name = camelCase(challengeName ?? "");
     return `#include <stdio.h>\n#include "${name}.h"\n\n#define mu_assert(message, test) do { if (!(test)) return message; } while (0)\n#define mu_run_test(test) do { char *message = test(); tests_run++; if (message) return message; } while (0)\n\nint tests_run = 0;\n\nstatic char *test_${name}() {\n    mu_assert("Test failed: ${name} should return input", ${name}(42) == 42);\n    return 0;\n}\n\nstatic char *all_tests() {\n    mu_run_test(test_${name});\n    return 0;\n}\n\nint main() {\n    char *result = all_tests();\n    if (result != 0) {\n        printf("%s\\n", result);\n    } else {\n        printf("ALL TESTS PASSED\\n");\n    }\n    printf("Tests run: %d\\n", tests_run);\n    return result != 0;\n}\n`;
 };
 // Create Erlang source file
-const createErlang = ({topLevelImports,  challengeName }: ChallengeSkeleton): string => {
+const createErlang = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string => {
     const moduleName = pascalCase(challengeName ?? "");
     return `-module(${moduleName}).\n-export([solve/1]).\n\n-spec solve(Input :: term()) -> Output :: term().\nsolve(Input) ->\n\t% TODO: Implement challenge logic\n\tInput.  % Placeholder: echo input`;
 };
 
 // Create Erlang test file (using EUnit)
-const createErlangTest = ({topLevelImports,  challengeName }: ChallengeSkeleton): string => {
+const createErlangTest = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string => {
     const moduleName = pascalCase(challengeName ?? "");
     const testModuleName = `${moduleName}_tests`;
     return `-module(${testModuleName}).\n-include_lib("eunit/include/eunit.hrl").\n\n%% Exports the test/0 function for EUnit\n-export([test/0]).\n\n%% Sample test suite\ntest() ->\n\t    [?_assertEqual(expected_output, ${moduleName}:solve(input_value))\n\t    %% Add more parameterized tests:\n\t    %% , ?_assertEqual(4, ${moduleName}:solve(2))\n\t    %% , ?_assertMatch({ok, _}, ${moduleName}:solve({error, foo}))\n\t].`;
 };
 // Create C header file
-const createCHeader = ({topLevelImports,  challengeName }: ChallengeSkeleton): string => {
+const createCHeader = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string => {
     const name = camelCase(challengeName ?? "");
     return `#ifndef ${name.toUpperCase()}_H\n#define ${name.toUpperCase()}_H\n\nint ${name}(int param);\n\n#endif\n`;
 };
 
 // Create C++ source file
-const createCpp = ({topLevelImports,  challengeName }: ChallengeSkeleton): string => {
+const createCpp = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string => {
     const name = camelCase(challengeName ?? "");
     return `#include <string>\n\nint ${name}(int param) {\n    return param;\n}\n`;
 };
 
 // Create C++ test file (using a simple assert-based test)
-const createCppTest = ({ challengeName, difficulty }: ChallengeSkeleton): string => {
+const createCppTest = ({
+    challengeName,
+    difficulty,
+}: ChallengeSkeleton): string => {
     const name = camelCase(challengeName ?? "");
     return `#include <cassert>\n#include "${name}.h"\n\nint main() {\n    assert(${name}(42) == 42 && "Test failed: ${name} should return input");\n    return 0;\n}\n`;
 };
 
 // Create C++ header file
-const createCppHeader = ({topLevelImports,  challengeName }: ChallengeSkeleton): string => {
+const createCppHeader = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string => {
     const name = camelCase(challengeName ?? "");
     return `#ifndef ${name.toUpperCase()}_H\n#define ${name.toUpperCase()}_H\n\nint ${name}(int param);\n\n#endif\n`;
 };
 
 // Create C# source file
-const createCSharp = ({ challengeName, difficulty }: ChallengeSkeleton): string => {
+const createCSharp = ({
+    challengeName,
+    difficulty,
+}: ChallengeSkeleton): string => {
     const className = pascalCase(challengeName ?? "");
     return `namespace ${pascalCase(difficulty)};\n\npublic class ${className} {\n    public int Solve(int param) {\n        return param;\n    }\n}\n`;
 };
 
 // Create C# test file (using xUnit)
-const createCSharpTest = ({ challengeName, difficulty }: ChallengeSkeleton): string => {
+const createCSharpTest = ({
+    challengeName,
+    difficulty,
+}: ChallengeSkeleton): string => {
     const className = pascalCase(challengeName ?? "");
     return `using Xunit;\nusing ${pascalCase(difficulty)};\n\npublic class ${className}Tests {\n    [Theory]\n    [InlineData(42, 42)]\n    public void Solve_ShouldReturnInput(int input, int expected) {\n        var instance = new ${className}();\n        var result = instance.Solve(input);\n        Assert.Equal(expected, result);\n    }\n}\n`;
 };
@@ -225,20 +278,26 @@ const createCSharpTestCsproj = ({ difficulty }: ChallengeSkeleton): string => {
 };
 
 // Create Makefile for C
-const createCMakefile = ({topLevelImports,  challengeName }: ChallengeSkeleton): string => {
+const createCMakefile = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string => {
     const name = snakeCase(challengeName ?? "");
     return `CC = gcc\nCFLAGS = -Wall -g\nTARGET = ${name}\n\nall: $(TARGET)\n\n$(TARGET): ${name}.c ${name}.h\n\t$(CC) $(CFLAGS) -o $(TARGET) ${name}.c test_${name}.c\n\nclean:\n\trm -f $(TARGET)\n`;
 };
 
 // Create Makefile for C++
-const createCppMakefile = ({topLevelImports,  challengeName }: ChallengeSkeleton): string => {
+const createCppMakefile = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton): string => {
     const name = snakeCase(challengeName ?? "");
     return `CXX = g++\nCXXFLAGS = -Wall -g\nTARGET = ${name}\n\nall: $(TARGET)\n\n$(TARGET): ${name}.cpp ${name}.h\n\t$(CXX) $(CXXFLAGS) -o $(TARGET) ${name}.cpp test_${name}.cpp\n\nclean:\n\trm -f $(TARGET)\n`;
 };
 const appendToFile = async (
     targetPath: string,
     skeleton: ChallengeSkeleton,
-    lang: string
+    lang: string,
 ) => {
     try {
         // Read existing file content
@@ -253,7 +312,6 @@ const appendToFile = async (
 
         // Save the updated file
         await saveFile(targetPath, updatedContent);
-        console.log(`Appended to ${targetPath}`);
     } catch (error) {
         console.error(`Error appending to ${targetPath}:`, error);
     }
@@ -264,8 +322,8 @@ const createJava = ({
     topLevelImports,
 }: ChallengeSkeleton): string => {
     const className = pascalCase(challengeName ?? "");
-    let contents = '';
-    if(topLevelImports) contents += `package ${difficulty.toLowerCase()};\n`
+    let contents = "";
+    if (topLevelImports) contents += `package ${difficulty.toLowerCase()};\n`;
     return `${contents}public class ${className} {\npublic String solve(String input) {\nreturn input;\n}}`;
 };
 const createJavaTestFiles = ({
@@ -289,7 +347,10 @@ const createKotlinTestFiles = ({
     const testName = pascalCase(challengeName ?? "");
     return `\npackage ${difficulty.toLowerCase().replace(/_/g, "")}\nimport org.junit.jupiter.params.ParameterizedTest\nimport org.junit.jupiter.params.provider.Arguments\nimport org.junit.jupiter.params.provider.MethodSource\nimport java.util.stream.Stream\nimport kotlin.test.assertEquals\n\nclass Kodee${testName}Test {\n@ParameterizedTest\n@MethodSource("${camelCase(challengeName ?? "")}Data")\nfun kodee${testName}Test(\nnumberToCheck: Int,\nexpected: Int,\n) {\nval result = kodee${testName}(numberToCheck)\nassertEquals(expected, result)\n}\ncompanion object {\n@JvmStatic\nfun ${camelCase(challengeName ?? "")}Data(): Stream<Arguments> =\nStream.of(\n)\n}\n}`;
 };
-const createPython = ({topLevelImports,  challengeName }: ChallengeSkeleton) => {
+const createPython = ({
+    topLevelImports,
+    challengeName,
+}: ChallengeSkeleton) => {
     const name = snakeCase(challengeName ?? "");
     return `def ${name}():\n\treturn None`;
 };
@@ -318,7 +379,7 @@ const phpTestCreate = ({ difficulty, challengeName }: ChallengeSkeleton) => {
     return `<?php\tdeclare(strict_types=1);\n\nuse Src\\${pascalCase(difficulty ?? "")}\\${name};\n\n
     dataset("${camelCase(challengeName ?? "")}Data", []);\nit('solve', function (int $n, int $expected) {\n$instance = new ${name};\n\n$result = $instance->solve($n);\n\nexpect($result)->toBe($expected);\n\n})->with('${camelCase(challengeName)}Data');`;
 };
-const createSwift = ({topLevelImports,  challengeName }: ChallengeSkeleton) => {
+const createSwift = ({ topLevelImports, challengeName }: ChallengeSkeleton) => {
     const name = camelCase(challengeName ?? "");
     return `func ${name}()-> Void {}`;
 };
@@ -413,17 +474,21 @@ const questions: PromptObject[] = [
         initial: false,
     },
     {
-        type: (prev: Answers<string>, values: Answers<string>)  => (values.hasPrerequisite ? "text" : null),
+        type: (prev: Answers<string>, values: Answers<string>) =>
+            values.hasPrerequisite ? "text" : null,
         name: "prerequisiteTitle",
         message: "Enter the prerequisite challenge title",
     },
     {
-        type: (prev: Answers<string>, values: Answers<string>)  => (values.hasPrerequisite ? "text" : null),
+        type: (prev: Answers<string>, values: Answers<string>) =>
+            values.hasPrerequisite ? "text" : null,
         name: "prerequisiteProvider",
-        message: "Enter the prerequisite challenge provider (e.g., LeetCode, Edabit)",
+        message:
+            "Enter the prerequisite challenge provider (e.g., LeetCode, Edabit)",
     },
     {
-        type: (prev: Answers<string>, values: Answers<string>)  => (values.hasPrerequisite ? "text" : null),
+        type: (prev: Answers<string>, values: Answers<string>) =>
+            values.hasPrerequisite ? "text" : null,
         name: "prerequisiteUrl",
         message: "Enter the prerequisite challenge URL",
     },
@@ -489,7 +554,7 @@ const parseExtension = (languages: string) => {
             return "rs";
         case "kotlin":
             return "kt";
-            case "c":
+        case "c":
             return "c";
         case "cpp":
             return "cpp";
@@ -561,39 +626,31 @@ const getSubModules = (files: string[]) => {
     }, new Set<string>());
 };
 
-const saveModuleEntry = async (modules: Set<string>, challengeDirectory: string) => {
-    console.log(`Saving mod.rs in ${challengeDirectory} with ${modules.size} total modules`,);
-if (modules.size > 0) {
-        const content = Array.from([...modules.keys()]).reduce(
-            (acc, curr) => acc.concat(`pub mod ${curr};\n`),
-            "",
-        );
-        console.log(`Writing to mod.rs:\n${content}`);
-        await writeFile(`${challengeDirectory}/mod.rs`, content);
-        console.log(`Saved mod.rs in ${challengeDirectory}`);
-    } else {
-        console.log(`No modules to write in ${challengeDirectory}/mod.rs`);
-    }
+const saveModuleEntry = async (
+    modules: Set<string>,
+    challengeDirectory: string,
+) => {
+    if (modules.size == 0) return null;
+    const content = Array.from([...modules.keys()]).reduce(
+        (acc, curr) => acc.concat(`pub mod ${curr};\n`),
+        "",
+    );
+    await writeFile(`${challengeDirectory}/mod.rs`, content);
 };
 const organizeImports = async () => {
-    console.log("Starting organizeImports...");
     await Promise.all(
         [...allowedDirectories].map(async (difficulty) => {
             const challengeDirectory = path.join(__dirname, "src", difficulty);
-            console.log(`Checking directory: ${challengeDirectory}`);
             try {
                 await access(challengeDirectory, constants.F_OK);
-                console.log(`Directory exists: ${challengeDirectory}`);
                 const files = await getDirectories(challengeDirectory);
-                console.log(`Files found in ${challengeDirectory}:`, files.length);
                 const modules = getSubModules(files);
                 await saveModuleEntry(modules, challengeDirectory);
             } catch (error) {
                 console.error(`Error accessing ${challengeDirectory}:`, error);
             }
-        })
+        }),
     );
-    console.log("Finished organizeImports.");
 };
 
 export const createDotNet = ({ difficulty }: { difficulty: string }) => {
@@ -659,7 +716,10 @@ const generateFile = async (skeleton: ChallengeSkeleton, lang: string) => {
         console.log(headerUrl);
         await saveFile(headerUrl, createCHeader(skeleton));
 
-        const makefileUrl = path.join(__dirname, `${challengeDirectory}/Makefile`);
+        const makefileUrl = path.join(
+            __dirname,
+            `${challengeDirectory}/Makefile`,
+        );
         console.log(makefileUrl);
         await saveFile(makefileUrl, createCMakefile(skeleton));
     } else if (lang === "cpp") {
@@ -670,7 +730,10 @@ const generateFile = async (skeleton: ChallengeSkeleton, lang: string) => {
         console.log(headerUrl);
         await saveFile(headerUrl, createCppHeader(skeleton));
 
-        const makefileUrl = path.join(__dirname, `${challengeDirectory}/Makefile`);
+        const makefileUrl = path.join(
+            __dirname,
+            `${challengeDirectory}/Makefile`,
+        );
         console.log(makefileUrl);
         await saveFile(makefileUrl, createCppMakefile(skeleton));
     } else if (lang === "csharp") {
@@ -700,35 +763,34 @@ async function dirExists(path: string): Promise<boolean> {
 const main = async () => {
     allowedDirectories.forEach(async (level) => {
         const levelDir = path.join(baseDir, level);
-        if (!(await dirExists(levelDir))) {
-            await mkdir(levelDir, { recursive: true });
-            console.log(`Created directory: ${levelDir}`);
-        }
+        if (!(await dirExists(levelDir))) return await mkdir(levelDir, { recursive: true });
     });
 
     const responses = await prompts(questions, { onSubmit, onCancel });
-    const { action, languages, difficulty, challengeName, targetFile } = responses;
+    const { action, languages, difficulty, challengeName, targetFile } =
+        responses;
     const skeleton: ChallengeSkeleton = {
         difficulty,
         languages,
-        topLevelImports: action !== 'append',
+        topLevelImports: action !== "append",
         challengeName,
         extension: "",
         pathname: "",
     };
-    if(!languages && action !== 'append') {
+    if (!languages && action !== "append") {
         return console.log("No languages selected. Exiting.");
     }
-    if(action === "append") {
-        if(!targetFile) {
-return console.log("No target file specified. Exiting.");
+    if (action === "append") {
+        if (!targetFile) {
+            return console.log("No target file specified. Exiting.");
         }
         const lang = detectLanguageFromPath(targetFile); // Helper to infer language
         if (!lang || !skeletonsKeys.has(lang)) {
-            return console.log(`Unsupported language for ${targetFile}. Exiting.`);
+            return console.log(
+                `Unsupported language for ${targetFile}. Exiting.`,
+            );
         }
         await appendToFile(targetFile, skeleton, lang);
-
     }
     if (!languages || languages.length === 0) {
         return console.log("No languages selected. Exiting.");

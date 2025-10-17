@@ -1,4 +1,5 @@
 package easy
+
 import kotlin.math.sqrt
 
 fun kodeeCheckPerfectNumber(n: Long): Boolean = n == kodeeCalculatePerfectNumber(n)
@@ -8,7 +9,7 @@ fun kodeeCalculatePerfectNumber(n: Long): Long {
         throw IllegalArgumentException("Value: $n is out of range, should be 1 or greater.")
     }
     if (n == 1L) return 1L
-	
+
     val root = sqrt(n.toDouble()).toLong()
 
     var total = 1L
@@ -21,7 +22,7 @@ fun kodeeCalculatePerfectNumber(n: Long): Long {
             }
         }
     }
-	
+
     return total
 }
 

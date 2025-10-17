@@ -1,0 +1,16 @@
+package easy
+
+fun fizzBuzz(n: Int): String {
+    if (n % 15 == 0) return "FizzBuzz"
+    if (n % 5 == 0) return "Buzz"
+    if (n % 3 == 0) return "Fizz"
+    return n.toString()
+}
+
+fun kodeeFizzBuzz(n: Int): Array<String> {
+    var result: Array<String> = Array(n) { "" }
+    for (i in 0..<n) {
+        result[i] = fizzBuzz(i + 1)
+    }
+    return result
+}

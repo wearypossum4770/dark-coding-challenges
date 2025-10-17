@@ -1,6 +1,7 @@
 pub mod array_of_multiples;
 pub mod convert_to_string_decimal;
 pub mod count_hand_washes;
+pub mod create_hello_world;
 pub mod csv_to_array;
 pub mod dance_for_cash;
 pub mod display_histogram;

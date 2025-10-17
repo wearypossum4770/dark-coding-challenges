@@ -7,16 +7,17 @@
  */
 
 plugins {
-    // Apply the foojay-resolver plugin to allow automatic download of JDKs
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+  // Apply the foojay-resolver plugin to allow automatic download of JDKs
+  id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
 rootProject.name = "dark-coding-challenges"
 
-include(":easy")
-include(":expert")
-include(":hard")
-include(":medium")
-include(":very_easy")
-include(":very_hard")
-
+include(
+    ":easy",
+    ":expert",
+    ":hard",
+    ":medium",
+    ":very_easy",
+    ":very_hard",
+)

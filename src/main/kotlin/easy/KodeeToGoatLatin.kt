@@ -14,6 +14,6 @@ fun kodeeToGoatLatin(sentence: String): String {
             result.append("${word.substring(1)}${word[0]}ma$suffix ")
         }
     }
-	
+
     return result.toString().trim()
 }

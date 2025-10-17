@@ -1,5 +1,5 @@
-
 package easy
+
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -44,7 +44,12 @@ class KodeeRemoveElementTest {
         fun removeElementOptionalData(): Stream<Arguments> =
             Stream.of(
                 Arguments.of(arrayOf(3, 2, 2, 3), 3, 2, arrayOf(null, 2, 2, null)),
-                Arguments.of(arrayOf(0, 1, 2, 2, 3, 0, 4, 2), 2, 5, arrayOf(0, 1, null, null, 3, 0, 4, null)),
+                Arguments.of(
+                    arrayOf(0, 1, 2, 2, 3, 0, 4, 2),
+                    2,
+                    5,
+                    arrayOf(0, 1, null, null, 3, 0, 4, null),
+                ),
             )
     }
 }

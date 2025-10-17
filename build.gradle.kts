@@ -8,102 +8,105 @@
 import java.time.Duration
 
 plugins {
-    kotlin("jvm") version "2.0.21" // Use the latest Kotlin plugin
-    id("application") // Apply application plugin for easy running of the app
-    id("com.diffplug.spotless") version "7.0.2"
-    id("com.ncorti.ktfmt.gradle") version "0.22.0"
+  kotlin("jvm") version "2.0.21"
 
-    // id("io.gitlab.arturbosch.detekt") version "1.19.0"
+  id("application") // Apply application plugin for easy running of the app
+  id("com.diffplug.spotless") version "7.0.2"
+  id("com.ncorti.ktfmt.gradle") version "0.22.0"
 
+  // id("io.gitlab.arturbosch.detekt") version "1.19.0"
 
 }
+
 // task myJavadocs(type: Javadoc) {
 //     source = sourceSets.main.allJava
 //         destinationDir = file("${buildDir}/docs/javadoc")
 
 //   }
 
-repositories {
-    mavenCentral() // Use Maven Central repository for dependencies
-}
+repositories { mavenCentral() }
 
 dependencies {
-    val junitVersion = "5.10.0"
-    // Add Kotlin standard library
-    implementation(kotlin("stdlib"))
-    testImplementation(kotlin("test"))
-    implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    // testImplementation("")
-    // testImplementation 'io.kotest:kotest-runner-junit5:$version'
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion") // JUnit 5 for testing
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion") // Or the latest version
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    implementation("io.vavr:vavr:0.10.6")
-
+  val junitVersion = "5.10.0"
+  // Add Kotlin standard library
+  implementation(kotlin("stdlib"))
+  testImplementation(kotlin("test"))
+  testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
+  implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")
+  testImplementation("org.jetbrains.kotlin:kotlin-test")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+  // testImplementation("")
+  // testImplementation 'io.kotest:kotest-runner-junit5:$version'
+  testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion") // JUnit 5 for testing
+  testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+  testImplementation(
+      "org.junit.jupiter:junit-jupiter-params:$junitVersion") // Or the latest version
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+  implementation("io.vavr:vavr:0.10.6")
 }
+
 java {
-    modularity.inferModulePath.set(true)
-    sourceSets {}
+  modularity.inferModulePath.set(true)
+  sourceSets {}
 }
+
 kotlin {
-    jvmToolchain(21)
-    compilerOptions {
-        freeCompilerArgs.add("-Xmulti-dollar-interpolation")
-    }
+  jvmToolchain(21)
+  compilerOptions { freeCompilerArgs.add("-Xmulti-dollar-interpolation") }
 }
-allprojects {
-    repositories {
-        mavenCentral()
-    }
-}
+
+allprojects { repositories { mavenCentral() } }
+
 application {
-    // Specify the main class to run (for application projects)
-    // mainClass.set("MainApp") // replace with your actual main class
-    mainClass.set("Main")
+  // Specify the main class to run (for application projects)
+  // mainClass.set("MainApp") // replace with your actual main class
+  mainClass.set("Main")
 }
 
-tasks.withType < JavaCompile > {
-    options.isIncremental = true // This is automatically enabled in modern Gradle versions
-    options.encoding = "UTF-8"
+tasks.withType<JavaCompile> {
+  options.isIncremental = true // This is automatically enabled in modern Gradle versions
+  options.encoding = "UTF-8"
 }
-tasks.withType < Test > {
-    maxParallelForks = Runtime.getRuntime().availableProcessors()
-    timeout.set(Duration.ofSeconds(30)) // Kill after 30s
 
+tasks.withType<Test> {
+  maxParallelForks = Runtime.getRuntime().availableProcessors()
+  timeout.set(Duration.ofSeconds(30)) // Kill after 30s
 }
-tasks.withType < Test > ().configureEach {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
-    }
+
+tasks.withType<Test>().configureEach {
+  useJUnitPlatform()
+  testLogging {
+    showStandardStreams = true
+    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    events("passed", "skipped", "failed")
+  }
 }
+
 spotless {
-    java {
-        // https://github.com/google/google-java-format
-        googleJavaFormat("1.25.2") // Use Google Java Format
-        toggleOffOn()
-        // Optional: Add more formatters or custom rules
-        importOrder() // Organize imports
-        removeUnusedImports() // Remove unused imports
-        trimTrailingWhitespace() // Remove trailing whitespace
-        endWithNewline() // Ensure files end with a newline
-    }
-    ktfmt {
-        // Google style - 2 space indentation & automatically adds/removes trailing commas
-        googleStyle()
-        maxWidth.set(170)
-        // KotlinLang style - 4 space indentation - From kotlinlang.org/docs/coding-conventions.html
-        kotlinLangStyle()
-    }
-    kotlin {
-        // https://github.com/pinterest/ktlint
-        ktlint("1.5.0") // Use ktlint for Kotlin
-        toggleOffOn()
-        // trimTrailingWhitespace()
-        // indentWithSpaces(4)
-    }
+  java {
+    // https://github.com/google/google-java-format
+    googleJavaFormat("1.25.2")
 
+    toggleOffOn()
+    importOrder()
+    removeUnusedImports()
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+  // ktfmt {
+  //     // Google style - 2 space indentation & automatically adds/removes trailing commas
+  //     googleStyle()
+  //     maxWidth.set(170)
+  //     // KotlinLang style - 4 space indentation - From
+  // kotlinlang.org/docs/coding-conventions.html
+  //     // kotlinLangStyle()
+  // }
+  kotlin {
+    // https://github.com/pinterest/ktlint
+    ktlint("1.5.0")
+
+    toggleOffOn()
+    // trimTrailingWhitespace()
+    // indentWithSpaces(4)
+  }
 }

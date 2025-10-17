@@ -1,4 +1,5 @@
 package easy
+
 import kotlin.math.pow
 
 fun kodeeArmstrongNumbers(numberToCheck: Int): Int {

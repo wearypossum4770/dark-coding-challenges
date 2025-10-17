@@ -1,4 +1,5 @@
 package veryeasy
+
 import kotlin.math.roundToInt
 
 fun kodeeToCelsius(temperature: Double): Double = (temperature - 32.0) * 5.0 / 9.0

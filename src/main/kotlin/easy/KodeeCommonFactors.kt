@@ -1,4 +1,5 @@
 package easy
+
 import kotlin.math.max
 
 fun kodeeCommonFactors(

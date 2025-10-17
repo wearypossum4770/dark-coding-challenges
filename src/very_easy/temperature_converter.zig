@@ -2,6 +2,7 @@ const std = @import("std");
 
 const expectEqualStrings = std.testing.expectEqualStrings;
 const expectApproxEqRel = std.testing.expectApproxEqRel;
+
 const bufPrint = std.fmt.bufPrint;
 
 const Allocator = std.mem.Allocator;
@@ -34,14 +35,17 @@ pub fn temperatureConverter(allocator: Allocator, deg: []const u8) ?[]const u8 {
         }
     }
     const temp = std.fmt.parseFloat(f32, deg[0..index]) catch {
+        defer allocator.free(buf);
         return allocator.dupe(u8, "Error") catch return null;
     };
     if (std.mem.endsWith(u8, deg, "°F")) {
         const celsius = @round((temp - 32.0) * 5.0 / 9.0);
+        defer allocator.free(buf);
         return bufPrint(buf, "{d:.0}°C", .{celsius}) catch return null;
     }
     if (std.mem.endsWith(u8, deg, "°C")) {
         const fahrenheit = @round((temp * 9.0 / 5.0) + 32.0);
+        defer allocator.free(buf);
         return bufPrint(buf, "{d:.0}°F", .{fahrenheit}) catch return null;
     }
     return allocator.dupe(u8, "Error") catch return null;

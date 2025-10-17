@@ -1,4 +1,5 @@
 package medium
+
 import easy.KodeeListNode
 
 fun <T> kodeeDeleteLinkedListNode(node: KodeeListNode<T>?) {

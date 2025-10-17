@@ -1,5 +1,5 @@
-
 package veryeasy
+
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -39,7 +39,10 @@ class KodeeTemperatureConverterTest {
         expected: Double,
     ) {
         val actual = kodeeToFahrenheit(celsius)
-        assertTrue(abs(expected - actual) <= tolerance, "Expected $actual to be within $tolerance of $expected")
+        assertTrue(
+            abs(expected - actual) <= tolerance,
+            "Expected $actual to be within $tolerance of $expected",
+        )
     }
 
     @ParameterizedTest
@@ -49,7 +52,10 @@ class KodeeTemperatureConverterTest {
         expected: Double,
     ) {
         val actual = kodeeToCelsius(fahrenheit)
-        assertTrue(abs(expected - actual) <= tolerance, "Expected $actual to be within $tolerance of $expected")
+        assertTrue(
+            abs(expected - actual) <= tolerance,
+            "Expected $actual to be within $tolerance of $expected",
+        )
     }
 
     @ParameterizedTest
@@ -59,7 +65,10 @@ class KodeeTemperatureConverterTest {
         expected: Double,
     ) {
         val actual = kodeeToKelvin(celsius)
-        assertTrue(abs(expected - actual) <= tolerance, "Expected $actual to be within $tolerance of $expected")
+        assertTrue(
+            abs(expected - actual) <= tolerance,
+            "Expected $actual to be within $tolerance of $expected",
+        )
     }
 
     companion object {

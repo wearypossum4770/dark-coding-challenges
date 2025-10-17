@@ -1,4 +1,3 @@
-
 package easy
 
 fun isNumberPalindrome(input: Int): Boolean {

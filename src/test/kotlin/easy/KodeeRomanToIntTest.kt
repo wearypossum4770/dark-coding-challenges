@@ -1,4 +1,5 @@
 package easy
+
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.parallel.Execution
 import org.junit.jupiter.api.parallel.ExecutionMode

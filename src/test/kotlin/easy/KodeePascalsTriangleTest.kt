@@ -1,5 +1,5 @@
-
 package easy
+
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -21,36 +21,10 @@ class KodeePascalsTriangleTest {
         @JvmStatic
         fun pascalsTriangleData(): Stream<Arguments> =
             Stream.of(
-                Arguments.of(
-                    1,
-                    listOf(
-                        listOf(1),
-                    ),
-                ),
-                Arguments.of(
-                    2,
-                    listOf(
-                        listOf(1),
-                        listOf(1, 1),
-                    ),
-                ),
-                Arguments.of(
-                    3,
-                    listOf(
-                        listOf(1),
-                        listOf(1, 1),
-                        listOf(1, 2, 1),
-                    ),
-                ),
-                Arguments.of(
-                    4,
-                    listOf(
-                        listOf(1),
-                        listOf(1, 1),
-                        listOf(1, 2, 1),
-                        listOf(1, 3, 3, 1),
-                    ),
-                ),
+                Arguments.of(1, listOf(listOf(1))),
+                Arguments.of(2, listOf(listOf(1), listOf(1, 1))),
+                Arguments.of(3, listOf(listOf(1), listOf(1, 1), listOf(1, 2, 1))),
+                Arguments.of(4, listOf(listOf(1), listOf(1, 1), listOf(1, 2, 1), listOf(1, 3, 3, 1))),
                 Arguments.of(
                     5,
                     listOf(

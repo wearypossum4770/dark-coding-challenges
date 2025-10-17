@@ -1,5 +1,5 @@
-
 package easy
+
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -37,7 +37,13 @@ class KodeeMergeSortedArrayTest {
         @JvmStatic
         fun mergeSortedArrayData(): Stream<Arguments> =
             Stream.of(
-                Arguments.of(intArrayOf(1, 2, 3, 0, 0, 0), 3, intArrayOf(2, 5, 6), 3, intArrayOf(1, 2, 2, 3, 5, 6)),
+                Arguments.of(
+                    intArrayOf(1, 2, 3, 0, 0, 0),
+                    3,
+                    intArrayOf(2, 5, 6),
+                    3,
+                    intArrayOf(1, 2, 2, 3, 5, 6),
+                ),
                 Arguments.of(intArrayOf(1), 1, intArrayOf(), 0, intArrayOf(1)),
                 Arguments.of(intArrayOf(0), 0, intArrayOf(1), 1, intArrayOf(1)),
             )
