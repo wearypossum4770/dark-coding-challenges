@@ -16,3 +16,27 @@ pub fn differenceOfSums(n: i32, m: i32) i32 {
     }
     return lhs - rhs;
 }
+
+test "sum of divisibility of 3  in range [1,10]" {
+    const n: i32 = 10;
+    const m: i32 = 3;
+    const expected: i32 = 19;
+    const actual = differenceOfSums(n, m);
+    try expectEqual(expected, actual);
+}
+
+test "sum of divisibility of 1  in range [1, 5]" {
+    const n: i32 = 5;
+    const m: i32 = 1;
+    const expected: i32 = -15;
+    const actual = differenceOfSums(n, m);
+    try expectEqual(expected, actual);
+}
+
+test "sum of divisibility of 6 in range  [1, 5]" {
+    const n: i32 = 5;
+    const m: i32 = 6;
+    const expected: i32 = 15;
+    const actual = differenceOfSums(n, m);
+    try expectEqual(expected, actual);
+}
