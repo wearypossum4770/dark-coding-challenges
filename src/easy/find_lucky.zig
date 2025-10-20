@@ -19,3 +19,33 @@ pub fn findLucky(comptime T: type, allocator: Allocator, arr: []const T) ?i32 {
     }
     return -1;
 }
+
+test "find maximum frequency for the integer that matches index of [2,2,3,4]" {
+    const arr = [_]i32{ 2, 2, 3, 4 };
+    const expected: i32 = 2;
+    const allocator = std.testing.allocator;
+    const result = findLucky(@TypeOf(arr[0]), allocator, &arr);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "find maximum frequency for the integer that matches index of [1,2,2,3,3,3]" {
+    const arr = [_]i32{ 1, 2, 2, 3, 3, 3 };
+    const expected: i32 = 3;
+    const allocator = std.testing.allocator;
+    const result = findLucky(@TypeOf(arr[0]), allocator, &arr);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "find maximum frequency for the integer that matches index of [2,2,2,3,3]" {
+    const arr = [_]i32{ 2, 2, 2, 3, 3 };
+    const expected: i32 = -1;
+    const allocator = std.testing.allocator;
+    const result = findLucky(@TypeOf(arr[0]), allocator, &arr);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
