@@ -11,3 +11,24 @@ pub fn find_lucky(arr: Vec<i32>) -> i32 {
     }
     -1
 }
+#[cfg(test)]
+mod tests {
+    use super::find_lucky;
+    use rstest::rstest;
+    #[rstest]
+			#[case(&[2,2,3,4], 2)]
+			#[case(&[1,2,2,3,3,3], 3)]
+			#[case(&[2,2,2,3,3], -1)]
+			#[case(&[], -1)]
+			#[case(&[0, 0, 0], -1)]
+			#[case(&[1], 1)]
+			#[case(&[2], -1)]
+			#[case(&[2, 2, 3, 3, 3], 3)]
+			#[case(&[1, 1, 2, 2], 2)]
+			#[case(&[4, 4, 4, 4], 4)]
+			#[case(&[7, 7, 7], -1)]
+			#[case(&[0, 1, 2, 2], 2)]
+    fn test_find_lucky(#[case] arr: &[i32], #[case] expected: i32) {
+        assert_eq!(find_lucky(arr.to_vec()), expected);
+    }
+}
