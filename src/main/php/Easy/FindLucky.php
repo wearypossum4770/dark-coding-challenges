@@ -9,7 +9,6 @@ class FindLucky
     /**
      * @param  int[]  $arr
      */
- 
     public function transformFindLucky(array $arr): int
     {
 
