@@ -17,3 +17,22 @@ pub fn numIdenticalPairs(comptime T: type, nums: []const T) i32 {
     }
     return count;
 }
+
+test "the numb of good pairs for [1,1,1,1]" {
+    const nums = [_]i32{ 1, 1, 1, 1 };
+    const expected: i32 = 6;
+    const actual = numIdenticalPairs(@TypeOf(nums[0]), &nums);
+    try expectEqual(expected, actual);
+}
+test "the numb of good pairs for [1,2,3]" {
+    const nums = [_]i32{ 1, 2, 3 };
+    const expected: i32 = 0;
+    const actual = numIdenticalPairs(@TypeOf(nums[0]), &nums);
+    try expectEqual(expected, actual);
+}
+test "the numb of good pairs for [1,2,3,1,1,3]" {
+    const nums = [_]i32{ 1, 2, 3, 1, 1, 3 };
+    const expected: i32 = 4;
+    const actual = numIdenticalPairs(@TypeOf(nums[0]), &nums);
+    try expectEqual(expected, actual);
+}
