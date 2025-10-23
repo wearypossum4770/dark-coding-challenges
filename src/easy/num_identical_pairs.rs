@@ -13,3 +13,16 @@ pub fn num_identical_pairs(nums: Vec<i32>) -> i32 {
     }
     count 
 }
+#[cfg(test)]
+mod tests {
+    use super::num_identical_pairs;
+    use rstest::rstest;
+    #[rstest]
+    #[case(&[1,1,1,1], 6)]
+    #[case(&[1,2,3], 0)]
+    #[case(&[1,2,3,1,1,3], 4)]
+
+    fn test_num_identical_pairs(#[case] nums: &[i32], #[case] expected: i32) {
+        assert_eq!(num_identical_pairs(nums.to_vec()), expected);
+    }
+}
