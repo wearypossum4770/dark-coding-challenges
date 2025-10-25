@@ -20,3 +20,17 @@ pub fn is_boomerang(points: Vec<Vec<i32>>) -> bool {
     let c = x3 * (y1 - y2);
     a + b + c != 0
 }
+#[cfg(test)]
+mod tests {
+    use super::is_boomerang;
+    use rstest::rstest;
+    #[rstest]
+#[case(vec![vec![1,1],vec![2,3],vec![3,2]], true)]
+#[case(vec![vec![1,1],vec![2,2],vec![3,3]], false)]
+#[case(vec![vec![1,0],vec![0,0],vec![2,0]], false)]
+#[case(vec![vec![0,1],vec![0,2],vec![1,2]], true)]
+    #[case(vec![vec![0,1],vec![0,1],vec![0,1]], false)]
+    fn test_is_boomerang(#[case] points: Vec<Vec<i32>>, #[case] expected: bool) {
+        assert_eq!(is_boomerang(points), expected);
+    }
+}
