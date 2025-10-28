@@ -19,3 +19,26 @@ pub fn reverse_vowels(s: String) -> String {
     }
     chars.into_iter().collect()
 }
+#[cfg(test)]
+mod tests {
+    use super::reverse_vowels;
+    use rstest::rstest;
+    #[rstest]
+    #[case("IceCreAm", "AceCreIm")]
+    #[case("leetcode", "leotcede")]
+    #[case("a", "a")]
+    #[case("b", "b")]
+    #[case("AEIOU", "UOIEA")]
+    #[case("aeiou", "uoiea")]
+    #[case("bcdfgh", "bcdfgh")]
+    #[case("aA", "Aa")]
+    #[case("a.b,e", "e.b,a")]
+    #[case("hello world", "hollo werld")]
+    #[case("aEiOu", "uOiEa")]
+    #[case(".,?!", ".,?!")]
+    #[case("aaaaaa", "aaaaaa")]
+    #[case("aAaaAa", "aAaaAa")]
+    fn test_reverse_vowels(#[case] s: &str, #[case] expected: &str) {
+        assert_eq!(reverse_vowels(s.to_string()), expected.to_string());
+    }
+}
