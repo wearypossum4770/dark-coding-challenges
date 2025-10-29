@@ -20,3 +20,24 @@ pub fn sortArrayByParity(comptime T: type, nums: []T) []T {
     }
     return nums;
 }
+
+test "array [3, 1, 2, 4] sorted by even/odd parity" {
+    var nums = [_]i32{ 3, 1, 2, 4 };
+    const expected = [_]i32{ 4, 2, 1, 3 };
+    const actual = sortArrayByParity(@TypeOf(nums[0]), &nums);
+    try expectEqualSlices(i32, &expected, actual);
+}
+
+test "array [0, 1, 2] sorted by even/odd parity" {
+    var nums = [_]i32{ 0, 1, 2 };
+    const expected = [_]i32{ 0, 2, 1 };
+    const actual = sortArrayByParity(@TypeOf(nums[0]), &nums);
+    try expectEqualSlices(i32, &expected, actual);
+}
+
+test "array [0] sorted by even/odd parity" {
+    var nums = [_]i32{0};
+    const expected = [_]i32{0};
+    const actual = sortArrayByParity(@TypeOf(nums[0]), &nums);
+    try expectEqualSlices(i32, &expected, actual);
+}
