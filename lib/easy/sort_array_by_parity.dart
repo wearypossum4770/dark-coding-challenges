@@ -1,18 +1,15 @@
 List<int> sortArrayByParity(List<int> nums) {
-  int left = 0;
-  int right = nums.length - 1;
-  while (left < right) {
-    if (nums[left] % 2 == 0) {
-      left++;
-    } else if (nums[right] % 2 == 1) {
-      right--;
+  List<int> result = List.filled(nums.length, 0);
+  int even = 0;
+  int odd = nums.length - 1;
+  for (int n in nums) {
+    if (n % 2 == 0) {
+      result[even] = n;
+      even++;
     } else {
-      int temp = nums[left];
-      nums[left] = nums[right];
-      nums[right] = temp;
-      right--;
-      left++;
+      result[odd] = n;
+      odd--;
     }
   }
-  return nums;
+  return result;
 }
