@@ -18,3 +18,25 @@ pub fn sortArrayByParityTwo(comptime T: type, allocator: Allocator, nums: []cons
     }
     return result;
 }
+
+test "parity sorting [4,2,5,7]" {
+    const nums = [_]i32{ 4, 2, 5, 7 };
+    const expected = [_]i32{ 4, 5, 2, 7 };
+    const allocator = std.testing.allocator;
+    const result = sortArrayByParityTwo(@TypeOf(nums[0]), allocator, &nums);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(nums[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+
+test "parity sorting [2,3]" {
+    const nums = [_]u2{ 2, 3 };
+    const expected = [_]u2{ 2, 3 };
+    const allocator = std.testing.allocator;
+    const result = sortArrayByParityTwo(@TypeOf(nums[0]), allocator, &nums);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(nums[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
