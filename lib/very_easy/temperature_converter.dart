@@ -14,12 +14,24 @@ List<double> convertTemperature(double celsius) {
   return [toKelvin(celsius), toFahrenheit(celsius)];
 }
 
+bool isDigit(int char) {
+  return char >= 48 && char <= 57;
+}
+
+bool isTemperatureChar(String char) {
+  switch (char) {
+    case '-':
+    case '.':
+      return true;
+    default:
+      return false;
+  }
+}
+
 String temperatureConverter(String deg) {
   final buffer = StringBuffer();
   for (int i = 0; i < deg.length; i++) {
-    final char = deg[i];
-    final code = char.codeUnitAt(0);
-    if ((code >= '0'.codeUnitAt(0) && code <= '9'.codeUnitAt(0)) || char == '-' || char == '.') {
+    if (isDigit(deg.codeUnitAt(i)) || isTemperatureChar(deg[i])) {
       buffer.write(deg[i]);
     } else {
       break;
