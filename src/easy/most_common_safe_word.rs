@@ -17,3 +17,34 @@ pub fn most_common_safe_word(paragraph: String, banned: Vec<String>) -> String {
         .map(|(word, _)| word)
         .unwrap_or_default()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::most_common_safe_word;
+    use rstest::rstest;
+
+    #[rstest]
+    #[case("Bob hit a ball, the hit BALL flew far after it was hit.".to_string(), &["hit"], "ball")]
+    #[case("..Bob hit a ball, the hit BALL flew far after it was hit.".to_string(), &["hit"], "ball")]
+    #[case("a.".to_string(), &[], "a")]
+    #[case("a b.b".to_string(), &[], "b")]
+    #[case("Bob. hIt, baLl".to_string(), &["bob", "hit"], "ball")]
+    #[case("Apple pear apple APPLE!".to_string(), &["apple"], "pear")]
+    #[case("Wow! wow? wow. really, really... REALLY!".to_string(), &["wow"], "really")]
+    #[case("test test test test".to_string(), &[], "test")]
+    #[case("word ".repeat(1_000), &[], "word")]
+    #[case("apple banana apple banana cherry".to_string(), &["banana"], "apple")]
+    fn test_most_common_safe_word(
+        #[case] paragraph: String,
+        #[case] banned: &[&str],
+        #[case] expected: &str,
+    ) {
+        assert_eq!(
+            most_common_safe_word(
+                paragraph.to_owned(),
+                banned.iter().map(|x| x.to_string()).collect()
+            ),
+            expected.to_string()
+        );
+    }
+}
