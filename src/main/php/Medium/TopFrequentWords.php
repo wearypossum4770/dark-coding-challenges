@@ -6,10 +6,9 @@ namespace Src\Medium;
 
 class TopFrequentWords
 {
-	   /**
-     * @param String[] $words
-     * @param Integer $k
-     * @return String[]
+    /**
+     * @param  string[]  $words
+     * @return string[]
      */
     public function solve(array $words, int $k): array
     {
@@ -17,8 +16,9 @@ class TopFrequentWords
         foreach ($words as $word) {
             $result[$word] = ($result[$word] ?? 0) + 1;
         }
-				uksort($result, 'strcmp');
+        uksort($result, 'strcmp');
         uasort($result, fn ($a, $b) => $b - $a);
-				return array_slice(array_keys($result), 0, $k);
+
+        return array_slice(array_keys($result), 0, $k);
     }
 }
