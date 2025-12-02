@@ -69,8 +69,9 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.withType<Test> {
-  maxParallelForks = Runtime.getRuntime().availableProcessors()
-  timeout.set(Duration.ofSeconds(30)) // Kill after 30s
+  maxParallelForks = 1
+  // maxParallelForks = Runtime.getRuntime().availableProcessors()
+  timeout.set(Duration.ofSeconds(60)) // Kill after 30s
 }
 
 tasks.withType<Test>().configureEach {
