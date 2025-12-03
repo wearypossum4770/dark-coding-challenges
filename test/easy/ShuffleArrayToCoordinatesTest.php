@@ -9,10 +9,10 @@ dataset('shuffleArrayToCoordinatesData', [
     [[1, 2, 3, 4, 4, 3, 2, 1], 4, [1, 4, 2, 3, 3, 2, 4, 1]],
     [[1, 1, 2, 2], 2, [1, 2, 1, 2]],
 ]);
-it('solve', function (int $n, int $expected) {
+it('solve', function (array $nums, int $n, array $expected) {
     $instance = new ShuffleArrayToCoordinates;
 
-    $result = $instance->solve($n);
+    $result = $instance->solve($nums, $n);
 
     expect($result)->toBe($expected);
 
