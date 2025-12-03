@@ -6,8 +6,21 @@ namespace Src\Easy;
 
 class ReverseLinkedList
 {
-    public function solve(int $n): array
+ /**
+     * @param ListNode|null $head
+     * @return ListNode|null
+     */
+    public function solve(?ListNode $head): ?ListNode
     {
-        return $this->transformReverseLinkedList($n);
+      $previous = null;
+        $current = $head;
+        while ($current !== null) {
+$next = $current->next;     
+            $current->next = $previous; 
+            $previous = $current;       
+            $current = $next;
+        }
+
+        return $previous;
     }
 }
