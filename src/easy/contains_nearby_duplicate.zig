@@ -34,3 +34,163 @@ test "distinct indices whose difference is 3 in {1, 2, 3, 1} backed by array" {
     const actual = containsNearbyDuplicateArrayBacked(@TypeOf(nums[0]), &nums, k);
     try expectEqual(expected, actual);
 }
+test "distinct indices whose difference is 3 in {1, 2, 3, 1}" {
+    const nums = [_]i32{ 1, 2, 3, 1 };
+    const k: @TypeOf(nums[0]) = 3;
+    const expected = true;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 1 in {1, 0, 1, 1}" {
+    const nums = [_]i32{ 1, 0, 1, 1 };
+    const k: @TypeOf(nums[0]) = 1;
+    const expected = true;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 2 in {1, 2, 3, 1, 2, 3}" {
+    const nums = [_]i32{ 1, 2, 3, 1, 2, 3 };
+    const k: @TypeOf(nums[0]) = 2;
+    const expected = false;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 10 in {5}" {
+    const nums = [_]i32{5};
+    const k: @TypeOf(nums[0]) = 10;
+    const expected = false;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 0 in {1, 1}" {
+    const nums = [_]i32{ 1, 1 };
+    const k: @TypeOf(nums[0]) = 0;
+    const expected = false;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 100_000 in {99, 99}" {
+    const nums = [_]i32{ 99, 99 };
+    const k: @TypeOf(nums[0]) = 100_000;
+    const expected = true;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 1 in {1, 1, 1, 1, 1}" {
+    const nums = [_]i32{ 1, 1, 1, 1, 1 };
+    const k: @TypeOf(nums[0]) = 1;
+    const expected = true;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 4 in {1, 2, 3, 4, 1}" {
+    const nums = [_]i32{ 1, 2, 3, 4, 1 };
+    const k: @TypeOf(nums[0]) = 4;
+    const expected = true;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 4 in {1, 2, 3, 4, 5, 1}" {
+    const nums = [_]i32{ 1, 2, 3, 4, 5, 1 };
+    const k: @TypeOf(nums[0]) = 4;
+    const expected = false;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 1 in {-1, -1}" {
+    const nums = [_]i32{ -1, -1 };
+    const k: @TypeOf(nums[0]) = 1;
+    const expected = true;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 1 in {-5, 10, -5, 10}" {
+    const nums = [_]i32{ -5, 10, -5, 10 };
+    const k: @TypeOf(nums[0]) = 1;
+    const expected = false;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 2 in {1, 2, 1, 3, 1}" {
+    const nums = [_]i32{ 1, 2, 1, 3, 1 };
+    const k: @TypeOf(nums[0]) = 2;
+    const expected = true;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 1 in {1, 2, 1, 3, 1}" {
+    const nums = [_]i32{ 1, 2, 1, 3, 1 };
+    const k: @TypeOf(nums[0]) = 1;
+    const expected = false;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 3 in {1, 5, 1, 6, 1}" {
+    const nums = [_]i32{ 1, 5, 1, 6, 1 };
+    const k: @TypeOf(nums[0]) = 3;
+    const expected = true;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 2 in {0, 0, 0}" {
+    const nums = [_]i32{ 0, 0, 0 };
+    const k: @TypeOf(nums[0]) = 2;
+    const expected = true;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
+test "distinct indices whose difference is 5 in {0}" {
+    const nums = [_]i32{0};
+    const k: @TypeOf(nums[0]) = 5;
+    const expected = false;
+    const allocator = std.testing.allocator;
+    const result = containsNearbyDuplicate(@TypeOf(nums[0]), allocator, &nums, k);
+    if (result) |actual| {
+        try expectEqual(expected, actual);
+    } else return error.SkipZigTest;
+}
