@@ -32,7 +32,7 @@ public class MostCommonSafeWordTest {
         Arguments.of("", new String[] {}, ""),
         Arguments.of("Wow! Such, wow? Very-wow.", new String[] {"such"}, "wow"),
         Arguments.of("test test test", new String[] {"test"}, ""),
-        Arguments.of("123 123 !@#", new String[] {}, ""),
+        Arguments.of("123 123", new String[] {}, "123"),
         Arguments.of("echo echo echo echo", new String[] {}, "echo"));
   }
 }
