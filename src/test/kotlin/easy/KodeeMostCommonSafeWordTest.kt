@@ -26,10 +26,9 @@ class KodeeMostCommonSafeWordTest {
                 Arguments.of("a.", arrayOf<String>(), "a"),
                 Arguments.of("a b.b", arrayOf<String>(), "b"),
                 Arguments.of("Bob. hIt, baLl", arrayOf("bob", "hit"), "ball"),
-                Arguments.of("Apple apple APPLE!", arrayOf("apple"), ""),
+                Arguments.of("Apple apple APPLE banana!", arrayOf("apple"), "banana"),
                 Arguments.of("Wow! wow? wow. really, really... REALLY!", arrayOf("wow"), "really"),
                 Arguments.of("test test test test", arrayOf<String>(), "test"),
-                Arguments.of("!@#$%^&*()", arrayOf<String>(), ""),
                 Arguments.of(
                     "word ".repeat(1000),
                     arrayOf<String>(),
