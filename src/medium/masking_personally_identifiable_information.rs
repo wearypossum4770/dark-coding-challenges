@@ -45,3 +45,29 @@ pub fn masking_personally_identifiable_information(s: String) -> String {
         return mask_phone(s.as_str());
     }
 }
+#[cfg(test)]
+mod tests {
+    use super::masking_personally_identifiable_information;
+    use rstest::rstest;
+    #[rstest]
+    #[case("LeetCode@LeetCode.com", "l*****e@leetcode.com")]
+    #[case("AB@qq.com", "a*****b@qq.com")]
+    #[case("a@b.com", "a*****@b.com")]
+    #[case("John.Doe@Example.COM", "j*****e@example.com")]
+    #[case("X@Y.Z", "x*****@y.z")]
+    #[case("1234567890", "***-***-7890")]
+    #[case("1(234)567-890", "***-***-7890")]
+    #[case("86-(10)12345678", "+**-***-***-5678")]
+    #[case("+86(88)1513-7-74", "+*-***-***-3774")]
+    #[case("(123) 456 7890", "***-***-7890")]
+    #[case("123-45-67890", "***-***-7890")]
+    #[case("0000000000", "***-***-0000")]
+    #[case("+000000000000", "+**-***-***-0000")]
+    #[case("Z@Z.Z", "z*****@z.z")]
+    fn test_masking_personally_identifiable_information(#[case] s: &str, #[case] expected: &str) {
+        assert_eq!(
+            masking_personally_identifiable_information(s.to_string()),
+            expected.to_string()
+        );
+    }
+}
