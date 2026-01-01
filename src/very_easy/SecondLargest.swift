@@ -6,8 +6,7 @@ func secondLargest(_ arr: [Int]) -> Int {
     if first < num {
       second = first
       first = num
-    }
-    if second < first && first > num {
+    } else if second < num {
       second = num
     }
   }
