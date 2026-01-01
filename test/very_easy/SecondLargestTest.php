@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Src\VeryEasy\SecondLargest;
 
-dataset("\n\tFeature: Second Largest Integer of Array", [
+dataset('secondLargestData', [
     [[10, 40, 30, 20, 50], 40],
     [[25, 143, 89, 13, 105], 105],
     [[54, 23, 11, 17, 10], 23],
@@ -21,11 +21,16 @@ dataset("\n\tFeature: Second Largest Integer of Array", [
     [[0, -1, 1], 0],
     [[-1, -1, 0], -1],
 ]);
-it("\n\tGiven: the integer array :nums.\n\tThen: the second largest number is :expected", function (array $nums, int $expected) {
-    $instance = new SecondLargest;
 
-    $result = $instance->solve($nums);
+describe("\n\tFeature: Second Largest Integer of Array", function () {
+    it(
+        "\n\tGiven: an array of integers :nums.\n\tThen: it returns the third largest distinct value :expected.",
+        function (array $nums, int $expected) {
+            $instance = new SecondLargest;
 
-    expect($result)->toBe($expected);
+            $result = $instance->solve($nums);
 
-})->with('secondLargestData');
+            expect($result)->toBe($expected);
+        }
+    )->with('secondLargestData');
+});
