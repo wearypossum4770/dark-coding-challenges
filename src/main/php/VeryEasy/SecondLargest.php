@@ -11,6 +11,9 @@ class SecondLargest
         $first = PHP_INT_MIN;
         $second = PHP_INT_MIN;
         foreach ($nums as $num) {
+            if ($first === $num) {
+                continue;
+            }
             if ($first < $num) {
                 $second = $first;
                 $first = $num;
