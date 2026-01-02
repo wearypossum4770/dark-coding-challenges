@@ -14,14 +14,14 @@ void main() {
       ThirdMaxTestCases([5, 4, 3, 2, 1], 3),
       ThirdMaxTestCases([10, 20, 30, 40], 20),
       ThirdMaxTestCases([3, 2, 1], 1),
-      ThirdMaxTestCases([5, 5, 3, 2], 3),
+      ThirdMaxTestCases([5, 5, 3, 2], 2),
       ThirdMaxTestCases([1, 2, 2, 3, 3], 1),
       ThirdMaxTestCases([-1, -2, -3, -4], -3),
       ThirdMaxTestCases([-10, -20, -30], -30),
       ThirdMaxTestCases([-10, 0, 10], -10),
       ThirdMaxTestCases([0, -1, 1, 2], 0),
       ThirdMaxTestCases([4, 4, 4, 3, 3, 2], 2),
-      ThirdMaxTestCases([-5, -1, -3], -3),
+      ThirdMaxTestCases([-5, -1, -3], -5),
       ThirdMaxTestCases([-2, -1, 0, 1, 2], 0),
     ];
 
