@@ -6,11 +6,6 @@ namespace Src\Easy;
 
 class RepeatedSubstringPattern
 {
-
-    /**
-     * @param String $s
-     * @return Boolean
-     */
     public function solve(string $s): bool
     {
         if (strlen($s) < 2) {
