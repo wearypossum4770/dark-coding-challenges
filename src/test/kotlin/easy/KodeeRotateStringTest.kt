@@ -33,7 +33,7 @@ class KodeeRotateStringTest {
                 Arguments.of("aaaa", "aaaa", true),
                 Arguments.of("aabb", "bbaa", true),
                 Arguments.of("aabb", "abab", false),
-                Arguments.of("aabb", "abba", truew),
+                Arguments.of("aabb", "abba", true),
                 Arguments.of("defdefdefabcabc", "defdefabcabcdef", true),
                 Arguments.of("bbbacddceeb", "ceebbbbacdd", true),
                 Arguments.of("a", "a", true),
