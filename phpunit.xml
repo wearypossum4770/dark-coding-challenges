@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
-         colors="true"
-        stopOnFailure="true"
-         stopOnError="true"
-         verbose="true"
-         failOnWarning="true"
-         failOnRisky="true"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    bootstrap="vendor/autoload.php"
+    colors="true"
+    stopOnFailure="true"
+    stopOnError="true"
+    failOnWarning="true"
+    failOnRisky="true"
 >
     <testsuites>
         <!-- https://docs.phpunit.de/en/10.5/fixtures.html#sharing-fixture -->
