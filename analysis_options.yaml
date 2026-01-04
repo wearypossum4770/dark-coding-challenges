@@ -18,7 +18,6 @@ formatter:
   page_width: 180
 linter:
   rules:
-    prefer_adjacent_string: false
     await_only_futures: true
     avoid_bool_literals_in_conditional_expressions: true
     avoid_double_and_int_checks: true
@@ -32,7 +31,6 @@ linter:
     avoid_types_as_parameter_names: true
     prefer_is_empty: true
     prefer_is_not_empty: true
-    prefer_if_null_operator: true
     prefer_conditional_assignment: true
     prefer_collection_literals: true
 #     - camel_case_types
