@@ -176,7 +176,7 @@ const createTypeScriptTest = ({
     if (topLevelImports) {
         contents += `import { describe, test, expect } from "bun:test";\nimport { ${name} } from "@/src/${difficulty}/${filename}";`;
     }
-    return `${contents}\ndescribe("${name}", () => {\ntest.each([])("", (inputs, output) => {\nconst result = ${name}(inputs);\nexpect(result).toStrictEqual(output);\n});\n});`;
+    return `${contents}\ndescribe("${name}", () => {\ntest.each([])("", (inputs, expected) => {\nconst result = ${name}(inputs);\nexpect(result).toStrictEqual(expected);\n});\n});`;
 };
 // Create C source file
 const createC = ({
@@ -385,7 +385,7 @@ const createSwift = ({ topLevelImports, challengeName }: ChallengeSkeleton) => {
 };
 const createSwiftTests = ({ difficulty, challengeName }: ChallengeSkeleton) => {
     const name = camelCase(challengeName ?? "");
-    return `import Testing\n@testable import ${snakeCase(difficulty)}\n@Test(arguments: [])\nfunc ${name}Test(outcome: Int) {\n #expect(${name}() == outcome)\n}`;
+    return `import Testing\n@testable import ${snakeCase(difficulty)}\n@Test(arguments: [])\nfunc ${name}Test(expect: Int) {\n #expect(${name}() == expect)\n}`;
 };
 
 const dartFileCreate = ({ difficulty, challengeName }: ChallengeSkeleton) =>
@@ -645,6 +645,12 @@ const organizeImports = async () => {
                 await access(challengeDirectory, constants.F_OK);
                 const files = await getDirectories(challengeDirectory);
                 const modules = getSubModules(files);
+                [
+                    "contains_nearby_almost_duplicate",
+                    "rotate_image",
+                    "merge_similar_items",
+                        "is_valid_sudoku",
+                ].forEach(mod => modules.delete(mod))
                 await saveModuleEntry(modules, challengeDirectory);
             } catch (error) {
                 console.error(`Error accessing ${challengeDirectory}:`, error);
@@ -806,5 +812,5 @@ const main = async () => {
         });
 };
 
-await main();
+    await main();
 await organizeImports();
