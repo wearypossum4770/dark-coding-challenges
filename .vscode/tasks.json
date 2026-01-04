@@ -5,8 +5,12 @@
             "type": "go",
             "label": "go: test package",
             "command": "test",
-            "args": ["${fileDirname}"],
-            "problemMatcher": ["$go"],
+            "args": [
+                "${fileDirname}"
+            ],
+            "problemMatcher": [
+                "$go"
+            ],
             "group": "build",
             "detail": "cd /home/devsteve/dev/dark-coding-challenges; go test ${fileDirname}"
         },
@@ -14,8 +18,12 @@
             "type": "go",
             "label": "go: test workspace",
             "command": "test",
-            "args": ["./..."],
-            "problemMatcher": ["$go"],
+            "args": [
+                "./..."
+            ],
+            "problemMatcher": [
+                "$go"
+            ],
             "group": "build",
             "detail": "cd /home/devsteve/dev/dark-coding-challenges; go test ./..."
         },
@@ -35,8 +43,17 @@
             "workspaceFolder": "/home/devsteve/dev/dark-coding-challenges",
             "args": "",
             "javaDebug": false,
-            "problemMatcher": ["$gradle"],
+            "problemMatcher": [
+                "$gradle"
+            ],
             "label": "gradle: spotlessApply"
+        },
+        {
+            "type": "dotnet",
+            "task": "watch advanced",
+            "file": "/home/devsteve/dev/dark-coding-challenges/advanced/advanced.csproj",
+            "problemMatcher": [],
+            "label": "dotnet: watch advanced"
         }
     ]
 }
