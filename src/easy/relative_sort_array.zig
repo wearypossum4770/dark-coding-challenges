@@ -1,5 +1,7 @@
 const std = @import("std");
 
+const expectEqualSlices = std.testing.expectEqualSlices;
+
 const Allocator = std.mem.Allocator;
 
 pub fn relativeSortArray(comptime T: type, allocator: Allocator, arr1: []const T, arr2: []const T) ?[]const T {
@@ -30,4 +32,136 @@ pub fn relativeSortArray(comptime T: type, allocator: Allocator, arr1: []const T
         }
     }
     return result;
+}
+test "relatively sort [2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19]" {
+    const arr1 = [_]i32{ 2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19 };
+    const arr2 = [_]i32{ 2, 1, 4, 3, 9, 6 };
+    const expected = [_]i32{ 2, 2, 2, 1, 4, 3, 3, 9, 6, 7, 19 };
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort [28, 6, 22, 8, 44, 17]" {
+    const arr1 = [_]i32{ 28, 6, 22, 8, 44, 17 };
+    const arr2 = [_]i32{ 22, 28, 8, 6 };
+    const expected = [_]i32{ 22, 28, 8, 6, 17, 44 };
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort [5, 3, 8, 1, 9, 2]" {
+    const arr1 = [_]i32{ 5, 3, 8, 1, 9, 2 };
+    const arr2 = [_]i32{};
+    const expected = [_]i32{ 1, 2, 3, 5, 8, 9 };
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort [5, 5, 2, 2, 8, 8]" {
+    const arr1 = [_]i32{ 5, 5, 2, 2, 8, 8 };
+    const arr2 = [_]i32{ 2, 5, 8 };
+    const expected = [_]i32{ 2, 2, 5, 5, 8, 8 };
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort [42]" {
+    const arr1 = [_]i32{42};
+    const arr2 = [_]i32{42};
+    const expected = [_]i32{42};
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort [100, 1, 100, 2]" {
+    const arr1 = [_]i32{ 100, 1, 100, 2 };
+    const arr2 = [_]i32{ 1, 2 };
+    const expected = [_]i32{ 1, 2, 100, 100 };
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort [3, 3, 3, 3, 3]" {
+    const arr1 = [_]i32{ 3, 3, 3, 3, 3 };
+    const arr2 = [_]i32{3};
+    const expected = [_]i32{ 3, 3, 3, 3, 3 };
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort [0]" {
+    const arr1 = [_]i32{0};
+    const arr2 = [_]i32{0};
+    const expected = [_]i32{0};
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort []" {
+    const arr1 = [_]usize{};
+    const arr2 = [_]usize{ 1, 2, 3 };
+    const expected = [_]usize{};
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(usize, allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(usize, &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort [7, 1, 7, 1, 7]" {
+    const arr1 = [_]i32{ 7, 1, 7, 1, 7 };
+    const arr2 = [_]i32{ 7, 1 };
+    const expected = [_]i32{ 7, 7, 7, 1, 1 };
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort [999, 0, 500, 1000, 0]" {
+    const arr1 = [_]i32{ 999, 0, 500, 1000, 0 };
+    const arr2 = [_]i32{ 0, 1000 };
+    const expected = [_]i32{ 0, 0, 1000, 500, 999 };
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
+}
+test "relatively sort [1, 2, 3, 4, 5]" {
+    const arr1 = [_]i32{ 1, 2, 3, 4, 5 };
+    const arr2 = [_]i32{ 5, 4, 3, 2, 1 };
+    const expected = [_]i32{ 5, 4, 3, 2, 1 };
+    const allocator = std.testing.allocator;
+    const result = relativeSortArray(@TypeOf(arr1[0]), allocator, &arr1, &arr2);
+    if (result) |actual| {
+        defer allocator.free(actual);
+        try expectEqualSlices(@TypeOf(arr1[0]), &expected, actual);
+    } else return error.SkipZigTest;
 }
