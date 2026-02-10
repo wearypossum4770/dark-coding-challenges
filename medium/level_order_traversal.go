@@ -1,4 +1,4 @@
-package easy
+package medium
 
 func LevelOrderTraversal(root *TreeNode) [][]int {
 	result := [][]int{}
