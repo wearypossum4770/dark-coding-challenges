@@ -1,12 +1,16 @@
 package medium
 
-func LevelOrderTraversal(root *TreeNode) [][]int {
-	result := [][]int{}
-	if root == nil {
-		return result
-	}
+import (
+	easy "github.com/wearypossum4770/dark-coding-challenges/easy"
+)
 
-	queue := []*TreeNode{root}
+func LevelOrderTraversal(root *easy.TreeNode) [][]int {
+	if root == nil {
+		return [][]int{{}}
+	}
+	result := [][]int{}
+
+	queue := []*easy.TreeNode{root}
 
 	for len(queue) > 0 {
 		size := len(queue)
