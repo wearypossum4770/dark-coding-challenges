@@ -6,10 +6,8 @@ namespace Src\Easy;
 
 class ValidMountainArray
 {
-  
     /**
-     * @param Integer[] $arr
-     * @return Boolean
+     * @param  int[]  $arr
      */
     public function transformValidMountainArray(array $arr): bool
     {
