@@ -1,0 +1,95 @@
+import pytest
+from easy.leaf_count_in_binary_tree import leaf_count_in_binary_tree
+
+from dark_coding_challenges.data_structures.tree_node import TreeNode
+
+
+@pytest.mark.parametrize(
+    "nums, expected",
+    [
+        ([1, 10, 39, 5], 2),
+        ([4, 8, 10, 7, None, 5, 1, 3], 3),
+        ([50, 30, 70, 20, 40, 60, 80, None, None, None, None, 65], 4),
+        ([30, 25, 35, 20, 28, None, 40, None, None, 27], 3),
+        ([1, 2, 3, -1, -1, -1, -1], 4),
+        ([1, 2, 3, None, None, None, None], 2),
+        ([1, 2, 3, 4, 5, None, None, None, None, None, None], 3),
+        ([10, 20, 30, 40, 50, 60, 70], 4),
+        ([None], 0),
+        ([5], 1),
+        ([1, None, None], 1),
+        ([1, 2, None, 3, None, 4, None, 5, None], 1),
+        ([1, None, 2, None, 3, None, 4, None, 5, None, 6], 1),
+        (
+            [
+                50,
+                30,
+                70,
+                20,
+                40,
+                60,
+                80,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+            ],
+            4,
+        ),
+        (
+            [
+                1,
+                2,
+                None,
+                3,
+                None,
+                4,
+                None,
+                5,
+                None,
+                6,
+                None,
+                7,
+                None,
+                8,
+                None,
+                9,
+                None,
+                10,
+            ],
+            1,
+        ),
+        ([-5, -8, -3, -12, -7, None, None, None, None, None, None], 3),
+        ([100000, 99999, 1, 2, None, None, None, 3, 4, 5, 6], 4),
+        ([-42, 42, -42, 42, -42, 42, -42], 4),
+        ([7, None, 8, None, 9, None, 10, None, 11, None, 12, None, 13], 1),
+        (
+            [
+                1,
+                2,
+                3,
+                None,
+                None,
+                None,
+                4,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                None,
+                5,
+            ],
+            2,
+        ),
+        ([99999, None, None], 1),
+    ],
+)
+def test_leaf_count_in_binary_tree(nums: list[int], expected: int):
+    root = TreeNode.from_list(nums)
+    assert leaf_count_in_binary_tree(root) == expected
