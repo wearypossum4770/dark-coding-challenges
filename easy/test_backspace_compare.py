@@ -1,0 +1,53 @@
+import pytest
+from easy.backspace_compare import backspace_compare
+
+
+@pytest.mark.parametrize(
+    "s, t, expected",
+    [
+        ("y#fo##f", "y#f#o##f", True),
+        ("ab#c", "ad#c", True),
+        ("ab##", "c#d#", True),
+        ("a#c", "b", False),
+        ("a", "a", True),
+        ("a", "b", False),
+        ("#", "#", True),
+        ("#a", "a", True),
+        ("a#", "", True),
+        ("a#", "#", True),
+        ("##", "#", True),
+        ("###", "##", True),
+        ("a##", "#", True),
+        ("a##", "", True),
+        ("a#b", "b", True),
+        ("a#b", "a", False),
+        ("abc", "abc", True),
+        ("abc", "abd", False),
+        ("ab#c", "ab#c", True),
+        ("ab##c", "c", True),
+        ("a#b#c#", "", True),
+        ("a#b#c#d", "d", True),
+        ("a#b#c#d", "e", False),
+        ("#a#b#", "", True),
+        ("bxj##tw", "bxj##tw", True),
+        ("bxj##tw", "bxk##tw", True),
+        ("xywrrmp", "xywrrmu", False),
+        ("xywrrmp", "xywrrmp", True),
+        ("a###b", "b", True),
+        ("a###b", "a", False),
+        ("####", "", True),
+        ("####", "####", True),
+        ("a####", "#", True),
+        ("ab####", "##", True),
+        ("nzp#o#g", "b#nzp#o#g", True),
+        ("bbbextm", "bbb#extm", False),
+        ("ab#c#", "a", True),
+        ("a#a#a#", "", True),
+        ("abc##", "a", True),
+        ("abc###", "", True),
+        ("", "#", True),
+        ("#", "", True),
+    ],
+)
+def test_backspace_compare(s: str, t: str, expected: bool):
+    assert backspace_compare(s, t) == expected
