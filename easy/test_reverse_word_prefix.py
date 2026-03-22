@@ -1,0 +1,51 @@
+import pytest
+from easy.reverse_word_prefix import reverse_word_prefix
+
+
+@pytest.mark.parametrize(
+    "word, char, expected",
+    [
+        ("abcdefd", "d", "dcbaefd"),
+        ("xyxzxe", "z", "zxyxxe"),
+        ("abcd", "z", "abcd"),
+        ("abcde", "a", "abcde"),
+        ("aabcd", "a", "aabcd"),
+        ("abcde", "e", "edcba"),
+        ("a", "a", "a"),
+        ("a", "b", "a"),
+        ("aabcaad", "a", "aabcaad"),
+        ("abacaba", "c", "cabaaba"),
+        ("abcdabcd", "d", "dcbaabcd"),
+        ("dcba", "a", "abcd"),
+        ("ba", "a", "ab"),
+        ("aaaa", "a", "aaaa"),
+        ("aaaa", "b", "aaaa"),
+        ("abcde", "b", "bacde"),
+        ("abcde", "d", "dcbae"),
+        ("ab", "a", "ab"),
+        ("ab", "b", "ba"),
+        ("ab", "z", "ab"),
+        ("racecar", "e", "ecarcar"),
+        ("racecar", "r", "racecar"),
+        ("aabba", "b", "baaba"),
+        ("mnopqrstu", "u", "utsrqponm"),
+        ("абвгд", "а", "абвгд"),
+        ("абвгд", "д", "дгвба"),
+        ("абвгд", "я", "абвгд"),
+        ("абвгде", "г", "гвбаде"),
+        ("абагд", "а", "абагд"),
+        ("а", "а", "а"),
+        ("а", "б", "а"),
+        ("дгвба", "а", "абвгд"),
+        ("ба", "а", "аб"),
+        ("аб", "а", "аб"),
+        ("аб", "б", "ба"),
+        ("шалаш", "л", "лашаш"),
+        ("аааа", "а", "аааа"),
+        ("аааа", "б", "аааа"),
+        ("abcde", "а", "abcde"),
+        ("абвгдеёж", "ж", "жёедгвба"),
+    ],
+)
+def test_reverse_word_prefix(word: str, char: str, expected: str):
+    assert reverse_word_prefix(word, char) == expected
